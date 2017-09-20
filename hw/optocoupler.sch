@@ -1,0 +1,110 @@
+EESchema Schematic File Version 2
+LIBS:kemet
+LIBS:multicomp
+LIBS:power
+LIBS:usevolt
+LIBS:wurth_elektronik_LED
+LIBS:fsb-cache
+EELAYER 26 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 12 12
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L 1K R?
+U 1 1 58998C01
+P 3800 3000
+AR Path="/58998C01" Ref="R?"  Part="1" 
+AR Path="/58997FA7/58998C01" Ref="R402"  Part="1" 
+AR Path="/59C3380F/58998C01" Ref="R901"  Part="1" 
+AR Path="/59C34D8B/58998C01" Ref="R1001"  Part="1" 
+AR Path="/59C3566B/58998C01" Ref="R1102"  Part="1" 
+AR Path="/59C35BD6/58998C01" Ref="R1201"  Part="1" 
+F 0 "R1201" H 3850 3184 45  0000 C CNN
+F 1 "1K" H 3850 3100 45  0000 C CNN
+F 2 "multicomp:0603" H 3830 3150 20  0001 C CNN
+F 3 "" H 3769 3039 60  0001 C CNN
+F 4 "9330380" H 4169 3439 60  0001 C CNN "1st Source Part Number"
+F 5 "Farnell" H 4069 3339 60  0001 C CNN "1st Source"
+F 6 "MC0063W060311K" H 3969 3239 60  0001 C CNN "Manufacturer Part Number"
+F 7 "MULTICOMP" H 3869 3139 60  0001 C CNN "Manufacturer"
+	1    3800 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR901
+U 1 1 58998C09
+P 4300 3400
+AR Path="/59C3380F/58998C09" Ref="#PWR901"  Part="1" 
+AR Path="/59C34D8B/58998C09" Ref="#PWR1001"  Part="1" 
+AR Path="/59C3566B/58998C09" Ref="#PWR1101"  Part="1" 
+AR Path="/59C35BD6/58998C09" Ref="#PWR1201"  Part="1" 
+F 0 "#PWR1201" H 4300 3150 50  0001 C CNN
+F 1 "GND" H 4305 3227 50  0000 C CNN
+F 2 "" H 4300 3400 50  0000 C CNN
+F 3 "" H 4300 3400 50  0000 C CNN
+	1    4300 3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR902
+U 1 1 58998C1A
+P 5000 3400
+AR Path="/59C3380F/58998C1A" Ref="#PWR902"  Part="1" 
+AR Path="/59C34D8B/58998C1A" Ref="#PWR1002"  Part="1" 
+AR Path="/59C3566B/58998C1A" Ref="#PWR1102"  Part="1" 
+AR Path="/59C35BD6/58998C1A" Ref="#PWR1202"  Part="1" 
+F 0 "#PWR1202" H 5000 3150 50  0001 C CNN
+F 1 "GND" H 5005 3227 50  0000 C CNN
+F 2 "" H 5000 3400 50  0000 C CNN
+F 3 "" H 5000 3400 50  0000 C CNN
+	1    5000 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4000 3000 4400 3000
+Wire Wire Line
+	4300 3400 4300 3300
+Wire Wire Line
+	4300 3300 4400 3300
+Wire Wire Line
+	3300 3000 3700 3000
+Wire Wire Line
+	5000 3400 5000 3300
+Wire Wire Line
+	5000 3300 4900 3300
+Wire Wire Line
+	4900 3000 5950 3000
+Text HLabel 5950 3000 2    60   Output ~ 0
+VOUT
+Text HLabel 3300 3000 0    60   Input ~ 0
+VIN
+$Comp
+L OPTOCOUPLER_HCPL-181-000E CP901
+U 1 1 597BAFD2
+P 4600 3100
+AR Path="/59C3380F/597BAFD2" Ref="CP901"  Part="1" 
+AR Path="/59C34D8B/597BAFD2" Ref="CP1001"  Part="1" 
+AR Path="/59C3566B/597BAFD2" Ref="CP1101"  Part="1" 
+AR Path="/59C35BD6/597BAFD2" Ref="CP1201"  Part="1" 
+F 0 "CP1201" H 4650 3437 60  0000 C CNN
+F 1 "OPTOCOUPLER_HCPL-181-000E" H 4650 3331 60  0000 C CNN
+F 2 "usevolt:HCPL-181-000E" H 4600 3300 60  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/317140.pdf?_ga=1.164840831.1561825231.1484148445" H 4600 3300 60  0001 C CNN
+F 4 "1244525" H 5000 3700 60  0001 C CNN "1st Source Part Number"
+F 5 "BROADCOM LIMITED" H 4700 3400 60  0001 C CNN "Manufacturer"
+F 6 "Farnell" H 4900 3600 60  0001 C CNN "1st Source"
+F 7 "HCPL-181-000E" H 4800 3500 60  0001 C CNN "Manufacturer Part Number"
+	1    4600 3100
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
