@@ -15,6 +15,7 @@
 #include <string.h>
 #include <uv_timer.h>
 #include <uv_utilities.h>
+#include <uv_output.h>
 
 extern dev_st dev;
 #define this (&dev)
@@ -159,6 +160,13 @@ const uv_command_st terminal_commands[] = {
 						"Usage: heat <0..100>",
 				.callback = &heater_callb
 		},
+		{
+				.id = CMD_HORN,
+				.str = "horn",
+				.instructions = "Turn horn on\n"
+						"Usage: horn <1/0>",
+				.callback = &horn_callb
+		}
 };
 
 
@@ -171,9 +179,9 @@ unsigned int commands_size(void) {
 
 
 
-static void stat_output(output_st *output, const char *output_name) {
+static void stat_output(uv_output_st *output, const char *output_name) {
 	printf("%s state: %u, current: %u mA, adc: 0x%x / 0x%x\n",
-			output_name, output_get_state(output), output_get_current(output),
+			output_name, uv_output_get_state(output), uv_output_get_current(output),
 			uv_adc_read(output->adc_chn), ADC_MAX_VALUE);
 }
 
@@ -213,12 +221,20 @@ void heater_callb(void* me, unsigned int cmd, unsigned int args, argument_st *ar
 			argv[0].number = 100;
 		}
 		this->heaterspeed = argv[0].number;
-		output_set_state(&this->heaterbat, (argv[0].number) ?
-				FSB_OUTPUT_STATE_ON : FSB_OUTPUT_STATE_OFF);
-		output_set_state(&this->heatervdd, (argv[0].number) ?
-				FSB_OUTPUT_STATE_ON : FSB_OUTPUT_STATE_OFF);
+		uv_output_set_state(&this->heaterbat, (argv[0].number) ?
+				OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
+		uv_output_set_state(&this->heatervdd, (argv[0].number) ?
+				OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
 	}
 	printf("heater speed: %u\n", this->heaterspeed);
+}
+
+
+void horn_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv) {
+	if (args && (argv[0].type == ARG_INTEGER)) {
+		uv_output_set_state(&this->horn, (argv[0].number) ?
+				OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
+	}
 }
 
 

@@ -78,12 +78,11 @@ ENDDEF
 DEF 10K R 0 40 N N 1 L N
 F0 "R" -31 39 45 H V L BNN
 F1 "10K" -33 -84 45 H V L BNN
-F2 "multicomp:0603" 30 150 20 H I C CNN
-F3 "http://www.farnell.com/datasheets/1788326.pdf?_ga=1.214208087.1948984246.1460023966" -31 39 60 H I C CNN
-F4 "9330399" 369 439 60 H I C CNN "1st Source Part Number"
-F5 "Farnell" 269 339 60 H I C CNN "1st Source"
-F6 "MC0063W0603110K" 169 239 60 H I C CNN "Manufacturer Part Number"
-F7 "MULTICOMP" 69 139 60 H I C CNN "Manufacturer"
+F2 "yageo:0603" 30 150 20 H I C CNN
+F3 "" -31 39 60 H I C CNN
+F4 "Digikey" 269 339 60 H I C CNN "1st Source"
+F5 "RC0603FR-0710KL" 169 239 60 H I C CNN "Manufacturer Part Number"
+F6 "YAGEO" 69 139 60 H I C CNN "Manufacturer"
 $FPLIST
  *RESC1608X60N*
 $ENDFPLIST
@@ -158,12 +157,11 @@ ENDDEF
 DEF 1K R 0 40 N N 1 L N
 F0 "R" -31 39 45 H V L BNN
 F1 "1K" -33 -84 45 H V L BNN
-F2 "multicomp:0603" 30 150 20 H I C CNN
+F2 "yageo:0603" 30 150 20 H I C CNN
 F3 "" -31 39 60 H I C CNN
-F4 "9330380" 369 439 60 H I C CNN "1st Source Part Number"
-F5 "Farnell" 269 339 60 H I C CNN "1st Source"
-F6 "MC0063W060311K" 169 239 60 H I C CNN "Manufacturer Part Number"
-F7 "MULTICOMP" 69 139 60 H I C CNN "Manufacturer"
+F4 "Digikey" 269 339 60 H I C CNN "1st Source"
+F5 "RC0603FR-071KL" 169 239 60 H I C CNN "Manufacturer Part Number"
+F6 "YAGEO" 69 139 60 H I C CNN "Manufacturer"
 $FPLIST
  *RESC1608X60N*
 $ENDFPLIST

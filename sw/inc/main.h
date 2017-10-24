@@ -11,15 +11,12 @@
 
 #include <uv_memory.h>
 #include <uv_filters.h>
-#include "output.h"
+#include <uv_output.h>
 #include "can_fsb.h"
 
 
 
 
-#define OUTPUT_2_MOHM				2
-#define OUTPUT_15_MOHM				15
-#define OUTPUT_4_MOHM				4
 #define OUTPUT_MOVING_AVG_COUNT		100
 
 
@@ -30,11 +27,11 @@
 /// a terminal command 'save'.
 typedef struct _dev_st {
 
-	output_st horn;
-	output_st radio;
-	output_st aux;
-	output_st heatervdd;
-	output_st heaterbat;
+	uv_output_st horn;
+	uv_output_st radio;
+	uv_output_st aux;
+	uv_output_st heatervdd;
+	uv_output_st heaterbat;
 
 	uint16_t total_current;
 

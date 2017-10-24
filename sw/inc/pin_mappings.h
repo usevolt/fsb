@@ -27,7 +27,7 @@
 #define EBERFAN_I					P0_1
 #define KEY_PREHEAT_I				P1_4
 #define KEY_ON_I					P1_5
-#define KEY_START_I					P1_11
+#define KEY_START_I					P0_16
 #define EMCY_I						P0_17
 
 // Digital outputs

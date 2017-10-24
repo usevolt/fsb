@@ -20,45 +20,25 @@
 dev_st dev = {};
 #define this ((dev_st*) &dev)
 
-#define ADC_START()		do { uv_adc_start(HORN_SENSE | \
-							RADIO_SENSE | \
-							AUX_SENSE | \
-							HEATERVDD_SENSE | \
-							HEATERBAT_SENSE | \
-							ADC0_0); } while (0)
 
-
-
-void adc_callback(void) {
-	uv_disable_int();
-	output_adc(&this->horn);
-	output_adc(&this->radio);
-	output_adc(&this->aux);
-	output_adc(&this->heatervdd);
-	output_adc(&this->heaterbat);
-	uv_enable_int();
-
-	// start new adc conversion
-	ADC_START();
-}
 
 
 void init(dev_st* me) {
 
 	// initialize outputs
-	output_init(&this->horn, HORN_SENSE, HORN_O, OUTPUT_2_MOHM,
+	uv_output_init(&this->horn, HORN_SENSE, HORN_O, 2,
 			0, 4000, OUTPUT_MOVING_AVG_COUNT,
 			FSB_EMCY_HORN_OVERCURRENT, FSB_EMCY_HORN_FAULT);
-	output_init(&this->radio, RADIO_SENSE, RADIO_O, OUTPUT_2_MOHM,
+	uv_output_init(&this->radio, RADIO_SENSE, RADIO_O, 2,
 			0, 2000, OUTPUT_MOVING_AVG_COUNT,
 			FSB_EMCY_RADIO_OVERCURRENT, FSB_EMCY_RADIO_FAULT);
-	output_init(&this->aux, AUX_SENSE, AUX_O, OUTPUT_2_MOHM,
+	uv_output_init(&this->aux, AUX_SENSE, AUX_O, 2,
 			0, 10000, OUTPUT_MOVING_AVG_COUNT,
 			FSB_EMCY_AUX_OVERCURRENT, FSB_EMCY_AUX_FAULT);
-	output_init(&this->heatervdd, HEATERVDD_SENSE, HEATERVDD_O, OUTPUT_2_MOHM,
+	uv_output_init(&this->heatervdd, HEATERVDD_SENSE, HEATERVDD_O, 2,
 			0, 20000, OUTPUT_MOVING_AVG_COUNT,
 			FSB_EMCY_HEATERVDD_OVERCURRENT, FSB_EMCY_HEATERVDD_FAULT);
-	output_init(&this->heaterbat, HEATERBAT_SENSE, HEATERBAT_O, OUTPUT_2_MOHM,
+	uv_output_init(&this->heaterbat, HEATERBAT_SENSE, HEATERBAT_O, 2,
 			0, 20000, OUTPUT_MOVING_AVG_COUNT,
 			FSB_EMCY_HEATERBAT_OVERCURRENT, FSB_EMCY_HEATERBAT_FAULT);
 
@@ -90,7 +70,6 @@ void init(dev_st* me) {
 
 	uv_canopen_set_state(CANOPEN_OPERATIONAL);
 
-	ADC_START();
 }
 
 
@@ -105,20 +84,20 @@ void step(void* me) {
 		// update watchdog timer value to prevent a hard reset
 		// uw_wdt_update();
 
-		output_step(&this->horn, step_ms);
-		output_step(&this->radio, step_ms);
-		output_step(&this->aux, step_ms);
-		output_step(&this->heatervdd, step_ms);
-		output_step(&this->heaterbat,step_ms);
+		uv_output_step(&this->horn, step_ms);
+		uv_output_step(&this->radio, step_ms);
+		uv_output_step(&this->aux, step_ms);
+		uv_output_step(&this->heatervdd, step_ms);
+		uv_output_step(&this->heaterbat,step_ms);
 
 		// terminal step function
 		uv_terminal_step();
 
-		this->total_current = output_get_current(&this->horn) +
-				output_get_current(&this->radio) +
-				output_get_current(&this->aux) +
-				output_get_current(&this->heatervdd) +
-				output_get_current(&this->heaterbat);
+		this->total_current = uv_output_get_current(&this->horn) +
+				uv_output_get_current(&this->radio) +
+				uv_output_get_current(&this->aux) +
+				uv_output_get_current(&this->heatervdd) +
+				uv_output_get_current(&this->heaterbat);
 
 		this->emcy = !uv_gpio_get(EMCY_I);
 
@@ -126,7 +105,15 @@ void step(void* me) {
 		if (this->heaterspeed > 100) {
 			this->heaterspeed = 100;
 		}
-		uv_pwm_set(HEATER_PWM, DUTY_CYCLEPPT(this->heaterspeed * 10));
+		// note: For pcb revision 2.0.0 heater is on/off
+		uv_pwm_set(HEATER_PWM, (this->heaterspeed) ?
+				DUTY_CYCLEPPT(1000) : DUTY_CYCLEPPT(0));
+		uv_output_set_state(&this->heatervdd, (this->heaterspeed) ?
+				OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
+		uv_output_set_state(&this->heaterbat, (this->heaterspeed) ?
+				OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
+
+
 
 		// vbat
 		uint16_t vbat = uv_adc_read(VBAT_SENSE);
@@ -169,7 +156,9 @@ void step(void* me) {
 			this->ignkey = FSB_IGNKEY_STATE_OFF;
 		}
 
-
+		// radio power is always on when ignition key is on
+		uv_output_set_state(&this->radio, (key_on) ? OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
+		uv_output_set_state(&this->aux, (key_on) ? OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
 
 
 		uv_rtos_task_delay(step_ms);
