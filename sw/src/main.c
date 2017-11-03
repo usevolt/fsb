@@ -99,11 +99,11 @@ void step(void* me) {
 				uv_output_get_current(&this->heatervdd) +
 				uv_output_get_current(&this->heaterbat);
 
-		this->emcy = !uv_gpio_get(EMCY_I);
+		this->emcy = uv_gpio_get(EMCY_I);
 
 		// heater
-		if (this->heaterspeed > 100) {
-			this->heaterspeed = 100;
+		if (this->heaterspeed > FSB_HEATER_MAX_SPEED) {
+			this->heaterspeed = FSB_HEATER_MAX_SPEED;
 		}
 		// note: For pcb revision 2.0.0 heater is on/off
 		uv_pwm_set(HEATER_PWM, (this->heaterspeed) ?
@@ -146,6 +146,12 @@ void step(void* me) {
 		else if (key_on &&
 				key_preheat &&
 				key_start) {
+			// send notification if emcy switch is pressed
+			if ((this->ignkey != FSB_IGNKEY_STATE_START) &&
+					this->emcy) {
+				uv_canopen_emcy_send(CANOPEN_EMCY_DEVICE_SPECIFIC,
+						FSB_EMCY_EMCY_NOTIFY);
+			}
 			this->ignkey = FSB_IGNKEY_STATE_START;
 		}
 		// fault state
@@ -159,6 +165,17 @@ void step(void* me) {
 		// radio power is always on when ignition key is on
 		uv_output_set_state(&this->radio, (key_on) ? OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
 		uv_output_set_state(&this->aux, (key_on) ? OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
+
+
+
+		// emcy handling
+		if (this->emcy) {
+			uv_output_set_state(&this->heaterbat, OUTPUT_STATE_OFF);
+			uv_output_set_state(&this->heatervdd, OUTPUT_STATE_OFF);
+			uv_output_set_state(&this->aux, OUTPUT_STATE_OFF);
+			uv_output_set_state(&this->radio, OUTPUT_STATE_OFF);
+			uv_output_set_state(&this->horn, OUTPUT_STATE_OFF);
+		}
 
 
 		uv_rtos_task_delay(step_ms);
