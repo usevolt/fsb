@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:fsb-rescue
 LIBS:kemet
 LIBS:power
 LIBS:usevolt

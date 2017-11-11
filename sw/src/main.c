@@ -128,6 +128,10 @@ void step(void* me) {
 		if (!key_on &&
 				!key_preheat &&
 				!key_start) {
+			if ((this->ignkey != FSB_IGNKEY_STATE_OFF) &&
+					this->heaterspeed) {
+				this->heaterspeed = 0;
+			}
 			this->ignkey = FSB_IGNKEY_STATE_OFF;
 		}
 		// key on

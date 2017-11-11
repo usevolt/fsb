@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:fsb-rescue
 LIBS:kemet
 LIBS:power
 LIBS:usevolt
@@ -9,7 +10,7 @@ EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 4 9
+Sheet 4 6
 Title ""
 Date ""
 Rev ""
@@ -296,23 +297,6 @@ F 7 "KEMET" H 2654 4209 60  0001 C CNN "Manufacturer"
 	0    1    1    0   
 $EndComp
 $Comp
-L LPC1549JBD64 U301
-U 1 1 5946DE63
-P 5100 2650
-F 0 "U301" H 5500 3726 45  0000 C CNN
-F 1 "LPC1549JBD64" H 5100 2650 45  0001 L BNN
-F 2 "usevolt:QFP64" H 5130 2800 20  0001 C CNN
-F 3 "http://www.nxp.com/documents/data_sheet/LPC15XX.pdf" H 4710 3570 60  0001 C CNN
-F 4 "2400142" H 5310 4170 60  0001 C CNN "2nd Source Part Number"
-F 5 "Farnell" H 5210 4070 60  0001 C CNN "2nd Source"
-F 6 "568-11350-ND" H 5110 3970 60  0001 C CNN "1st Source Part Number"
-F 7 "Digi-Key" H 5010 3870 60  0001 C CNN "1st Source"
-F 8 "LPC1549JBD64E" H 5500 3631 60  0000 C CNN "Manufacturer Part Number"
-F 9 "NXP" H 4810 3670 60  0001 C CNN "Manufacturer"
-	1    5100 2650
-	1    0    0    -1  
-$EndComp
-$Comp
 L ARM_JTAG_SWD_HEADER_10_PINSMD J301
 U 1 1 5953ECE3
 P 8850 3850
@@ -326,23 +310,6 @@ F 6 "Amphenol FCI" H 8950 4390 60  0001 C CNN "Manufacturer"
 F 7 "Digikey" H 9150 4590 60  0001 C CNN "1st Source"
 	1    8850 3850
 	1    0    0    -1  
-$EndComp
-$Comp
-L MCP2551_SOIC8 U302
-U 1 1 5953EADD
-P 9300 5800
-F 0 "U302" H 9350 6104 45  0000 C CNN
-F 1 "MCP2551_SOIC8" H 9350 6020 45  0000 C CNN
-F 2 "usevolt:SOIC8" H 9180 5950 20  0001 C CNN
-F 3 "http://www.microchip.com/mymicrochip/filehandler.aspx?ddocname=en011797" H 8900 6250 60  0001 C CNN
-F 4 "9758569" H 9900 6620 60  0001 C CNN "2nd Source Part Number"
-F 5 "Digi-Key" H 9600 6320 60  0001 C CNN "1st Source"
-F 6 "Farnell" H 9800 6520 60  0001 C CNN "2nd Source"
-F 7 "MCP2551-I/SN" H 9500 6220 60  0001 C CNN "Manufacturer Part Number"
-F 8 "MCP2551-I/SN-ND" H 9700 6420 60  0001 C CNN "1st Source Part Number"
-F 9 "MICROCHIP" H 9450 6100 60  0001 C CNN "Manufacturer"
-	1    9300 5800
-	-1   0    0    -1  
 $EndComp
 $Comp
 L +5V #PWR025
@@ -371,8 +338,6 @@ Text HLabel 7400 5550 2    60   Output ~ 0
 AUX
 Text HLabel 7150 1950 2    60   Output ~ 0
 HEATER
-Text HLabel 3350 2850 0    60   Output ~ 0
-HEATER_PWM
 Text HLabel 7150 2250 2    60   Input ~ 0
 KEY_19
 Text HLabel 7150 2450 2    60   Input ~ 0
@@ -566,8 +531,6 @@ Wire Wire Line
 Wire Wire Line
 	6400 1950 7150 1950
 Wire Wire Line
-	3350 2850 4600 2850
-Wire Wire Line
 	6400 2350 7150 2350
 Wire Wire Line
 	6400 2450 7150 2450
@@ -583,4 +546,46 @@ Wire Wire Line
 	8050 3850 8050 3550
 Wire Wire Line
 	8050 3550 6400 3550
+$Comp
+L LPC1549JBD64 U401
+U 1 1 5A05FDBB
+P 5100 2650
+F 0 "U401" H 5500 3726 45  0000 C CNN
+F 1 "LPC1549JBD64" H 5100 2650 45  0001 L BNN
+F 2 "usevolt:QFP64" H 5130 2800 20  0001 C CNN
+F 3 "http://www.nxp.com/documents/data_sheet/LPC15XX.pdf" H 4710 3570 60  0001 C CNN
+F 4 "2400142" H 5310 4170 60  0001 C CNN "2nd Source Part Number"
+F 5 "Farnell" H 5210 4070 60  0001 C CNN "2nd Source"
+F 6 "568-11350-ND" H 5110 3970 60  0001 C CNN "1st Source Part Number"
+F 7 "Digi-Key" H 5010 3870 60  0001 C CNN "1st Source"
+F 8 "LPC1549JBD64QL" H 5500 3631 60  0000 C CNN "Manufacturer Part Number"
+F 9 "NXP" H 4810 3670 60  0001 C CNN "Manufacturer"
+	1    5100 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L MCP2551_SOIC8 U402
+U 1 1 5A060268
+P 9300 5800
+F 0 "U402" H 9350 6104 45  0000 C CNN
+F 1 "MCP2551_SOIC8" H 9350 6020 45  0000 C CNN
+F 2 "usevolt:SOIC8" H 9180 5950 20  0001 C CNN
+F 3 "http://www.microchip.com/mymicrochip/filehandler.aspx?ddocname=en011797" H 8900 6250 60  0001 C CNN
+F 4 "9758569" H 9900 6620 60  0001 C CNN "2nd Source Part Number"
+F 5 "Digi-Key" H 9600 6320 60  0001 C CNN "1st Source"
+F 6 "Farnell" H 9800 6520 60  0001 C CNN "2nd Source"
+F 7 "MCP2551-I/SN" H 9500 6220 60  0001 C CNN "Manufacturer Part Number"
+F 8 "MCP2551-I/SN-ND" H 9700 6420 60  0001 C CNN "1st Source Part Number"
+F 9 "MICROCHIP" H 9450 6100 60  0001 C CNN "Manufacturer"
+	1    9300 5800
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	4600 2750 3350 2750
+Wire Wire Line
+	4600 2850 3350 2850
+Text HLabel 3350 2750 0    60   Output ~ 0
+UI
+Text HLabel 3350 2850 0    60   Input ~ 0
+UI_SENSE
 $EndSCHEMATC

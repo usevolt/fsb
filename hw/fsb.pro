@@ -1,4 +1,4 @@
-update=su  8. lokakuuta 2017 11.56.55
+update=pe 10. marraskuuta 2017 13.23.28
 version=1
 last_client=kicad
 [pcbnew]
@@ -29,8 +29,9 @@ version=1
 version=1
 LibDir=../../../uv/kicad/libs
 [eeschema/libraries]
-LibName1=/home/usevolt/uv/kicad/libs/kemet
-LibName2=/home/usevolt/uv/kicad/libs/power
-LibName3=/home/usevolt/uv/kicad/libs/usevolt
-LibName4=/home/usevolt/uv/kicad/libs/wurth_elektronik_LED
-LibName5=yageo
+LibName1=fsb-rescue
+LibName2=/home/usevolt/uv/kicad/libs/kemet
+LibName3=/home/usevolt/uv/kicad/libs/power
+LibName4=/home/usevolt/uv/kicad/libs/usevolt
+LibName5=/home/usevolt/uv/kicad/libs/wurth_elektronik_LED
+LibName6=yageo
