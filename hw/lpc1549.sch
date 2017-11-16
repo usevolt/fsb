@@ -324,29 +324,29 @@ F 3 "" H 10100 5600 50  0000 C CNN
 $EndComp
 Text HLabel 3350 2450 0    60   Input ~ 0
 EBER_FAN
-Text HLabel 7400 5350 2    60   Output ~ 0
+Text HLabel 3350 2750 0    60   Output ~ 0
 HORN
-Text HLabel 3350 2250 0    60   Input ~ 0
+Text HLabel 3350 2850 0    60   Input ~ 0
 HORN_SENSE
-Text HLabel 7400 5450 2    60   Output ~ 0
+Text HLabel 3350 2650 0    60   Output ~ 0
 RADIO
-Text HLabel 3350 2350 0    60   Input ~ 0
+Text HLabel 3350 2950 0    60   Input ~ 0
 RADIO_SENSE
-Text HLabel 3350 2050 0    60   Input ~ 0
+Text HLabel 3350 5250 0    60   Input ~ 0
 AUX_SENSE
-Text HLabel 7400 5550 2    60   Output ~ 0
+Text HLabel 3350 5150 0    60   Output ~ 0
 AUX
-Text HLabel 7150 1950 2    60   Output ~ 0
+Text HLabel 7150 1850 2    60   Output ~ 0
 HEATER
-Text HLabel 7150 2250 2    60   Input ~ 0
+Text HLabel 7150 2050 2    60   Input ~ 0
 KEY_19
-Text HLabel 7150 2450 2    60   Input ~ 0
+Text HLabel 7150 1950 2    60   Input ~ 0
 KEY_50
-Text HLabel 7150 2350 2    60   Input ~ 0
+Text HLabel 7150 2250 2    60   Input ~ 0
 KEY_AC
-Text HLabel 7150 2550 2    60   Input ~ 0
+Text HLabel 7150 2350 2    60   Input ~ 0
 EMCY
-Text HLabel 3350 2650 0    60   Input ~ 0
+Text HLabel 3350 5650 0    60   Input ~ 0
 HEATER_SENSE
 $Comp
 L 10K R306
@@ -517,29 +517,29 @@ Wire Wire Line
 Wire Wire Line
 	3750 2450 3350 2450
 Wire Wire Line
-	6400 5350 7400 5350
+	4600 2750 3350 2750
 Wire Wire Line
-	4600 2250 3350 2250
+	4600 2850 3350 2850
 Wire Wire Line
-	6400 5450 7400 5450
+	4600 2650 3350 2650
 Wire Wire Line
-	4600 2350 3350 2350
+	4600 2950 3350 2950
 Wire Wire Line
-	4600 2050 3350 2050
+	4600 5250 3350 5250
 Wire Wire Line
-	6400 5550 7400 5550
+	4600 5150 3350 5150
 Wire Wire Line
-	6400 1950 7150 1950
-Wire Wire Line
-	6400 2350 7150 2350
-Wire Wire Line
-	6400 2450 7150 2450
+	6400 1850 7150 1850
 Wire Wire Line
 	6400 2250 7150 2250
 Wire Wire Line
-	6400 2550 7150 2550
+	6400 1950 7150 1950
 Wire Wire Line
-	4600 2650 3350 2650
+	6400 2050 7150 2050
+Wire Wire Line
+	6400 2350 7150 2350
+Wire Wire Line
+	4600 5650 3350 5650
 Wire Wire Line
 	4600 2550 3350 2550
 Wire Wire Line
@@ -581,11 +581,19 @@ F 9 "MICROCHIP" H 9450 6100 60  0001 C CNN "Manufacturer"
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
-	4600 2750 3350 2750
+	4600 3050 3350 3050
 Wire Wire Line
-	4600 2850 3350 2850
-Text HLabel 3350 2750 0    60   Output ~ 0
+	4600 3150 3350 3150
+Text HLabel 3350 3050 0    60   Output ~ 0
 UI
-Text HLabel 3350 2850 0    60   Input ~ 0
+Text HLabel 3350 3150 0    60   Input ~ 0
 UI_SENSE
+Wire Wire Line
+	6400 2450 6800 2450
+Wire Wire Line
+	6400 2550 6800 2550
+Text HLabel 6800 2450 2    60   Input ~ 0
+DOORSW1
+Text HLabel 6800 2550 2    60   Input ~ 0
+DOORSW2
 $EndSCHEMATC

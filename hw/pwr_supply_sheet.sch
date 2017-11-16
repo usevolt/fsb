@@ -38,21 +38,6 @@ F 7 "Multicomp" H 2720 3970 60  0001 C CNN "Manufacturer"
 	1    0    0    -1  
 $EndComp
 $Comp
-L DIODE_TVS_SMBJ33A-TRDO-214AA D203
-U 1 1 57B820C1
-P 2800 4050
-F 0 "D203" V 2892 3982 45  0000 R CNN
-F 1 "DIODE_TVS_SMBJ33A-TRDO-214AA" V 2750 4750 45  0000 R CNN
-F 2 "usevolt:DO-214AA" H 2830 4200 20  0001 C CNN
-F 3 "http://www.littelfuse.com/~/media/electronics/datasheets/tvs_diodes/littelfuse_tvs_diode_smbj_datasheet.pdf.pdf" H 2910 4060 60  0001 C CNN
-F 4 "Digi-Key" H 3210 4360 60  0001 C CNN "1st Source"
-F 5 "Littlefuse" H 3010 4160 60  0001 C CNN "Manufacturer"
-F 6 "SMBJ33A" H 3110 4260 60  0001 C CNN "Manufacturer Part Number"
-F 7 "SMBJ33ALFCT-ND" H 3310 4460 60  0001 C CNN "1st Source Part Number"
-	1    2800 4050
-	0    -1   -1   0   
-$EndComp
-$Comp
 L 100nF C201
 U 1 1 57B8217A
 P 3400 3950
@@ -200,9 +185,7 @@ $EndComp
 Wire Wire Line
 	900  3850 1700 3850
 Wire Wire Line
-	3800 3700 4550 3700
-Wire Wire Line
-	4550 3700 4550 3750
+	3800 3750 4550 3750
 Text HLabel 7050 3600 2    60   Output ~ 0
 +5V
 Wire Wire Line
@@ -211,7 +194,7 @@ Text HLabel 8750 3600 2    60   Output ~ 0
 +3V3
 Wire Wire Line
 	8750 3600 8600 3600
-Text HLabel 750  5000 0    60   Output ~ 0
+Text HLabel 750  5200 0    60   Output ~ 0
 VDD
 Text HLabel 2700 4300 0    60   Input ~ 0
 GND
@@ -279,9 +262,9 @@ F 3 "" H 2800 4500 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3800 3850 3800 3700
+	3800 3850 3800 3750
 Wire Wire Line
-	750  5000 1150 5000
+	750  5200 1900 5200
 Connection ~ 1500 3850
 Wire Wire Line
 	2700 3850 3800 3850
@@ -317,23 +300,6 @@ F 7 "1457504" H 7250 4390 60  0001 C CNN "1st Source Part Number"
 F 8 "Digikey" H 7350 4490 60  0001 C CNN "2nd Source"
 F 9 "399-8375-1-ND" H 7450 4590 60  0001 C CNN "2nd Source Part Number"
 	1    6850 4050
-	0    1    1    0   
-$EndComp
-$Comp
-L T491D226K035AT C202
-U 1 1 58946146
-P 3800 4050
-F 0 "C202" V 3708 4153 45  0000 L CNN
-F 1 "T491D226K035AT" V 3792 4153 45  0000 L CNN
-F 2 "kemet:7343" H 3830 4200 20  0001 C CNN
-F 3 "http://www.farnell.com/datasheets/2121523.pdf?_ga=1.259966538.1948984246.1460023966" H 3800 3990 60  0001 C CNN
-F 4 "399-8375-1-ND" H 4400 4590 60  0001 C CNN "2nd Source Part Number"
-F 5 "Farnell" H 4100 4290 60  0001 C CNN "1st Source"
-F 6 "T491D226K035AT" H 4000 4190 60  0001 C CNN "Manufacturer Part Number"
-F 7 "Digikey" H 4300 4490 60  0001 C CNN "2nd Source"
-F 8 "Kemet" H 3900 4090 60  0001 C CNN "Manufacturer"
-F 9 "1457504" H 4200 4390 60  0001 C CNN "1st Source Part Number"
-	1    3800 4050
 	0    1    1    0   
 $EndComp
 Wire Wire Line
@@ -400,70 +366,39 @@ Wire Wire Line
 Wire Wire Line
 	2050 2700 2050 3850
 Connection ~ 2050 3850
-$Comp
-L 10K R201
-U 1 1 5988FEDF
-P 1550 2900
-F 0 "R201" V 1558 2958 45  0000 L CNN
-F 1 "10K" V 1642 2958 45  0000 L CNN
-F 2 "multicomp:0603" H 1580 3050 20  0001 C CNN
-F 3 "http://www.farnell.com/datasheets/1788326.pdf?_ga=1.214208087.1948984246.1460023966" H 1519 2939 60  0001 C CNN
-F 4 "9330399" H 1919 3339 60  0001 C CNN "1st Source Part Number"
-F 5 "Farnell" H 1819 3239 60  0001 C CNN "1st Source"
-F 6 "MC0063W0603110K" H 1719 3139 60  0001 C CNN "Manufacturer Part Number"
-F 7 "MULTICOMP" H 1619 3039 60  0001 C CNN "Manufacturer"
-	1    1550 2900
-	0    1    1    0   
-$EndComp
-Connection ~ 1550 2700
-$Comp
-L GND #PWR201
-U 1 1 5988FF98
-P 1550 3150
-F 0 "#PWR201" H 1550 2900 50  0001 C CNN
-F 1 "GND" H 1555 2977 50  0000 C CNN
-F 2 "" H 1550 3150 50  0000 C CNN
-F 3 "" H 1550 3150 50  0000 C CNN
-	1    1550 3150
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1550 3150 1550 3100
-Wire Wire Line
-	1550 2700 1550 2800
 Connection ~ 1800 1650
 Text HLabel 3350 1850 2    60   Output ~ 0
 VBAT_SENSE
 $Comp
 L SCHOTTKY_DIODE_V40PW10C D205
 U 1 1 59C29BB6
-P 1550 5050
-F 0 "D205" H 1550 5397 60  0000 C CNN
-F 1 "SCHOTTKY_DIODE_V40PW10C" H 1550 5291 60  0000 C CNN
-F 2 "usevolt:SlimDPAK" H 1350 4700 60  0001 C CNN
-F 3 "http://www.farnell.com/datasheets/2245239.pdf?_ga=2.16591231.874534928.1505194133-1862443086.1504075057" H 1350 4700 60  0001 C CNN
-F 4 "2535169" H 1900 5650 60  0001 C CNN "1st Source Part Number"
-F 5 "Digikey" H 2000 5750 60  0001 C CNN "2nd Source"
-F 6 "Farnell" H 1800 5550 60  0001 C CNN "1st Source"
-F 7 "V40PW10CHM3/I" H 1700 5450 60  0001 C CNN "Manufacturer Part Number"
-F 8 "V40PW10CHM3/IGICT-ND" H 2100 5850 60  0001 C CNN "2nd Source Part Number"
-F 9 "VISHAY" H 1600 5350 60  0001 C CNN "Manufacturer"
-	1    1550 5050
+P 2300 5250
+F 0 "D205" H 2300 5597 60  0000 C CNN
+F 1 "SCHOTTKY_DIODE_V40PW10C" H 2300 5491 60  0000 C CNN
+F 2 "usevolt:SlimDPAK" H 2100 4900 60  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/2245239.pdf?_ga=2.16591231.874534928.1505194133-1862443086.1504075057" H 2100 4900 60  0001 C CNN
+F 4 "2535169" H 2650 5850 60  0001 C CNN "1st Source Part Number"
+F 5 "Digikey" H 2750 5950 60  0001 C CNN "2nd Source"
+F 6 "Farnell" H 2550 5750 60  0001 C CNN "1st Source"
+F 7 "V40PW10CHM3/I" H 2450 5650 60  0001 C CNN "Manufacturer Part Number"
+F 8 "V40PW10CHM3/IGICT-ND" H 2850 6050 60  0001 C CNN "2nd Source Part Number"
+F 9 "VISHAY" H 2350 5550 60  0001 C CNN "Manufacturer"
+	1    2300 5250
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
-	1950 5050 2250 5050
+	2700 5250 3000 5250
 Wire Wire Line
-	2250 4350 2250 5550
+	3000 5750 3000 4800
 Wire Wire Line
-	2250 4350 1500 4350
+	3000 4800 1500 4800
 Wire Wire Line
-	1500 4350 1500 3850
+	1500 4800 1500 3850
 Wire Wire Line
-	1950 4950 2100 4950
+	2700 5150 2850 5150
 Wire Wire Line
-	2100 4950 2100 5050
-Connection ~ 2100 5050
+	2850 5150 2850 5250
+Connection ~ 2850 5250
 Wire Wire Line
 	1800 1850 2150 1850
 Wire Wire Line
@@ -471,33 +406,33 @@ Wire Wire Line
 $Comp
 L SCHOTTKY_DIODE_V40PW10C D206
 U 1 1 5A05E274
-P 1550 5550
-F 0 "D206" H 1550 5897 60  0000 C CNN
-F 1 "SCHOTTKY_DIODE_V40PW10C" H 1550 5791 60  0000 C CNN
-F 2 "usevolt:SlimDPAK" H 1350 5200 60  0001 C CNN
-F 3 "http://www.farnell.com/datasheets/2245239.pdf?_ga=2.16591231.874534928.1505194133-1862443086.1504075057" H 1350 5200 60  0001 C CNN
-F 4 "2535169" H 1900 6150 60  0001 C CNN "1st Source Part Number"
-F 5 "Digikey" H 2000 6250 60  0001 C CNN "2nd Source"
-F 6 "Farnell" H 1800 6050 60  0001 C CNN "1st Source"
-F 7 "V40PW10CHM3/I" H 1700 5950 60  0001 C CNN "Manufacturer Part Number"
-F 8 "V40PW10CHM3/IGICT-ND" H 2100 6350 60  0001 C CNN "2nd Source Part Number"
-F 9 "VISHAY" H 1600 5850 60  0001 C CNN "Manufacturer"
-	1    1550 5550
+P 2300 5750
+F 0 "D206" H 2300 6097 60  0000 C CNN
+F 1 "SCHOTTKY_DIODE_V40PW10C" H 2300 5991 60  0000 C CNN
+F 2 "usevolt:SlimDPAK" H 2100 5400 60  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/2245239.pdf?_ga=2.16591231.874534928.1505194133-1862443086.1504075057" H 2100 5400 60  0001 C CNN
+F 4 "2535169" H 2650 6350 60  0001 C CNN "1st Source Part Number"
+F 5 "Digikey" H 2750 6450 60  0001 C CNN "2nd Source"
+F 6 "Farnell" H 2550 6250 60  0001 C CNN "1st Source"
+F 7 "V40PW10CHM3/I" H 2450 6150 60  0001 C CNN "Manufacturer Part Number"
+F 8 "V40PW10CHM3/IGICT-ND" H 2850 6550 60  0001 C CNN "2nd Source Part Number"
+F 9 "VISHAY" H 2350 6050 60  0001 C CNN "Manufacturer"
+	1    2300 5750
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
-	1150 5500 850  5500
+	1900 5700 1650 5700
 Wire Wire Line
-	850  5500 850  5000
-Connection ~ 850  5000
+	1650 5700 1650 5200
+Connection ~ 1650 5200
 Wire Wire Line
-	2250 5550 1950 5550
-Connection ~ 2250 5050
+	2700 5750 3000 5750
+Connection ~ 3000 5250
 Wire Wire Line
-	1950 5450 2100 5450
+	2700 5650 2850 5650
 Wire Wire Line
-	2100 5450 2100 5550
-Connection ~ 2100 5550
+	2850 5650 2850 5750
+Connection ~ 2850 5750
 $Comp
 L LM2671SOIC8 VR201
 U 1 1 5A060F27
@@ -549,4 +484,68 @@ Wire Wire Line
 	2800 1250 3100 1250
 Wire Wire Line
 	3100 1250 3100 1100
+$Comp
+L DIODE_TVS_TPSMD28A D208
+U 1 1 5A0E2A07
+P 850 5500
+F 0 "D208" V 942 5432 45  0000 R CNN
+F 1 "DIODE_TVS_TPSMD28A" V 858 5432 45  0000 R CNN
+F 2 "usevolt:DO-214AB" H 880 5650 20  0001 C CNN
+F 3 "http://www.littelfuse.com/~/media/electronics/datasheets/tvs_diodes/littelfuse_tvs_diode_tpsmd_datasheet.pdf.pdf" H 960 5510 60  0001 C CNN
+F 4 "Digi-Key" H 1260 5810 60  0001 C CNN "1st Source"
+F 5 "Littlefuse" H 1060 5610 60  0001 C CNN "Manufacturer"
+F 6 "TPSMD28A" H 1160 5710 60  0001 C CNN "Manufacturer Part Number"
+F 7 "F6570CT-ND" H 1360 5910 60  0001 C CNN "1st Source Part Number"
+	1    850  5500
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	850  5300 850  5200
+Connection ~ 850  5200
+$Comp
+L GND #PWR201
+U 1 1 5A0E2B45
+P 850 5850
+F 0 "#PWR201" H 850 5600 50  0001 C CNN
+F 1 "GND" H 855 5677 50  0000 C CNN
+F 2 "" H 850 5850 50  0000 C CNN
+F 3 "" H 850 5850 50  0000 C CNN
+	1    850  5850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	850  5850 850  5600
+$Comp
+L DIODE_TVS_SMBJ33A-TRDO-214AA D203
+U 1 1 57B820C1
+P 2800 4050
+F 0 "D203" V 2892 3982 45  0000 R CNN
+F 1 "DIODE_TVS_SMBJ33A-TRDO-214AA" V 2750 4750 45  0000 R CNN
+F 2 "usevolt:DO-214AA" H 2830 4200 20  0001 C CNN
+F 3 "http://www.littelfuse.com/~/media/electronics/datasheets/tvs_diodes/littelfuse_tvs_diode_smbj_datasheet.pdf.pdf" H 2910 4060 60  0001 C CNN
+F 4 "Digi-Key" H 3210 4360 60  0001 C CNN "1st Source"
+F 5 "Littlefuse" H 3010 4160 60  0001 C CNN "Manufacturer"
+F 6 "SMBJ33A" H 3110 4260 60  0001 C CNN "Manufacturer Part Number"
+F 7 "SMBJ33ALFCT-ND" H 3310 4460 60  0001 C CNN "1st Source Part Number"
+	1    2800 4050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L CAP_EEE-FK1H470P C202
+U 1 1 5A0E34C5
+P 3800 4050
+F 0 "C202" V 3708 4153 45  0000 L CNN
+F 1 "CAP_EEE-FK1H470P" V 3792 4153 45  0000 L CNN
+F 2 "usevolt:CAP_EEE-FK1H470P" H 3830 4200 20  0001 C CNN
+F 3 "http://industrial.panasonic.com/www-cgi/jvcr13pz.cgi?E+PZ+3+ABA0120+EEEFK1H470P+7+WW" H 3800 3990 60  0001 C CNN
+F 4 "667-EEE-FK1H470P" H 4400 4590 60  0001 C CNN "2nd Source Part Number"
+F 5 "Digi-Key" H 4100 4290 60  0001 C CNN "1st Source"
+F 6 "EEE-FK1H470P" H 4000 4190 60  0001 C CNN "Manufacturer Part Number"
+F 7 "Mouser" H 4300 4490 60  0001 C CNN "2nd Source"
+F 8 "Panasonic Electronic Components" H 3900 4090 60  0001 C CNN "Manufacturer"
+F 9 "PCE3815CT-ND" H 4200 4390 60  0001 C CNN "1st Source Part Number"
+	1    3800 4050
+	0    1    1    0   
+$EndComp
+Connection ~ 3800 3850
 $EndSCHEMATC

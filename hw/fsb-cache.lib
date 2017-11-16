@@ -383,6 +383,33 @@ X VDD 5 -300 100 100 R 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
+# CAP_EEE-FK1H470P
+#
+DEF CAP_EEE-FK1H470P C 0 40 N N 1 L N
+F0 "C" 0 -60 45 H V L BNN
+F1 "CAP_EEE-FK1H470P" 5 35 45 H V L BNN
+F2 "usevolt:CAP_EEE-FK1H470P" 30 150 20 H I C CNN
+F3 "http://industrial.panasonic.com/www-cgi/jvcr13pz.cgi?E+PZ+3+ABA0120+EEEFK1H470P+7+WW" 0 -60 60 H I C CNN
+F4 "667-EEE-FK1H470P" 600 540 60 H I C CNN "2nd Source Part Number"
+F5 "Digi-Key" 300 240 60 H I C CNN "1st Source"
+F6 "EEE-FK1H470P" 200 140 60 H I C CNN "Manufacturer Part Number"
+F7 "Mouser" 500 440 60 H I C CNN "2nd Source"
+F8 "Panasonic Electronic Components" 100 40 60 H I C CNN "Manufacturer"
+F9 "PCE3815CT-ND" 400 340 60 H I C CNN "1st Source Part Number"
+$FPLIST
+ *CAP_POL_SMD_10X10X10MM*
+$ENDFPLIST
+DRAW
+P 2 1 0 0 -142 50 -117 50 N
+P 2 1 0 0 -130 62 -130 37 N
+P 2 1 0 0 -95 75 -95 -75 N
+P 2 1 0 0 0 0 -50 0 N
+A 50 0 106 1351 -1351 1 1 0 N -25 75 -25 -75
+X + + -200 0 100 R 40 40 1 1 B
+X - - 100 0 100 L 40 40 1 1 B
+ENDDRAW
+ENDDEF
+#
 # DIODE_RS07J-GS18
 #
 DEF ~DIODE_RS07J-GS18 D 0 40 N N 1 L N
@@ -433,6 +460,32 @@ P 2 1 0 0 100 -40 130 -40 N
 P 2 1 0 0 100 40 100 -40 N
 X P P$1 -100 0 100 R 40 40 1 1 B
 X N P$2 200 0 100 L 40 40 1 1 B
+ENDDRAW
+ENDDEF
+#
+# DIODE_TVS_TPSMD28A
+#
+DEF DIODE_TVS_TPSMD28A D 0 40 N N 1 L N
+F0 "D" 110 10 45 H V L BNN
+F1 "DIODE_TVS_TPSMD28A" 140 -60 45 H V L BNN
+F2 "usevolt:DO-214AB" 30 150 20 H I C CNN
+F3 "http://www.littelfuse.com/~/media/electronics/datasheets/tvs_diodes/littelfuse_tvs_diode_tpsmd_datasheet.pdf.pdf" 110 10 60 H I C CNN
+F4 "Digi-Key" 410 310 60 H I C CNN "1st Source"
+F5 "Littlefuse" 210 110 60 H I C CNN "Manufacturer"
+F6 "TPSMD28A" 310 210 60 H I C CNN "Manufacturer Part Number"
+F7 "F6570CT-ND" 510 410 60 H I C CNN "1st Source Part Number"
+$FPLIST
+ *DO-214AA*
+$ENDFPLIST
+DRAW
+P 2 1 0 0 0 -40 90 0 N
+P 2 1 0 0 0 40 0 -40 N
+P 2 1 0 0 70 40 100 40 N
+P 2 1 0 0 90 0 0 40 N
+P 2 1 0 0 100 -40 130 -40 N
+P 2 1 0 0 100 40 100 -40 N
+X P 1 -100 0 100 R 40 40 1 1 B
+X N 2 200 0 100 L 40 40 1 1 B
 ENDDRAW
 ENDDEF
 #
