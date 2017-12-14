@@ -43,7 +43,7 @@
 #define CONFIG_PWM0									1
 #define CONFIG_PWM0_FREQ							10000
 #define CONFIG_PWM0_0								1
-#define CONFIG_PWM0_0_IO							P0_5
+#define CONFIG_PWM0_0_IO							P1_3
 
 #define CONFIG_PWM1									0
 #define CONFIG_PWM1_FREQ							10000
@@ -72,7 +72,7 @@
 #define CONFIG_ADC_CHANNEL0_0						1
 #define CONFIG_ADC_CHANNEL0_1						0
 #define CONFIG_ADC_CHANNEL0_2						0
-#define CONFIG_ADC_CHANNEL0_3						0
+#define CONFIG_ADC_CHANNEL0_3						1
 #define CONFIG_ADC_CHANNEL0_4						1
 #define CONFIG_ADC_CHANNEL0_5						1
 #define CONFIG_ADC_CHANNEL0_6						1
@@ -83,9 +83,9 @@
 #define CONFIG_ADC_CHANNEL0_11						1
 #define CONFIG_ADC_CHANNEL1_0						0
 #define CONFIG_ADC_CHANNEL1_1						0
-#define CONFIG_ADC_CHANNEL1_2						0
+#define CONFIG_ADC_CHANNEL1_2						1
 #define CONFIG_ADC_CHANNEL1_3						0
-#define CONFIG_ADC_CHANNEL1_4						0
+#define CONFIG_ADC_CHANNEL1_4						1
 #define CONFIG_ADC_CHANNEL1_5						0
 #define CONFIG_ADC_CHANNEL1_6						0
 #define CONFIG_ADC_CHANNEL1_7						0
@@ -193,6 +193,10 @@
 
 
 #define CONFIG_OUTPUT								1
+#define CONFIG_SOLENOID_OUTPUT						1
+#define CONFIG_PID									1
+#define CONFIG_SOLENOID_P							1
+#define CONFIG_SOLENOID_I							1
 
 
 

@@ -35,11 +35,10 @@ void init(dev_st* me) {
 	uv_output_init(&this->aux, AUX_SENSE, AUX_O, 2,
 			0, 10000, OUTPUT_MOVING_AVG_COUNT,
 			FSB_EMCY_AUX_OVERCURRENT, FSB_EMCY_AUX_FAULT);
-	uv_output_init(&this->heatervdd, HEATERVDD_SENSE, HEATERVDD_O, 2,
-			0, 20000, OUTPUT_MOVING_AVG_COUNT,
-			FSB_EMCY_HEATERVDD_OVERCURRENT, FSB_EMCY_HEATERVDD_FAULT);
-	uv_output_init(&this->heaterbat, HEATERBAT_SENSE, HEATERBAT_O, 2,
-			0, 20000, OUTPUT_MOVING_AVG_COUNT,
+	uv_output_init(&this->ui, UI_SENSE, UI_O, 2, 2000, 3000, OUTPUT_MOVING_AVG_COUNT,
+			FSB_EMCY_UI_OVERCURRENT, FSB_EMCY_UI_FAULT);
+	uv_solenoid_output_init(&this->heater, HEATER_PWM, 50, 1, HEATER_SENSE, 2,
+			20000, 30000, OUTPUT_MOVING_AVG_COUNT,
 			FSB_EMCY_HEATERBAT_OVERCURRENT, FSB_EMCY_HEATERBAT_FAULT);
 
 	// initialize inputs
@@ -48,6 +47,9 @@ void init(dev_st* me) {
 	UV_GPIO_INIT_INPUT(KEY_ON_I, PULL_DOWN_ENABLED);
 	UV_GPIO_INIT_INPUT(KEY_START_I, PULL_DOWN_ENABLED);
 	UV_GPIO_INIT_INPUT(EMCY_I, PULL_UP_ENABLED);
+	UV_GPIO_INIT_INPUT(DOORSW1_I, PULL_UP_ENABLED);
+	UV_GPIO_INIT_INPUT(DOORSW2_I, PULL_UP_ENABLED);
+	UV_GPIO_INIT_INPUT(VBAT_I, PULL_UP_ENABLED);
 
 	// initialize heater PWM output
 	uv_pwm_set(HEATER_PWM, DUTY_CYCLEPPT(0));
@@ -87,8 +89,8 @@ void step(void* me) {
 		uv_output_step(&this->horn, step_ms);
 		uv_output_step(&this->radio, step_ms);
 		uv_output_step(&this->aux, step_ms);
-		uv_output_step(&this->heatervdd, step_ms);
-		uv_output_step(&this->heaterbat,step_ms);
+		uv_output_step(&this->ui, step_ms);
+		uv_solenoid_output_step(&this->heater, step_ms);
 
 		// terminal step function
 		uv_terminal_step();
@@ -96,8 +98,8 @@ void step(void* me) {
 		this->total_current = uv_output_get_current(&this->horn) +
 				uv_output_get_current(&this->radio) +
 				uv_output_get_current(&this->aux) +
-				uv_output_get_current(&this->heatervdd) +
-				uv_output_get_current(&this->heaterbat);
+				uv_output_get_current(&this->ui) +
+				uv_solenoid_output_get_current(&this->heater);
 
 		this->emcy = uv_gpio_get(EMCY_I);
 
@@ -105,20 +107,14 @@ void step(void* me) {
 		if (this->heaterspeed > FSB_HEATER_MAX_SPEED) {
 			this->heaterspeed = FSB_HEATER_MAX_SPEED;
 		}
-		// note: For pcb revision 2.0.0 heater is on/off
-		uv_pwm_set(HEATER_PWM, (this->heaterspeed) ?
-				DUTY_CYCLEPPT(1000) : DUTY_CYCLEPPT(0));
-		uv_output_set_state(&this->heatervdd, (this->heaterspeed) ?
-				OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
-		uv_output_set_state(&this->heaterbat, (this->heaterspeed) ?
-				OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
 
 
+		// ui
+		uv_output_set_state(&this->ui, (this->ignkey == FSB_IGNKEY_STATE_START) ?
+				OUTPUT_STATE_OFF : OUTPUT_STATE_ON);
 
 		// vbat
-		uint16_t vbat = uv_adc_read(VBAT_SENSE);
-		vbat = vbat * 3300 / ADC_MAX_VALUE;
-		this->vbat = (vbat > 10000) ? 1 : 0;
+		this->vbat = !uv_gpio_get(VBAT_I);
 
 		// ignition key state machine
 		uint8_t key_on = uv_gpio_get(KEY_ON_I);
@@ -174,11 +170,11 @@ void step(void* me) {
 
 		// emcy handling
 		if (this->emcy) {
-			uv_output_set_state(&this->heaterbat, OUTPUT_STATE_OFF);
-			uv_output_set_state(&this->heatervdd, OUTPUT_STATE_OFF);
 			uv_output_set_state(&this->aux, OUTPUT_STATE_OFF);
 			uv_output_set_state(&this->radio, OUTPUT_STATE_OFF);
 			uv_output_set_state(&this->horn, OUTPUT_STATE_OFF);
+			uv_output_set_state(&this->ui, OUTPUT_STATE_OFF);
+			uv_solenoid_output_set_state(&this->heater, OUTPUT_STATE_OFF);
 		}
 
 

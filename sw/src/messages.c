@@ -74,32 +74,18 @@ canopen_object_st obj_dict[] = {
 				.data_ptr = &this->aux.current
 		},
 		{
-				.main_index = FSB_HEATERVDD_STATUS_INDEX,
-				.sub_index = FSB_HEATERVDD_STATUS_SUBINDEX,
-				.type = FSB_HEATERVDD_STATUS_TYPE,
-				.permissions = FSB_HEATERVDD_STATUS_PERMISSIONS,
-				.data_ptr = &this->heatervdd.state
+				.main_index = FSB_HEATER_STATUS_INDEX,
+				.sub_index = FSB_HEATER_STATUS_SUBINDEX,
+				.type = FSB_HEATER_STATUS_TYPE,
+				.permissions = FSB_HEATER_STATUS_PERMISSIONS,
+				.data_ptr = &this->heater.super.state
 		},
 		{
-				.main_index = FSB_HEATERVDD_CURRENT_INDEX,
-				.sub_index = FSB_HEATERVDD_CURRENT_SUBINDEX,
-				.type = FSB_HEATERVDD_CURRENT_TYPE,
-				.permissions = FSB_HEATERVDD_CURRENT_PERMISSIONS,
-				.data_ptr = &this->heatervdd.current
-		},
-		{
-				.main_index = FSB_HEATERBAT_STATUS_INDEX,
-				.sub_index = FSB_HEATERBAT_STATUS_SUBINDEX,
-				.type = FSB_HEATERBAT_STATUS_TYPE,
-				.permissions = FSB_HEATERBAT_STATUS_PERMISSIONS,
-				.data_ptr = &this->heaterbat.state
-		},
-		{
-				.main_index = FSB_HEATERBAT_CURRENT_INDEX,
-				.sub_index = FSB_HEATERBAT_CURRENT_SUBINDEX,
-				.type = FSB_HEATERBAT_CURRENT_TYPE,
-				.permissions = FSB_HEATERBAT_CURRENT_PERMISSIONS,
-				.data_ptr = &this->heaterbat.current
+				.main_index = FSB_HEATER_CURRENT_INDEX,
+				.sub_index = FSB_HEATER_CURRENT_SUBINDEX,
+				.type = FSB_HEATER_CURRENT_TYPE,
+				.permissions = FSB_HEATER_CURRENT_PERMISSIONS,
+				.data_ptr = &this->heater.super.current
 		},
 		{
 				.main_index = FSB_HEATER_SPEED_INDEX,
@@ -107,6 +93,20 @@ canopen_object_st obj_dict[] = {
 				.type = FSB_HEATER_SPEED_TYPE,
 				.permissions = FSB_HEATER_SPEED_PERMISSIONS,
 				.data_ptr = &this->heaterspeed
+		},
+		{
+				.main_index = FSB_UI_STATUS_INDEX,
+				.sub_index = FSB_UI_STATUS_SUBINDEX,
+				.type = FSB_UI_STATUS_TYPE,
+				.permissions = FSB_UI_STATUS_PERMISSIONS,
+				.data_ptr = &this->ui.state
+		},
+		{
+				.main_index = FSB_UI_CURRENT_INDEX,
+				.sub_index = FSB_UI_CURRENT_SUBINDEX,
+				.type = FSB_UI_CURRENT_TYPE,
+				.permissions = FSB_UI_CURRENT_PERMISSIONS,
+				.data_ptr = &this->ui.current
 		},
 		{
 				.main_index = FSB_IGNKEY_INDEX,
@@ -136,6 +136,20 @@ canopen_object_st obj_dict[] = {
 				.permissions = FSB_EBERFAN_PERMISSIONS,
 				.data_ptr = &this->eberfan
 		},
+		{
+				.main_index = FSB_DOORSW1_INDEX,
+				.sub_index = FSB_DOORSW1_SUBINDEX,
+				.type = FSB_DOORSW1_TYPE,
+				.permissions = FSB_DOORSW1_PERMISSIONS,
+				.data_ptr = &this->doorsw1
+		},
+		{
+				.main_index = FSB_DOORSW2_INDEX,
+				.sub_index = FSB_DOORSW2_SUBINDEX,
+				.type = FSB_DOORSW2_TYPE,
+				.permissions = FSB_DOORSW2_PERMISSIONS,
+				.data_ptr = &this->doorsw2
+		}
 };
 
 int obj_dict_len() {
@@ -192,8 +206,7 @@ void stat_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv
 	stat_output(&this->horn, "Horn");
 	stat_output(&this->aux, "Aux");
 	stat_output(&this->radio, "Radio");
-	stat_output(&this->heatervdd, "HeaterVDD");
-	stat_output(&this->heaterbat, "HeaterBAT");
+	stat_output((uv_output_st*) &this->heater, "Heater");
 	printf("Ignition key state: ");
 	if (this->ignkey == FSB_IGNKEY_STATE_OFF) {
 		printf("OFF");
@@ -210,8 +223,8 @@ void stat_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv
 	else {
 		printf("FAULT");
 	}
-	printf("\nemcy: %u\nvbat: %u (0x%x / 0x%x)\neber fan: %u\nheater speed: %u\n",
-			this->emcy, this->vbat, uv_adc_read(VBAT_SENSE), ADC_MAX_VALUE, this->eberfan, this->heaterspeed);
+	printf("\nemcy: %u\nvbat: %u\neber fan: %u\nheater speed: %u\n",
+			this->emcy, this->vbat, this->eberfan, this->heaterspeed);
 }
 
 
@@ -221,10 +234,7 @@ void heater_callb(void* me, unsigned int cmd, unsigned int args, argument_st *ar
 			argv[0].number = 100;
 		}
 		this->heaterspeed = argv[0].number;
-		uv_output_set_state(&this->heaterbat, (argv[0].number) ?
-				OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
-		uv_output_set_state(&this->heatervdd, (argv[0].number) ?
-				OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
+		uv_solenoid_output_set(&this->heater, this->heaterspeed);
 	}
 	printf("heater speed: %u\n", this->heaterspeed);
 }

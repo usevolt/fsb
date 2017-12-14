@@ -12,6 +12,7 @@
 #include <uv_memory.h>
 #include <uv_filters.h>
 #include <uv_output.h>
+#include <uv_solenoid_output.h>
 #include "can_fsb.h"
 
 
@@ -30,8 +31,8 @@ typedef struct _dev_st {
 	uv_output_st horn;
 	uv_output_st radio;
 	uv_output_st aux;
-	uv_output_st heatervdd;
-	uv_output_st heaterbat;
+	uv_output_st ui;
+	uv_solenoid_output_st heater;
 
 	uint16_t total_current;
 
@@ -40,6 +41,8 @@ typedef struct _dev_st {
 	uint16_t vbat;
 	uint8_t eberfan;
 	uint8_t heaterspeed;
+	uint8_t doorsw1;
+	uint8_t doorsw2;
 
 	uv_data_start_t data_start;
 
