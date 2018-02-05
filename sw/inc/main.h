@@ -18,9 +18,12 @@
 
 
 
-#define OUTPUT_MOVING_AVG_COUNT		100
+#define OUTPUT_MOVING_AVG_COUNT		10
+#define IGNKEY_MOVING_AVER_COUNT	5
 
 
+
+#define HEATER_MAX_CURRENT_MA		20000
 
 
 /// @brief: main data structure.
@@ -32,17 +35,21 @@ typedef struct _dev_st {
 	uv_output_st radio;
 	uv_output_st aux;
 	uv_output_st ui;
-	uv_solenoid_output_st heater;
+	uv_output_st heater;
 
 	uint16_t total_current;
 
 	fsb_ignkey_states_e ignkey;
+	uv_moving_aver_st key_on;
+	uv_moving_aver_st key_preheat;
+	uv_moving_aver_st key_start;
 	uint8_t emcy;
 	uint16_t vbat;
 	uint8_t eberfan;
 	uint8_t heaterspeed;
 	uint8_t doorsw1;
 	uint8_t doorsw2;
+	uint8_t seatsw;
 
 	uv_data_start_t data_start;
 

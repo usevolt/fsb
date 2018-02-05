@@ -34,6 +34,14 @@ INCLUDEDIRS := 	-I"inc/" \
 				-I"hal/uv_hal/freertos/include" \
 				-I"hal/uv_hal/freertos/portable/GCC/ARM_CM3"
 
+SOURCEDIRS := src \
+				hal/uv_hal/src \
+				hal/uv_hal/freertos \
+				hal/uv_hal/src/canopen \
+				hal/uv_hal/freertos/portable/GCC/ARM_CM3 \
+				hal/uv_hal/src_lpc1549 \
+				hal/lpc_chip_15xx/src
+
 #List of directories where to search libraries
 LIB_DIRS := 	-L"hal/lpc_chip_15xx/Debug"
 
@@ -49,7 +57,7 @@ LIBS :=			-llpc_chip_15xx
 
 
 CC := arm-none-eabi-gcc
-SOURCES := $(shell find $(SOURCEDIR) -name '*.c')
+SOURCES := $(shell find $(SOURCEDIRS) -maxdepth 1 -name '*.c')
 GIT_VERSION := $(shell git describe --abbrev=4 --dirty --always --tags)
 APP_NAME := $(shell basename `git rev-parse --show-toplevel`)
 FULL_NAME := $(APP_NAME)_$(GIT_VERSION)

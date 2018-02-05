@@ -18,7 +18,7 @@
 // Analog inputs
 #define AUX_SENSE					ADC1_2
 #define HORN_SENSE					ADC0_3
-#define RADIO_SENSE					ADC0_5
+#define RADIO_SENSE					ADC0_2
 #define HEATER_SENSE				ADC1_4
 #define UI_SENSE					ADC0_0
 
@@ -28,8 +28,9 @@
 #define KEY_ON_I					P0_15
 #define KEY_START_I					P0_13
 #define EMCY_I						P0_16
-#define DOORSW1_I					P1_4
-#define DOORSW2_I					P1_5
+#define DOORSW1_I					P1_9
+#define DOORSW2_I					P1_4
+#define SEATSW_I					P1_5
 #define VBAT_I						P0_2
 
 

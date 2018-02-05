@@ -78,14 +78,14 @@ canopen_object_st obj_dict[] = {
 				.sub_index = FSB_HEATER_STATUS_SUBINDEX,
 				.type = FSB_HEATER_STATUS_TYPE,
 				.permissions = FSB_HEATER_STATUS_PERMISSIONS,
-				.data_ptr = &this->heater.super.state
+				.data_ptr = &this->heater.state
 		},
 		{
 				.main_index = FSB_HEATER_CURRENT_INDEX,
 				.sub_index = FSB_HEATER_CURRENT_SUBINDEX,
 				.type = FSB_HEATER_CURRENT_TYPE,
 				.permissions = FSB_HEATER_CURRENT_PERMISSIONS,
-				.data_ptr = &this->heater.super.current
+				.data_ptr = &this->heater.current
 		},
 		{
 				.main_index = FSB_HEATER_SPEED_INDEX,
@@ -149,6 +149,13 @@ canopen_object_st obj_dict[] = {
 				.type = FSB_DOORSW2_TYPE,
 				.permissions = FSB_DOORSW2_PERMISSIONS,
 				.data_ptr = &this->doorsw2
+		},
+		{
+				.main_index = FSB_SEATSW_INDEX,
+				.sub_index = FSB_SEATSW_SUBINDEX,
+				.type = FSB_SEATSW_TYPE,
+				.permissions = FSB_SEATSW_PERMISSIONS,
+				.data_ptr = &this->seatsw
 		}
 };
 
@@ -206,7 +213,8 @@ void stat_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv
 	stat_output(&this->horn, "Horn");
 	stat_output(&this->aux, "Aux");
 	stat_output(&this->radio, "Radio");
-	stat_output((uv_output_st*) &this->heater, "Heater");
+	stat_output(&this->heater, "Heater");
+	stat_output(&this->ui, "UI");
 	printf("Ignition key state: ");
 	if (this->ignkey == FSB_IGNKEY_STATE_OFF) {
 		printf("OFF");
@@ -225,16 +233,19 @@ void stat_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv
 	}
 	printf("\nemcy: %u\nvbat: %u\neber fan: %u\nheater speed: %u\n",
 			this->emcy, this->vbat, this->eberfan, this->heaterspeed);
+	printf("doorsw1: %u\ndoorsw2: %u\nseatsw: %u\n",
+			this->doorsw1, this->doorsw2, this->seatsw);
+	printf("%u\n", _canopen.txpdo_time[0]);
 }
 
 
 void heater_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv) {
 	if (args && (argv[0].type == ARG_INTEGER)) {
-		if (argv[0].number > 100) {
-			argv[0].number = 100;
+		if (argv[0].number > FSB_HEATER_MAX_SPEED) {
+			printf("Max allowed speed: %u\n", FSB_HEATER_MAX_SPEED);
+			argv[0].number = FSB_HEATER_MAX_SPEED;
 		}
 		this->heaterspeed = argv[0].number;
-		uv_solenoid_output_set(&this->heater, this->heaterspeed);
 	}
 	printf("heater speed: %u\n", this->heaterspeed);
 }
