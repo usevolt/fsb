@@ -310,18 +310,41 @@ $EndComp
 Wire Wire Line
 	7050 4900 7050 3700
 $Comp
-L DIODE_TVS_SMBJ33A-TRDO-214AA D?
-U 1 1 5A39459B
-P 8300 4300
-F 0 "D?" H 8350 4494 45  0000 C CNN
-F 1 "DIODE_TVS_SMBJ33A-TRDO-214AA" H 8350 4410 45  0000 C CNN
-F 2 "usevolt:DO-214AA" H 8330 4450 20  0001 C CNN
-F 3 "http://www.littelfuse.com/~/media/electronics/datasheets/tvs_diodes/littelfuse_tvs_diode_smbj_datasheet.pdf.pdf" H 8410 4310 60  0001 C CNN
-F 4 "Digi-Key" H 8710 4610 60  0001 C CNN "1st Source"
-F 5 "Littlefuse" H 8510 4410 60  0001 C CNN "Manufacturer"
-F 6 "SMBJ33A" H 8610 4510 60  0001 C CNN "Manufacturer Part Number"
-F 7 "SMBJ33ALFCT-ND" H 8810 4710 60  0001 C CNN "1st Source Part Number"
-	1    8300 4300
+L SCHOTTKY_DIODE_V40PW10C D801
+U 1 1 5A394B01
+P 7700 4450
+F 0 "D801" H 7700 4797 60  0000 C CNN
+F 1 "SCHOTTKY_DIODE_V40PW10C" H 7700 4691 60  0000 C CNN
+F 2 "usevolt:SlimDPAK" H 7500 4100 60  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/2245239.pdf?_ga=2.16591231.874534928.1505194133-1862443086.1504075057" H 7500 4100 60  0001 C CNN
+F 4 "2535169" H 8050 5050 60  0001 C CNN "1st Source Part Number"
+F 5 "Digikey" H 8150 5150 60  0001 C CNN "2nd Source"
+F 6 "Farnell" H 7950 4950 60  0001 C CNN "1st Source"
+F 7 "V40PW10CHM3/I" H 7850 4850 60  0001 C CNN "Manufacturer Part Number"
+F 8 "V40PW10CHM3/IGICT-ND" H 8250 5250 60  0001 C CNN "2nd Source Part Number"
+F 9 "VISHAY" H 7750 4750 60  0001 C CNN "Manufacturer"
+	1    7700 4450
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	7300 4400 7050 4400
+Connection ~ 7050 4400
+$Comp
+L GND #PWR807
+U 1 1 5A394BA1
+P 8300 4600
+F 0 "#PWR807" H 8300 4350 50  0001 C CNN
+F 1 "GND" H 8305 4427 50  0000 C CNN
+F 2 "" H 8300 4600 50  0000 C CNN
+F 3 "" H 8300 4600 50  0000 C CNN
+	1    8300 4600
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	8300 4350 8300 4600
+Wire Wire Line
+	8300 4450 8100 4450
+Wire Wire Line
+	8300 4350 8100 4350
+Connection ~ 8300 4450
 $EndSCHEMATC

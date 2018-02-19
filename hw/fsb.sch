@@ -626,21 +626,6 @@ F 7 "Multicomp" H 9170 1320 60  0001 C CNN "Manufacturer"
 	1    8950 1200
 	1    0    0    -1  
 $EndComp
-$Comp
-L FUSE_MC36211_350MA F102
-U 1 1 598F0936
-P 8800 1950
-F 0 "F102" H 8800 2154 45  0000 C CNN
-F 1 "FUSE_MC36211_350MA" H 8800 2070 45  0000 C CNN
-F 2 "usevolt:FUSE_MC36211" H 8830 2100 20  0001 C CNN
-F 3 "http://www.farnell.com/datasheets/1678471.pdf?_ga=1.218604761.1948984246.1460023966" H 8920 1970 60  0001 C CNN
-F 4 "Farnell" H 9220 2270 60  0001 C CNN "1st Source"
-F 5 "MC36211" H 9120 2170 60  0001 C CNN "Manufacturer Part Number"
-F 6 "MC36211" H 9320 2370 60  0001 C CNN "1st Source Part Number"
-F 7 "Multicomp" H 9020 2070 60  0001 C CNN "Manufacturer"
-	1    8800 1950
-	1    0    0    -1  
-$EndComp
 Text Label 9550 5000 0    60   ~ 0
 HEATER_15+
 $Comp
@@ -970,4 +955,19 @@ F2 "OUT1" O R 9450 5000 60
 F3 "IN1" I L 8500 5000 60 
 F4 "SENSE1" O L 8500 5100 60 
 $EndSheet
+$Comp
+L FUSE_0ZCH0075AF2E F102
+U 1 1 5A8A8B03
+P 8800 1950
+F 0 "F102" H 8800 2154 45  0000 C CNN
+F 1 "FUSE_0ZCH0075AF2E" H 8800 2070 45  0000 C CNN
+F 2 "usevolt:1210" H 8830 2100 20  0001 C CNN
+F 3 "https://belfuse.com/resources/CircuitProtection/datasheets/0ZCH%20Nov2016.pdf" H 8920 1970 60  0001 C CNN
+F 4 "507-1788-1-ND" H 9320 2370 60  0001 C CNN "1st Source Part Number"
+F 5 "Digikey" H 9220 2270 60  0001 C CNN "1st Source"
+F 6 "0ZCH0075AF2E" H 9120 2170 60  0001 C CNN "Manufacturer Part Number"
+F 7 "Bel Fuse Inc." H 9020 2070 60  0001 C CNN "Manufacturer"
+	1    8800 1950
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
