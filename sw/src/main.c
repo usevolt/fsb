@@ -205,9 +205,8 @@ void step(void* me) {
 			uv_output_set_state(&this->ui, OUTPUT_STATE_OFF);
 		}
 		else {
-			// radio power is always on when ignition key is on
-			uv_output_set_state(&this->radio,
-					(this->ignkey == FSB_IGNKEY_STATE_ON) ? OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
+			// radio power is always on
+			uv_output_set_state(&this->radio, OUTPUT_STATE_ON);
 			uv_output_set_state(&this->aux,
 					(this->ignkey == FSB_IGNKEY_STATE_ON) ? OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
 			// ui

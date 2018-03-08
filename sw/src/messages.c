@@ -9,6 +9,7 @@
 #include "main.h"
 #include "messages.h"
 #include "can_fsb.h"
+#include "can_esb.h"
 #include "pin_mappings.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -16,6 +17,7 @@
 #include <uv_timer.h>
 #include <uv_utilities.h>
 #include <uv_output.h>
+#include <uv_rtos.h>
 
 extern dev_st dev;
 #define this (&dev)
@@ -235,7 +237,7 @@ void stat_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv
 			this->emcy, this->vbat, this->eberfan, this->heaterspeed);
 	printf("doorsw1: %u\ndoorsw2: %u\nseatsw: %u\n",
 			this->doorsw1, this->doorsw2, this->seatsw);
-	printf("%u\n", _canopen.txpdo_time[0]);
+
 }
 
 
