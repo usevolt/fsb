@@ -40,7 +40,7 @@
 
 #define CONFIG_PWM									1
 #define CONFIG_PWM0									1
-#define CONFIG_PWM0_FREQ							10000
+#define CONFIG_PWM0_FREQ							1000
 #define CONFIG_PWM0_0								1
 #define CONFIG_PWM0_0_IO							P1_3
 
@@ -117,6 +117,7 @@
 
 
 #define CONFIG_CANOPEN								1
+#define CONFIG_CANOPEN_NMT_SLAVE					1
 #define CONFIG_CANOPEN_LOG							0
 #define CONFIG_CANOPEN_RXPDO_COUNT					0
 #define CONFIG_CANOPEN_TXPDO_COUNT					1

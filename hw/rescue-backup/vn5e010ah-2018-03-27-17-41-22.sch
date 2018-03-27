@@ -1,4 +1,10 @@
-EESchema Schematic File Version 4
+EESchema Schematic File Version 2
+LIBS:fsb-rescue
+LIBS:kemet
+LIBS:power
+LIBS:usevolt
+LIBS:wurth_elektronik_LED
+LIBS:yageo
 LIBS:fsb-cache
 EELAYER 26 0
 EELAYER END
@@ -29,7 +35,7 @@ Wire Wire Line
 Wire Wire Line
 	4350 3450 4600 3450
 $Comp
-L fsb-rescue:VDD #PWR602
+L VDD #PWR602
 U 1 1 59D7E637
 P 4600 3000
 AR Path="/5A019746/59D7E637" Ref="#PWR602"  Part="1" 
@@ -67,7 +73,7 @@ Wire Wire Line
 	4600 3450 4600 3300
 Connection ~ 4600 3300
 $Comp
-L fsb-rescue:GND #PWR601
+L GND #PWR601
 U 1 1 5A014ACD
 P 3850 3600
 AR Path="/5A019746/5A014ACD" Ref="#PWR601"  Part="1" 
@@ -93,7 +99,7 @@ $EndComp
 Wire Wire Line
 	3850 3300 3850 3600
 $Comp
-L fsb-rescue:1K R502
+L 1K R502
 U 1 1 5A058D94
 P 3600 3350
 AR Path="/5A01611C/5A058D94" Ref="R502"  Part="1" 
@@ -127,7 +133,7 @@ Wire Wire Line
 	3600 3550 3850 3550
 Connection ~ 3850 3550
 $Comp
-L fsb-rescue:390 R1001
+L 390 R1001
 U 1 1 5A32CF0E
 P 4150 3300
 AR Path="/5A1349CF/5A32CF0E" Ref="R1001"  Part="1" 
@@ -151,7 +157,7 @@ F 7 "YAGEO" H 4219 3439 60  0001 C CNN "Manufacturer"
 	1    0    0    -1  
 $EndComp
 $Comp
-L fsb-rescue:VN5E010AH U1001
+L VN5E010AH U1001
 U 1 1 5A32CF4A
 P 5300 3300
 AR Path="/5A1349CF/5A32CF4A" Ref="U1001"  Part="1" 
@@ -175,7 +181,7 @@ F 7 "VN5E010AHTR-E" H 5250 4550 60  0001 C CNN "Manufacturer Part Number"
 	1    0    0    -1  
 $EndComp
 $Comp
-L fsb-rescue:GND #PWR1003
+L GND #PWR1003
 U 1 1 5A32CF90
 P 4800 3600
 AR Path="/5A1349CF/5A32CF90" Ref="#PWR1003"  Part="1" 

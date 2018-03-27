@@ -217,13 +217,20 @@ void step(void* me) {
 
 
 		// emcy handling
-		if (this->emcy) {
-			// note: UI should not be stopped to keep display visible
-			uv_output_set_state(&this->aux, OUTPUT_STATE_OFF);
-			uv_output_set_state(&this->radio, OUTPUT_STATE_OFF);
-			uv_output_set_state(&this->horn, OUTPUT_STATE_OFF);
-			uv_output_set_state(&this->heater, OUTPUT_STATE_OFF);
-		}
+//		if (this->emcy) {
+//			// note: UI should not be stopped to keep display visible
+//			uv_output_disable(&this->aux);
+//			uv_output_disable(&this->radio);
+//			uv_output_disable(&this->horn);
+//			uv_output_disable(&this->heater);
+//			uv_pwm_set(HEATER_PWM, 0);
+//		}
+//		else {
+//			uv_output_enable(&this->aux);
+//			uv_output_enable(&this->radio);
+//			uv_output_enable(&this->horn);
+//			uv_output_enable(&this->heater);
+//		}
 
 		uv_rtos_task_delay(step_ms);
 	}

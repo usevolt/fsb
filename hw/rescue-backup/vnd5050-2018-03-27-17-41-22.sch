@@ -1,4 +1,10 @@
-EESchema Schematic File Version 4
+EESchema Schematic File Version 2
+LIBS:fsb-rescue
+LIBS:kemet
+LIBS:power
+LIBS:usevolt
+LIBS:wurth_elektronik_LED
+LIBS:yageo
 LIBS:fsb-cache
 EELAYER 26 0
 EELAYER END
@@ -27,7 +33,7 @@ SENSE1
 Text HLabel 3200 4200 0    60   Output ~ 0
 SENSE2
 $Comp
-L fsb-rescue:VND5050AJTR-E U401
+L VND5050AJTR-E U401
 U 1 1 59D8088A
 P 4600 4000
 AR Path="/5A015FC0/59D8088A" Ref="U401"  Part="1" 
@@ -46,7 +52,7 @@ F 7 "VND5050AJTR-E" H 4800 4600 60  0001 C CNN "Manufacturer Part Number"
 	1    0    0    -1  
 $EndComp
 $Comp
-L fsb-rescue:VDD #PWR019
+L VDD #PWR019
 U 1 1 59D808C7
 P 5250 3650
 AR Path="/5A015FC0/59D808C7" Ref="#PWR019"  Part="1" 
@@ -89,7 +95,7 @@ Wire Wire Line
 Wire Wire Line
 	3200 4000 4300 4000
 $Comp
-L fsb-rescue:GND #PWR020
+L GND #PWR020
 U 1 1 59D86DC2
 P 3600 4450
 AR Path="/5A015FC0/59D86DC2" Ref="#PWR020"  Part="1" 
@@ -108,7 +114,7 @@ Wire Wire Line
 Wire Wire Line
 	3600 4300 4300 4300
 $Comp
-L fsb-rescue:390 R402
+L 390 R402
 U 1 1 59D88771
 P 3800 4100
 AR Path="/5A015FC0/59D88771" Ref="R402"  Part="1" 
@@ -127,7 +133,7 @@ F 7 "YAGEO" H 3869 4239 60  0001 C CNN "Manufacturer"
 	1    0    0    -1  
 $EndComp
 $Comp
-L fsb-rescue:390 R401
+L 390 R401
 U 1 1 59D88845
 P 3800 3900
 AR Path="/5A015FC0/59D88845" Ref="R401"  Part="1" 
@@ -166,7 +172,7 @@ Wire Wire Line
 	4150 3700 3200 3700
 Connection ~ 4150 3900
 $Comp
-L fsb-rescue:1K R403
+L 1K R403
 U 1 1 5A05950C
 P 3400 3900
 AR Path="/5A015FC0/5A05950C" Ref="R403"  Part="1" 
@@ -185,7 +191,7 @@ F 7 "YAGEO" H 3469 4039 60  0001 C CNN "Manufacturer"
 	1    0    0    -1  
 $EndComp
 $Comp
-L fsb-rescue:1K R404
+L 1K R404
 U 1 1 5A059568
 P 3400 4100
 AR Path="/5A015FC0/5A059568" Ref="R404"  Part="1" 
