@@ -344,7 +344,7 @@ Text HLabel 7150 2250 2    60   Input ~ 0
 KEY_AC
 Text HLabel 7150 2350 2    60   Input ~ 0
 EMCY
-Text HLabel 3350 5650 0    60   Input ~ 0
+Text HLabel 3350 5550 0    60   Input ~ 0
 HEATER_SENSE
 $Comp
 L fsb-rescue:10K R306
@@ -537,7 +537,7 @@ Wire Wire Line
 Wire Wire Line
 	6400 2350 7150 2350
 Wire Wire Line
-	4600 5650 3350 5650
+	4600 5550 3350 5550
 Wire Wire Line
 	4600 2550 3350 2550
 Wire Wire Line
@@ -657,7 +657,11 @@ Wire Wire Line
 Wire Wire Line
 	10100 5700 10200 5700
 Wire Wire Line
-	4600 5550 4150 5550
-Text HLabel 4150 5550 0    50   Output ~ 0
+	4600 5450 4150 5450
+Text HLabel 4150 5450 0    50   Output ~ 0
 HEATER_PWM
+Wire Wire Line
+	4600 5650 4150 5650
+Text HLabel 4150 5650 0    50   Input ~ 0
+FUEL_L
 $EndSCHEMATC
