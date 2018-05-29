@@ -664,4 +664,12 @@ Wire Wire Line
 	4600 5650 4150 5650
 Text HLabel 4150 5650 0    50   Input ~ 0
 FUEL_L
+Wire Wire Line
+	6400 5450 6950 5450
+Wire Wire Line
+	6400 5550 6950 5550
+Text HLabel 6950 5450 2    50   Input ~ 0
+IN1
+Text HLabel 6950 5550 2    50   Input ~ 0
+IN2
 $EndSCHEMATC

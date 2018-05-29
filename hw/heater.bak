@@ -318,24 +318,6 @@ F 9 "VISHAY" H 7750 4750 60  0001 C CNN "Manufacturer"
 	1    7700 4450
 	-1   0    0    -1  
 $EndComp
-$Comp
-L fsb-rescue:GND #PWR0807
-U 1 1 5A394BA1
-P 8300 4600
-F 0 "#PWR0807" H 8300 4350 50  0001 C CNN
-F 1 "GND" H 8305 4427 50  0000 C CNN
-F 2 "" H 8300 4600 50  0000 C CNN
-F 3 "" H 8300 4600 50  0000 C CNN
-	1    8300 4600
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8300 4350 8300 4450
-Wire Wire Line
-	8300 4450 8100 4450
-Wire Wire Line
-	8300 4350 8100 4350
-Connection ~ 8300 4450
 Wire Wire Line
 	6750 3700 7050 3700
 Wire Wire Line
@@ -362,8 +344,6 @@ Wire Wire Line
 	7050 3700 7250 3700
 Wire Wire Line
 	4500 3700 4650 3700
-Wire Wire Line
-	8300 4450 8300 4600
 Text HLabel 6600 2950 0    50   Input ~ 0
 IN_PWM
 $Comp
@@ -386,7 +366,7 @@ $EndComp
 Text HLabel 8700 2900 2    50   Input ~ 0
 OUT-
 Wire Wire Line
-	8700 2900 8050 2900
+	8700 2900 8550 2900
 $Comp
 L fsb-rescue:GND #PWR0107
 U 1 1 5ABBA8C9
@@ -427,4 +407,16 @@ Wire Wire Line
 Connection ~ 7050 4400
 Wire Wire Line
 	7300 4400 7050 4400
+Wire Wire Line
+	8550 2900 8550 4350
+Wire Wire Line
+	8550 4350 8100 4350
+Connection ~ 8550 2900
+Wire Wire Line
+	8550 2900 8050 2900
+Wire Wire Line
+	8100 4450 8550 4450
+Wire Wire Line
+	8550 4450 8550 4350
+Connection ~ 8550 4350
 $EndSCHEMATC
