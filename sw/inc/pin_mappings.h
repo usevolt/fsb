@@ -21,6 +21,7 @@
 #define RADIO_SENSE					ADC0_2
 #define HEATER_SENSE				ADC1_4
 #define UI_SENSE					ADC0_0
+#define FUEL_LEVEL_AIN				ADC1_4
 
 // Digital inputs
 #define EBERFAN_I					P0_1
@@ -39,6 +40,7 @@
 #define RADIO_O						P0_3
 #define AUX_O						P0_18
 #define UI_O						P0_7
+#define HEATER_O					P1_3
 // refer to uv_hal_config for where PWM0_0 is located
 #define HEATER_PWM					PWM0_0
 

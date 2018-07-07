@@ -344,62 +344,44 @@ Wire Wire Line
 	7050 3700 7250 3700
 Wire Wire Line
 	4500 3700 4650 3700
-Text HLabel 6600 2950 0    50   Input ~ 0
+Text HLabel 5550 2250 0    50   Input ~ 0
 IN_PWM
 $Comp
 L usevolt:VNB35NV04TR-E Q801
 U 1 1 5ABB9BC8
-P 7850 2950
-F 0 "Q801" H 7825 3225 50  0000 C CNN
-F 1 "VNB35NV04TR-E" H 7825 3134 50  0000 C CNN
-F 2 "usevolt:D2" H 7600 2950 50  0001 C CNN
-F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/95/6b/79/42/8e/45/4a/e6/DM00062289.pdf/files/DM00062289.pdf/jcr:content/translations/en.DM00062289.pdf" H 7600 2950 50  0001 C CNN
-F 4 "STMicroelectronics" H 7950 3200 50  0001 C CNN "Manufacturer"
-F 5 "VNB35NV04TR-E" H 8050 3300 50  0001 C CNN "Manufacturer Part Number"
-F 6 "Digikey" H 8150 3400 50  0001 C CNN "1st Source"
-F 7 "497-11686-1-ND" H 8250 3500 50  0001 C CNN "1st Source Part Number"
-F 8 "Mouser" H 8350 3600 50  0001 C CNN "2nd Source"
-F 9 "511-VNB35NV04TR-E" H 8450 3700 50  0001 C CNN "2nd Source Part Number"
-	1    7850 2950
+P 7850 2250
+F 0 "Q801" H 7825 2525 50  0000 C CNN
+F 1 "VNB35NV04TR-E" H 7825 2434 50  0000 C CNN
+F 2 "usevolt:D2" H 7600 2250 50  0001 C CNN
+F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/95/6b/79/42/8e/45/4a/e6/DM00062289.pdf/files/DM00062289.pdf/jcr:content/translations/en.DM00062289.pdf" H 7600 2250 50  0001 C CNN
+F 4 "STMicroelectronics" H 7950 2500 50  0001 C CNN "Manufacturer"
+F 5 "VNB35NV04TR-E" H 8050 2600 50  0001 C CNN "Manufacturer Part Number"
+F 6 "Digikey" H 8150 2700 50  0001 C CNN "1st Source"
+F 7 "497-11686-1-ND" H 8250 2800 50  0001 C CNN "1st Source Part Number"
+F 8 "Mouser" H 8350 2900 50  0001 C CNN "2nd Source"
+F 9 "511-VNB35NV04TR-E" H 8450 3000 50  0001 C CNN "2nd Source Part Number"
+	1    7850 2250
 	1    0    0    -1  
 $EndComp
-Text HLabel 8700 2900 2    50   Input ~ 0
+Text HLabel 8700 2200 2    50   Input ~ 0
 OUT-
 Wire Wire Line
-	8700 2900 8550 2900
+	8700 2200 8550 2200
 $Comp
 L fsb-rescue:GND #PWR0107
 U 1 1 5ABBA8C9
-P 8300 3350
-F 0 "#PWR0107" H 8300 3100 50  0001 C CNN
-F 1 "GND" H 8305 3177 50  0000 C CNN
-F 2 "" H 8300 3350 50  0000 C CNN
-F 3 "" H 8300 3350 50  0000 C CNN
-	1    8300 3350
+P 8300 2650
+F 0 "#PWR0107" H 8300 2400 50  0001 C CNN
+F 1 "GND" H 8305 2477 50  0000 C CNN
+F 2 "" H 8300 2650 50  0000 C CNN
+F 3 "" H 8300 2650 50  0000 C CNN
+	1    8300 2650
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	8300 3350 8300 3000
+	8300 2650 8300 2300
 Wire Wire Line
-	8300 3000 8050 3000
-$Comp
-L fsb-rescue:1K R809
-U 1 1 5ABBC1B6
-P 6900 2950
-F 0 "R809" H 6950 3134 45  0000 C CNN
-F 1 "1K" H 6950 3050 45  0000 C CNN
-F 2 "yageo:0603" H 6930 3100 20  0001 C CNN
-F 3 "" H 6869 2989 60  0001 C CNN
-F 4 "Digikey" H 7169 3289 60  0001 C CNN "1st Source"
-F 5 "RC0603FR-071KL" H 7069 3189 60  0001 C CNN "Manufacturer Part Number"
-F 6 "YAGEO" H 6969 3089 60  0001 C CNN "Manufacturer"
-	1    6900 2950
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	6800 2950 6600 2950
-Wire Wire Line
-	7100 2950 7600 2950
+	8300 2300 8050 2300
 Wire Wire Line
 	7050 4400 7050 3700
 Wire Wire Line
@@ -408,15 +390,116 @@ Connection ~ 7050 4400
 Wire Wire Line
 	7300 4400 7050 4400
 Wire Wire Line
-	8550 2900 8550 4350
+	8550 2200 8550 4350
 Wire Wire Line
 	8550 4350 8100 4350
-Connection ~ 8550 2900
+Connection ~ 8550 2200
 Wire Wire Line
-	8550 2900 8050 2900
+	8550 2200 8050 2200
 Wire Wire Line
 	8100 4450 8550 4450
 Wire Wire Line
 	8550 4450 8550 4350
 Connection ~ 8550 4350
+$Comp
+L usevolt:MOSFET-N_2N7002W U805
+U 1 1 5B408B19
+P 6500 2500
+F 0 "U805" H 6500 2787 60  0000 C CNN
+F 1 "MOSFET-N_2N7002W" H 6500 2681 60  0000 C CNN
+F 2 "usevolt:SOT323" H 6800 3400 60  0001 C CNN
+F 3 "http://www.onsemi.com/pub_link/Collateral/2N7002W-D.PDF" H 6650 3500 60  0001 C CNN
+F 4 "2533171" H 7075 3325 60  0001 C CNN "2nd Source Part Number"
+F 5 "2N7002WT1G" H 6675 2925 60  0001 C CNN "Manufacturer Part Number"
+F 6 "2N7002WT1GOSCT-ND" H 6875 3125 60  0001 C CNN "1st Source Part Number"
+F 7 "Digikey" H 6775 3025 60  0001 C CNN "1st Source"
+F 8 "Farnell" H 6975 3225 60  0001 C CNN "2nd Source"
+F 9 "ON Semiconductor" H 6575 2825 60  0001 C CNN "Manufacturer"
+	1    6500 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L usevolt:MOSFET_P_ZXMP10A13F U804
+U 1 1 5B408DAE
+P 6500 2000
+F 0 "U804" H 6500 2265 50  0000 C CNN
+F 1 "MOSFET_P_ZXMP10A13F" H 6500 2174 50  0000 C CNN
+F 2 "usevolt:SOT-23_3-PIN" H 6500 2200 50  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/1915646.pdf?_ga=2.76885333.1768503822.1530426090-1862443086.1504075057" H 6500 2200 50  0001 C CNN
+F 4 "DIODES INC." H 6600 2250 50  0001 C CNN "Manufacturer"
+F 5 "ZXMP10A13FTA" H 6700 2350 50  0001 C CNN "Manufacturer Part Number"
+F 6 "Farnell" H 6800 2450 50  0001 C CNN "1st Source"
+F 7 "1843777" H 6900 2550 50  0001 C CNN "1st Source Part Number"
+	1    6500 2000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6300 2000 6000 2000
+Wire Wire Line
+	6000 2000 6000 2250
+Wire Wire Line
+	6000 2500 6350 2500
+Wire Wire Line
+	5550 2250 6000 2250
+Connection ~ 6000 2250
+Wire Wire Line
+	6000 2250 6000 2500
+$Comp
+L fsb-rescue:GND #PWR0109
+U 1 1 5B40D98A
+P 7000 2750
+F 0 "#PWR0109" H 7000 2500 50  0001 C CNN
+F 1 "GND" H 7005 2577 50  0000 C CNN
+F 2 "" H 7000 2750 50  0000 C CNN
+F 3 "" H 7000 2750 50  0000 C CNN
+	1    7000 2750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 2750 7000 2550
+Wire Wire Line
+	7000 2550 6650 2550
+$Comp
+L yageo:10 R809
+U 1 1 5B410B23
+P 7000 1650
+F 0 "R809" V 7008 1708 45  0000 L CNN
+F 1 "10" V 7092 1708 45  0000 L CNN
+F 2 "yageo:0603" H 7030 1800 20  0001 C CNN
+F 3 "" H 6969 1689 60  0001 C CNN
+F 4 "" H 7369 2089 60  0001 C CNN "1st Source Part Number"
+F 5 "Digikey" H 7269 1989 60  0001 C CNN "1st Source"
+F 6 "RC0603FR-0710RL" H 7169 1889 60  0001 C CNN "Manufacturer Part Number"
+F 7 "YAGEO" H 7069 1789 60  0001 C CNN "Manufacturer"
+	1    7000 1650
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7000 1550 7000 1450
+Wire Wire Line
+	7000 1850 7000 1950
+Wire Wire Line
+	7000 1950 6700 1950
+Wire Wire Line
+	6700 2050 7000 2050
+Wire Wire Line
+	7000 2050 7000 2250
+Wire Wire Line
+	7000 2250 7600 2250
+Wire Wire Line
+	7000 2250 7000 2450
+Wire Wire Line
+	7000 2450 6650 2450
+Connection ~ 7000 2250
+$Comp
+L fsb-rescue:+3V3 #PWR0110
+U 1 1 5B415F3E
+P 7000 1450
+F 0 "#PWR0110" H 7000 1300 50  0001 C CNN
+F 1 "+3V3" H 7015 1623 50  0000 C CNN
+F 2 "" H 7000 1450 50  0000 C CNN
+F 3 "" H 7000 1450 50  0000 C CNN
+	1    7000 1450
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

@@ -40,9 +40,9 @@
 
 #define CONFIG_PWM									1
 #define CONFIG_PWM0									1
-#define CONFIG_PWM0_FREQ							1000
+#define CONFIG_PWM0_FREQ							20000
 #define CONFIG_PWM0_0								1
-#define CONFIG_PWM0_0_IO							P1_3
+#define CONFIG_PWM0_0_IO							P0_11
 
 #define CONFIG_PWM1									0
 #define CONFIG_PWM1_FREQ							10000
