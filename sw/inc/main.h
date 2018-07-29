@@ -25,6 +25,11 @@
 
 #define HEATER_MAX_CURRENT_MA		20000
 
+/// @brief: Heater minimum duty cycle
+#define HEATER_PWM_DC_MIN			300
+/// @brief: Heater maximum duty cycle
+#define HEATER_PWM_DC_MAX			800
+
 
 /// @brief: main data structure.
 /// This struct can be save to non-volatile flash memory with
