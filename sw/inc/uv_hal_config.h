@@ -42,7 +42,7 @@
 #define CONFIG_PWM0									1
 #define CONFIG_PWM0_FREQ							20000
 #define CONFIG_PWM0_0								1
-#define CONFIG_PWM0_0_IO							P0_11
+#define CONFIG_PWM0_0_IO							P0_12
 
 #define CONFIG_PWM1									0
 #define CONFIG_PWM1_FREQ							10000
@@ -83,7 +83,7 @@
 #define CONFIG_ADC_CHANNEL1_0						0
 #define CONFIG_ADC_CHANNEL1_1						0
 #define CONFIG_ADC_CHANNEL1_2						1
-#define CONFIG_ADC_CHANNEL1_3						0
+#define CONFIG_ADC_CHANNEL1_3						1
 #define CONFIG_ADC_CHANNEL1_4						1
 #define CONFIG_ADC_CHANNEL1_5						0
 #define CONFIG_ADC_CHANNEL1_6						0

@@ -60,7 +60,7 @@ void init(dev_st* me) {
 	UV_GPIO_INIT_INPUT(VBAT_I, PULL_UP_ENABLED);
 
 	// initialize heater PWM output
-	uv_pwm_set(HEATER_PWM, DUTY_CYCLEPPT(0));
+	uv_pwm_set(HEATER_PWM, DUTY_CYCLEPPT(1000));
 
 
 	this->ignkey = FSB_IGNKEY_STATE_OFF;
@@ -131,7 +131,8 @@ void step(void* me) {
 		}
 		uv_output_set_state(&this->heater,
 				(this->heaterspeed) ? OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
-		uv_pwm_set(HEATER_PWM, PWM_MAX_VALUE * this->heaterspeed / FSB_HEATER_MAX_SPEED);
+		uv_pwm_set(HEATER_PWM,
+				PWM_MAX_VALUE - (PWM_MAX_VALUE * this->heaterspeed / FSB_HEATER_MAX_SPEED));
 
 
 		// vbat

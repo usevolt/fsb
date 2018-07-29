@@ -19,7 +19,7 @@
 #define AUX_SENSE					ADC1_2
 #define HORN_SENSE					ADC0_3
 #define RADIO_SENSE					ADC0_2
-#define HEATER_SENSE				ADC1_4
+#define HEATER_SENSE				ADC1_3
 #define UI_SENSE					ADC0_0
 #define FUEL_LEVEL_AIN				ADC1_4
 

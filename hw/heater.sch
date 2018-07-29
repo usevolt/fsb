@@ -459,21 +459,6 @@ Wire Wire Line
 	7000 2750 7000 2550
 Wire Wire Line
 	7000 2550 6650 2550
-$Comp
-L yageo:10 R809
-U 1 1 5B410B23
-P 7000 1650
-F 0 "R809" V 7008 1708 45  0000 L CNN
-F 1 "10" V 7092 1708 45  0000 L CNN
-F 2 "yageo:0603" H 7030 1800 20  0001 C CNN
-F 3 "" H 6969 1689 60  0001 C CNN
-F 4 "" H 7369 2089 60  0001 C CNN "1st Source Part Number"
-F 5 "Digikey" H 7269 1989 60  0001 C CNN "1st Source"
-F 6 "RC0603FR-0710RL" H 7169 1889 60  0001 C CNN "Manufacturer Part Number"
-F 7 "YAGEO" H 7069 1789 60  0001 C CNN "Manufacturer"
-	1    7000 1650
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	7000 1550 7000 1450
 Wire Wire Line
@@ -502,4 +487,42 @@ F 3 "" H 7000 1450 50  0000 C CNN
 	1    7000 1450
 	1    0    0    -1  
 $EndComp
+$Comp
+L yageo:10 R809
+U 1 1 5B410B23
+P 7000 1650
+F 0 "R809" V 7008 1708 45  0000 L CNN
+F 1 "10" V 7092 1708 45  0000 L CNN
+F 2 "yageo:0603" H 7030 1800 20  0001 C CNN
+F 3 "" H 6969 1689 60  0001 C CNN
+F 4 "" H 7369 2089 60  0001 C CNN "1st Source Part Number"
+F 5 "Digikey" H 7269 1989 60  0001 C CNN "1st Source"
+F 6 "RC0603FR-0710RL" H 7169 1889 60  0001 C CNN "Manufacturer Part Number"
+F 7 "YAGEO" H 7069 1789 60  0001 C CNN "Manufacturer"
+	1    7000 1650
+	0    1    1    0   
+$EndComp
+$Comp
+L yageo:10 R?
+U 1 1 5B5E9327
+P 7350 1650
+F 0 "R?" V 7358 1708 45  0000 L CNN
+F 1 "10" V 7442 1708 45  0000 L CNN
+F 2 "yageo:0603" H 7380 1800 20  0001 C CNN
+F 3 "" H 7319 1689 60  0001 C CNN
+F 4 "" H 7719 2089 60  0001 C CNN "1st Source Part Number"
+F 5 "Digikey" H 7619 1989 60  0001 C CNN "1st Source"
+F 6 "RC0603FR-0710RL" H 7519 1889 60  0001 C CNN "Manufacturer Part Number"
+F 7 "YAGEO" H 7419 1789 60  0001 C CNN "Manufacturer"
+	1    7350 1650
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7350 1550 7000 1550
+Connection ~ 7000 1550
+Wire Wire Line
+	7350 1850 7350 1950
+Wire Wire Line
+	7350 1950 7000 1950
+Connection ~ 7000 1950
 $EndSCHEMATC
