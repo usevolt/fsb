@@ -12,6 +12,7 @@
 #include <uv_memory.h>
 #include <uv_filters.h>
 #include <uv_output.h>
+#include <uv_sensor.h>
 #include <uv_solenoid_output.h>
 #include "can_fsb.h"
 
@@ -29,6 +30,12 @@
 #define HEATER_PWM_DC_MIN			300
 /// @brief: Heater maximum duty cycle
 #define HEATER_PWM_DC_MAX			800
+
+#define LEVEL_FAULT_MIN_VAL			0
+#define LEVEL_FAULT_MAX_VAL			150
+#define FUEL_LEVEL_AVG_COUNT		50
+#define FUEL_LEVEL_HYSTERESIS		20
+#define FUEL_LEVEL_WARNING_VALUE	30
 
 
 /// @brief: main data structure.
@@ -55,6 +62,8 @@ typedef struct _dev_st {
 	uint8_t doorsw1;
 	uint8_t doorsw2;
 	uint8_t seatsw;
+	uv_sensor_st fuel_level;
+	uint8_t fuel_level_value;
 
 	uv_data_start_t data_start;
 

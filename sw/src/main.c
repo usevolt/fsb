@@ -29,6 +29,39 @@ dev_st dev = {};
 static void ignkey_state_changed(fsb_ignkey_states_e last_state);
 
 
+uint16_t adc_get_voltage_mv(const uv_adc_channels_e adc_chn) {
+	int32_t adc = uv_adc_read(adc_chn);
+	return adc * 3300 / ADC_MAX_VALUE;
+}
+
+
+#define LEVEL_0_MV				0
+#define LEVEL_100_MV			500
+int16_t get_level(uv_adc_channels_e adc) {
+	int16_t ret;
+	int64_t mv = adc_get_voltage_mv(adc);
+	int32_t t = uv_reli(mv, LEVEL_0_MV, LEVEL_100_MV);
+	int32_t result = uv_lerpi(t, 0, 100);
+
+	if (result < LEVEL_FAULT_MIN_VAL) {
+		ret = LEVEL_FAULT_MIN_VAL;
+	}
+	else if (result > LEVEL_FAULT_MAX_VAL) {
+		ret = LEVEL_FAULT_MAX_VAL;
+	}
+	else {
+		if (result > 100) {
+			result = 100;
+		}
+		ret = result;
+	}
+	return ret;
+}
+
+
+
+
+
 
 void init(dev_st* me) {
 
@@ -62,6 +95,13 @@ void init(dev_st* me) {
 	// initialize heater PWM output
 	uv_pwm_set(HEATER_PWM, PWM_MAX_VALUE);
 
+	// initialize fuel level sensor module
+	uv_sensor_init(&this->fuel_level, FUEL_LEVEL_AIN, FUEL_LEVEL_AVG_COUNT, &get_level);
+	uv_sensor_set_warning(&this->fuel_level, FUEL_LEVEL_WARNING_VALUE, FUEL_LEVEL_HYSTERESIS,
+			true, FSB_EMCY_FUEL_LEVEL_WARNING);
+	uv_sensor_set_fault(&this->fuel_level, LEVEL_FAULT_MIN_VAL, LEVEL_FAULT_MAX_VAL,
+			FUEL_LEVEL_HYSTERESIS, FSB_EMCY_FUEL_LEVEL_FAULT);
+	this->fuel_level_value = 0;
 
 	this->ignkey = FSB_IGNKEY_STATE_OFF;
 	this->emcy = uv_gpio_get(EMCY_I);
@@ -99,7 +139,13 @@ void step(void* me) {
 	while (true) {
 		unsigned int step_ms = 20;
 
-		this->emcy = uv_gpio_get(EMCY_I);
+		// todo: emcy
+		//this->emcy = uv_gpio_get(EMCY_I);
+		this->emcy = 0;
+
+		uv_sensor_step(&this->fuel_level, step_ms);
+		this->fuel_level_value = (uint8_t) uv_sensor_get_value(&this->fuel_level);
+
 		this->doorsw1 = uv_gpio_get(DOORSW1_I);
 		this->doorsw2 = uv_gpio_get(DOORSW2_I);
 		this->seatsw = !uv_gpio_get(SEATSW_I);
@@ -230,20 +276,20 @@ void step(void* me) {
 
 
 		// emcy handling
-//		if (this->emcy) {
-//			// note: UI should not be stopped to keep display visible
-//			uv_output_disable(&this->aux);
-//			uv_output_disable(&this->radio);
-//			uv_output_disable(&this->horn);
-//			uv_output_disable(&this->heater);
-//			uv_pwm_set(HEATER_PWM, 0);
-//		}
-//		else {
-//			uv_output_enable(&this->aux);
-//			uv_output_enable(&this->radio);
-//			uv_output_enable(&this->horn);
-//			uv_output_enable(&this->heater);
-//		}
+		if (this->emcy) {
+			// note: UI should not be stopped to keep display visible
+			uv_output_disable(&this->aux);
+			uv_output_disable(&this->radio);
+			uv_output_disable(&this->horn);
+			uv_output_disable(&this->heater);
+			uv_pwm_set(HEATER_PWM, 0);
+		}
+		else {
+			uv_output_enable(&this->aux);
+			uv_output_enable(&this->radio);
+			uv_output_enable(&this->horn);
+			uv_output_enable(&this->heater);
+		}
 
 		uv_rtos_task_delay(step_ms);
 	}

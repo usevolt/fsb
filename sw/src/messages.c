@@ -158,6 +158,13 @@ canopen_object_st obj_dict[] = {
 				.type = FSB_SEATSW_TYPE,
 				.permissions = FSB_SEATSW_PERMISSIONS,
 				.data_ptr = &this->seatsw
+		},
+		{
+				.main_index = FSB_FUEL_LEVEL_INDEX,
+				.sub_index = FSB_FUEL_LEVEL_SUBINDEX,
+				.type = FSB_FUEL_LEVEL_TYPE,
+				.permissions = FSB_FUEL_LEVEL_PERMISSIONS,
+				.data_ptr = &this->fuel_level_value
 		}
 };
 
