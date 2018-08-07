@@ -148,8 +148,10 @@ void step(void* me) {
 
 		this->doorsw1 = uv_gpio_get(DOORSW1_I);
 		this->doorsw2 = uv_gpio_get(DOORSW2_I);
-		this->seatsw = !uv_gpio_get(SEATSW_I);
 		this->eberfan = uv_gpio_get(EBERFAN_I);
+		// todo: !!
+//		this->seatsw = !uv_gpio_get(SEATSW_I);
+		this->seatsw = 1;
 
 		// update watchdog timer value to prevent a hard reset
 		// uw_wdt_update();

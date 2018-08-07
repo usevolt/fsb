@@ -244,6 +244,7 @@ void stat_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv
 			this->emcy, this->vbat, this->eberfan, this->heaterspeed);
 	printf("doorsw1: %u\ndoorsw2: %u\nseatsw: %u\n",
 			this->doorsw1, this->doorsw2, this->seatsw);
+	printf("fuel level: %u\n", this->fuel_level_value);
 
 }
 
