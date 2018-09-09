@@ -67,6 +67,8 @@ typedef struct _dev_st {
 
 	uv_data_start_t data_start;
 
+	bool safety_disable;
+
 	uv_data_end_t data_end;
 
 } dev_st;

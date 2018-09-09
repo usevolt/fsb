@@ -196,6 +196,13 @@ const uv_command_st terminal_commands[] = {
 				.instructions = "Turn horn on\n"
 						"Usage: horn <1/0>",
 				.callback = &horn_callb
+		},
+		{
+				.id = CMD_SAFETY,
+				.str = "safety",
+				.instructions = "Disables or enables safety related inputs.\n"
+						"Usage: safety <0/1>",
+				.callback = &safety_callb
 		}
 };
 
@@ -245,6 +252,7 @@ void stat_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv
 	printf("doorsw1: %u\ndoorsw2: %u\nseatsw: %u\n",
 			this->doorsw1, this->doorsw2, this->seatsw);
 	printf("fuel level: %u\n", this->fuel_level_value);
+	printf("Safety functions disabled: %u\n", this->safety_disable);
 
 }
 
@@ -268,6 +276,12 @@ void horn_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv
 	}
 }
 
+void safety_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv) {
+	if (args && (argv[0].type == ARG_INTEGER)) {
+		this->safety_disable = (argv[0].number) ? false : true;
+	}
+	printf("Safety functions disabled: %u\n", this->safety_disable);
+}
 
 
 

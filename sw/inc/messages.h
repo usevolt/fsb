@@ -21,6 +21,7 @@ int obj_dict_len();
 void stat_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv);
 void heater_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv);
 void horn_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv);
+void safety_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv);
 
 
 
@@ -29,6 +30,7 @@ typedef enum {
 	CMD_STAT = 0,
 	CMD_HEATER,
 	CMD_HORN,
+	CMD_SAFETY,
 	CMD_COUNT
 } gsm_commands_e;
 

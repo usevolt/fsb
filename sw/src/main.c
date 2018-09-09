@@ -122,6 +122,8 @@ void init(dev_st* me) {
 	// load non-volatile data
 	if (uv_memory_load()) {
 
+		this->safety_disable = false;
+
 		uv_memory_save();
 	}
 
@@ -140,18 +142,15 @@ void step(void* me) {
 		unsigned int step_ms = 20;
 
 		// todo: emcy
-		//this->emcy = uv_gpio_get(EMCY_I);
-		this->emcy = 0;
+		this->emcy = (this->safety_disable) ? 0 : uv_gpio_get(EMCY_I);
 
 		uv_sensor_step(&this->fuel_level, step_ms);
 		this->fuel_level_value = (uint8_t) uv_sensor_get_value(&this->fuel_level);
 
-		this->doorsw1 = uv_gpio_get(DOORSW1_I);
-		this->doorsw2 = uv_gpio_get(DOORSW2_I);
 		this->eberfan = uv_gpio_get(EBERFAN_I);
-		// todo: !!
-//		this->seatsw = !uv_gpio_get(SEATSW_I);
-		this->seatsw = 1;
+		this->doorsw1 = (this->safety_disable) ? 1 : uv_gpio_get(DOORSW1_I);
+		this->doorsw2 = (this->safety_disable) ? 1 : uv_gpio_get(DOORSW2_I);
+		this->seatsw = (this->safety_disable) ? 1 : !uv_gpio_get(SEATSW_I);
 
 		// update watchdog timer value to prevent a hard reset
 		// uw_wdt_update();
