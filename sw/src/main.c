@@ -107,6 +107,7 @@ void init(dev_st* me) {
 	this->emcy = uv_gpio_get(EMCY_I);
 	this->vbat = 0;
 	this->eberfan = uv_gpio_get(EBERFAN_I);
+	uv_moving_aver_init(&this->eberfan_avg, OUTPUT_MOVING_AVG_COUNT);
 	this->heaterspeed = 0;
 	this->doorsw1 = uv_gpio_get(DOORSW1_I);
 	this->doorsw2 = uv_gpio_get(DOORSW2_I);
@@ -147,7 +148,7 @@ void step(void* me) {
 		uv_sensor_step(&this->fuel_level, step_ms);
 		this->fuel_level_value = (uint8_t) uv_sensor_get_value(&this->fuel_level);
 
-		this->eberfan = uv_gpio_get(EBERFAN_I);
+		this->eberfan = uv_moving_aver_step(&this->eberfan_avg, uv_gpio_get(EBERFAN_I));
 		this->doorsw1 = (this->safety_disable) ? 1 : uv_gpio_get(DOORSW1_I);
 		this->doorsw2 = (this->safety_disable) ? 1 : uv_gpio_get(DOORSW2_I);
 		this->seatsw = (this->safety_disable) ? 1 : !uv_gpio_get(SEATSW_I);

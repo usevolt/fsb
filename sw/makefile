@@ -79,7 +79,7 @@ DEPS := $(OBJECTS:.o=.d)
 
 
 all: $(BINARY)
-	$(MAKE) post-build
+	$(MAKE) -j 5 post-build
 
 $(BINARY): $(OBJECTS)
 	@echo ""

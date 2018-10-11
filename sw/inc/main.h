@@ -58,6 +58,7 @@ typedef struct _dev_st {
 	uint8_t emcy;
 	uint16_t vbat;
 	uint8_t eberfan;
+	uv_moving_aver_st eberfan_avg;
 	uint8_t heaterspeed;
 	uint8_t doorsw1;
 	uint8_t doorsw2;
