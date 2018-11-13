@@ -97,6 +97,13 @@ canopen_object_st obj_dict[] = {
 				.data_ptr = &this->heaterspeed
 		},
 		{
+				.main_index = FSB_HEATER_REQ_INDEX,
+				.sub_index = FSB_HEATER_REQ_SUBINDEX,
+				.type = FSB_HEATER_REQ_TYPE,
+				.permissions = FSB_HEATER_REQ_PERMISSIONS,
+				.data_ptr = &this->heater_req
+		},
+		{
 				.main_index = FSB_UI_STATUS_INDEX,
 				.sub_index = FSB_UI_STATUS_SUBINDEX,
 				.type = FSB_UI_STATUS_TYPE,

@@ -31,6 +31,8 @@
 /// @brief: Heater maximum duty cycle
 #define HEATER_PWM_DC_MAX			1000
 
+#define HEATER_SPEED_STEPS_COUNT	4
+
 #define LEVEL_FAULT_MIN_VAL			0
 #define LEVEL_FAULT_MAX_VAL			150
 #define FUEL_LEVEL_AVG_COUNT		50
@@ -56,13 +58,17 @@ typedef struct _dev_st {
 	uv_moving_aver_st key_preheat;
 	uv_moving_aver_st key_start;
 	uint8_t emcy;
+	uv_moving_aver_st emcy_avg;
 	uint16_t vbat;
 	uint8_t eberfan;
 	uv_moving_aver_st eberfan_avg;
 	uint8_t heaterspeed;
+	int8_t heater_req;
+	int8_t last_heater_req;
 	uint8_t doorsw1;
 	uint8_t doorsw2;
 	uint8_t seatsw;
+	uv_moving_aver_st seatsw_avg;
 	uv_sensor_st fuel_level;
 	uint8_t fuel_level_value;
 

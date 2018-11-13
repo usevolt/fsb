@@ -105,13 +105,17 @@ void init(dev_st* me) {
 
 	this->ignkey = FSB_IGNKEY_STATE_OFF;
 	this->emcy = uv_gpio_get(EMCY_I);
+	uv_moving_aver_init(&this->emcy_avg, IGNKEY_MOVING_AVER_COUNT);
 	this->vbat = 0;
 	this->eberfan = uv_gpio_get(EBERFAN_I);
 	uv_moving_aver_init(&this->eberfan_avg, OUTPUT_MOVING_AVG_COUNT);
 	this->heaterspeed = 0;
+	this->heater_req = 0;
+	this->last_heater_req = 0;
 	this->doorsw1 = uv_gpio_get(DOORSW1_I);
 	this->doorsw2 = uv_gpio_get(DOORSW2_I);
 	this->seatsw = !uv_gpio_get(SEATSW_I);
+	uv_moving_aver_init(&this->seatsw_avg, IGNKEY_MOVING_AVER_COUNT);
 
 	uv_moving_aver_init(&this->key_on, IGNKEY_MOVING_AVER_COUNT);
 	uv_moving_aver_init(&this->key_preheat, IGNKEY_MOVING_AVER_COUNT);
@@ -132,7 +136,14 @@ void init(dev_st* me) {
 
 }
 
+static uint8_t get_gpio(uv_gpios_e gpio) {
+	uint8_t val = 0;
+	for (uint8_t i = 0; i < UINT8_MAX; i++) {
+		val += (uv_gpio_get(gpio)) ? 0 : 1;
+	}
+	return (val < (UINT8_MAX / 2));
 
+}
 
 
 void step(void* me) {
@@ -143,7 +154,8 @@ void step(void* me) {
 		unsigned int step_ms = 20;
 
 		// todo: emcy
-		this->emcy = (this->safety_disable) ? 0 : uv_gpio_get(EMCY_I);
+		this->emcy = (this->safety_disable) ? 0 :
+				uv_moving_aver_step(&this->emcy_avg, get_gpio(EMCY_I));
 
 		uv_sensor_step(&this->fuel_level, step_ms);
 		this->fuel_level_value = (uint8_t) uv_sensor_get_value(&this->fuel_level);
@@ -151,7 +163,8 @@ void step(void* me) {
 		this->eberfan = uv_moving_aver_step(&this->eberfan_avg, uv_gpio_get(EBERFAN_I));
 		this->doorsw1 = (this->safety_disable) ? 1 : uv_gpio_get(DOORSW1_I);
 		this->doorsw2 = (this->safety_disable) ? 1 : uv_gpio_get(DOORSW2_I);
-		this->seatsw = (this->safety_disable) ? 1 : !uv_gpio_get(SEATSW_I);
+		this->seatsw = (this->safety_disable) ? 1 :
+				uv_moving_aver_step(&this->seatsw_avg, !get_gpio(SEATSW_I));
 
 		// update watchdog timer value to prevent a hard reset
 		// uw_wdt_update();
@@ -171,6 +184,23 @@ void step(void* me) {
 				uv_output_get_current(&this->ui) +
 				uv_output_get_current(&this->heater);
 
+
+		if (this->heater_req && !this->last_heater_req) {
+			if (this->heater_req > 0) {
+				// increase heater requested
+				this->heaterspeed += FSB_HEATER_MAX_SPEED / HEATER_SPEED_STEPS_COUNT;
+			}
+			else {
+				// decrease heater requested
+				if (this->heaterspeed >= FSB_HEATER_MAX_SPEED / HEATER_SPEED_STEPS_COUNT) {
+					this->heaterspeed -= FSB_HEATER_MAX_SPEED / HEATER_SPEED_STEPS_COUNT;
+				}
+				else {
+					this->heaterspeed = 0;
+				}
+			}
+		}
+		this->last_heater_req = this->heater_req;
 
 		// heater. It is also controlled by eber
 		if ((this->heaterspeed > FSB_HEATER_MAX_SPEED) ||
