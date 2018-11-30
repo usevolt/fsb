@@ -292,7 +292,9 @@ void step(void* me) {
 		if (this->eberfan) {
 			uv_output_set_state(&this->radio, OUTPUT_STATE_OFF);
 			uv_output_set_state(&this->aux, OUTPUT_STATE_OFF);
-			uv_output_set_state(&this->ui, OUTPUT_STATE_OFF);
+			// keep ui on if ignkey is not in off position
+			uv_output_set_state(&this->ui,
+					(this->ignkey == FSB_IGNKEY_STATE_OFF) ? OUTPUT_STATE_OFF : OUTPUT_STATE_ON);
 		}
 		else {
 			// radio and aux power is on when ignkey is ON

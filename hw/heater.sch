@@ -18,16 +18,10 @@ Text HLabel 7250 3700 2    60   Output ~ 0
 OUT+
 Text HLabel 4350 3700 0    60   Input ~ 0
 IN1
-Text HLabel 5400 3950 0    60   Output ~ 0
+Text HLabel 5250 3550 0    60   Output ~ 0
 SENSE1
 Wire Wire Line
-	5400 3800 5650 3800
-Wire Wire Line
-	4900 3800 5100 3800
-Wire Wire Line
 	4350 3700 4500 3700
-Wire Wire Line
-	5400 3950 5500 3950
 $Comp
 L fsb-rescue:VDD #PWR0803
 U 1 1 5A34158F
@@ -50,82 +44,6 @@ Wire Wire Line
 Connection ~ 6750 3700
 Wire Wire Line
 	5650 3500 5650 3600
-Wire Wire Line
-	5650 3950 5650 3800
-Connection ~ 5650 3800
-$Comp
-L fsb-rescue:GND #PWR0801
-U 1 1 5A34159D
-P 4900 4100
-F 0 "#PWR0801" H 4900 3850 50  0001 C CNN
-F 1 "GND" H 4905 3927 50  0000 C CNN
-F 2 "" H 4900 4100 50  0000 C CNN
-F 3 "" H 4900 4100 50  0000 C CNN
-	1    4900 4100
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4900 3800 4900 4050
-$Comp
-L fsb-rescue:1K R?
-U 1 1 5A3415A8
-P 4650 3850
-AR Path="/5A01611C/5A3415A8" Ref="R?"  Part="1" 
-AR Path="/5A019746/5A3415A8" Ref="R?"  Part="1" 
-AR Path="/5A01A445/5A3415A8" Ref="R?"  Part="1" 
-AR Path="/5A01AB59/5A3415A8" Ref="R?"  Part="1" 
-AR Path="/5A120DD2/5A3415A8" Ref="R?"  Part="1" 
-AR Path="/5A12FF64/5A3415A8" Ref="R?"  Part="1" 
-AR Path="/5A130D3E/5A3415A8" Ref="R?"  Part="1" 
-AR Path="/5A1349CF/5A3415A8" Ref="R?"  Part="1" 
-AR Path="/5A1358B0/5A3415A8" Ref="R?"  Part="1" 
-AR Path="/5A13680F/5A3415A8" Ref="R?"  Part="1" 
-AR Path="/5A14370A/5A3415A8" Ref="R?"  Part="1" 
-AR Path="/5A33548E/5A3415A8" Ref="R?"  Part="1" 
-AR Path="/5A33648A/5A3415A8" Ref="R?"  Part="1" 
-AR Path="/5A340DA3/5A3415A8" Ref="R805"  Part="1" 
-F 0 "R805" V 4658 3908 45  0000 L CNN
-F 1 "1K" V 4742 3908 45  0000 L CNN
-F 2 "yageo:0603" H 4680 4000 20  0001 C CNN
-F 3 "" H 4619 3889 60  0001 C CNN
-F 4 "" H 5019 4289 60  0001 C CNN "1st Source Part Number"
-F 5 "Digikey" H 4919 4189 60  0001 C CNN "1st Source"
-F 6 "RC0603FR-071KL" H 4819 4089 60  0001 C CNN "Manufacturer Part Number"
-F 7 "YAGEO" H 4719 3989 60  0001 C CNN "Manufacturer"
-	1    4650 3850
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	4650 3750 4650 3700
-Connection ~ 4650 3700
-Wire Wire Line
-	4650 4050 4900 4050
-Connection ~ 4900 4050
-$Comp
-L fsb-rescue:390 R?
-U 1 1 5A3415B7
-P 5200 3800
-AR Path="/5A1349CF/5A3415B7" Ref="R?"  Part="1" 
-AR Path="/5A14370A/5A3415B7" Ref="R?"  Part="1" 
-AR Path="/5A120DD2/5A3415B7" Ref="R?"  Part="1" 
-AR Path="/5A12FF64/5A3415B7" Ref="R?"  Part="1" 
-AR Path="/5A130D3E/5A3415B7" Ref="R?"  Part="1" 
-AR Path="/5A1358B0/5A3415B7" Ref="R?"  Part="1" 
-AR Path="/5A13680F/5A3415B7" Ref="R?"  Part="1" 
-AR Path="/5A33548E/5A3415B7" Ref="R?"  Part="1" 
-AR Path="/5A33648A/5A3415B7" Ref="R?"  Part="1" 
-AR Path="/5A340DA3/5A3415B7" Ref="R807"  Part="1" 
-F 0 "R807" H 5250 3984 45  0000 C CNN
-F 1 "390" H 5250 3900 45  0000 C CNN
-F 2 "yageo:0603" H 5230 3950 20  0001 C CNN
-F 3 "" H 5169 3839 60  0001 C CNN
-F 4 "" H 5569 4239 60  0001 C CNN "1st Source Part Number"
-F 5 "Digikey" H 5469 4139 60  0001 C CNN "1st Source"
-F 6 "RC0603FR-07390RL" H 5369 4039 60  0001 C CNN "Manufacturer Part Number"
-F 7 "YAGEO" H 5269 3939 60  0001 C CNN "Manufacturer"
-	1    5200 3800
-	1    0    0    -1  
-$EndComp
 $Comp
 L fsb-rescue:VN5E010AH U802
 U 1 1 5A3415C2
@@ -144,21 +62,16 @@ $EndComp
 $Comp
 L fsb-rescue:GND #PWR0805
 U 1 1 5A3415C9
-P 5850 4100
-F 0 "#PWR0805" H 5850 3850 50  0001 C CNN
-F 1 "GND" H 5855 3927 50  0000 C CNN
-F 2 "" H 5850 4100 50  0000 C CNN
-F 3 "" H 5850 4100 50  0000 C CNN
-	1    5850 4100
+P 5850 4200
+F 0 "#PWR0805" H 5850 3950 50  0001 C CNN
+F 1 "GND" H 5855 4027 50  0000 C CNN
+F 2 "" H 5850 4200 50  0000 C CNN
+F 3 "" H 5850 4200 50  0000 C CNN
+	1    5850 4200
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5850 3900 5850 4000
-Wire Wire Line
 	5850 4000 5950 4000
-Wire Wire Line
-	5950 3900 5850 3900
-Connection ~ 5850 4000
 $Comp
 L fsb-rescue:VN5E010AH U803
 U 1 1 5A341601
@@ -177,38 +90,31 @@ $EndComp
 $Comp
 L fsb-rescue:GND #PWR0806
 U 1 1 5A34165B
-P 5850 5350
-F 0 "#PWR0806" H 5850 5100 50  0001 C CNN
-F 1 "GND" H 5855 5177 50  0000 C CNN
-F 2 "" H 5850 5350 50  0000 C CNN
-F 3 "" H 5850 5350 50  0000 C CNN
-	1    5850 5350
+P 5850 5500
+F 0 "#PWR0806" H 5850 5250 50  0001 C CNN
+F 1 "GND" H 5855 5327 50  0000 C CNN
+F 2 "" H 5850 5500 50  0000 C CNN
+F 3 "" H 5850 5500 50  0000 C CNN
+	1    5850 5500
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5400 5000 5500 5000
-Wire Wire Line
-	4900 5000 5100 5000
 Wire Wire Line
 	4500 4900 4650 4900
 Wire Wire Line
 	5650 4800 5950 4800
 Wire Wire Line
 	5650 4700 5650 4800
-Connection ~ 5500 5000
 $Comp
 L fsb-rescue:GND #PWR0802
 U 1 1 5A341754
-P 4900 5300
-F 0 "#PWR0802" H 4900 5050 50  0001 C CNN
-F 1 "GND" H 4905 5127 50  0000 C CNN
-F 2 "" H 4900 5300 50  0000 C CNN
-F 3 "" H 4900 5300 50  0000 C CNN
-	1    4900 5300
+P 4900 3950
+F 0 "#PWR0802" H 4900 3700 50  0001 C CNN
+F 1 "GND" H 4905 3777 50  0000 C CNN
+F 2 "" H 4900 3950 50  0000 C CNN
+F 3 "" H 4900 3950 50  0000 C CNN
+	1    4900 3950
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	4900 5000 4900 5250
 $Comp
 L fsb-rescue:1K R?
 U 1 1 5A34175F
@@ -243,32 +149,6 @@ Wire Wire Line
 Connection ~ 4650 4900
 Wire Wire Line
 	4650 5250 4900 5250
-Connection ~ 4900 5250
-$Comp
-L fsb-rescue:390 R?
-U 1 1 5A34176D
-P 5200 5000
-AR Path="/5A1349CF/5A34176D" Ref="R?"  Part="1" 
-AR Path="/5A14370A/5A34176D" Ref="R?"  Part="1" 
-AR Path="/5A120DD2/5A34176D" Ref="R?"  Part="1" 
-AR Path="/5A12FF64/5A34176D" Ref="R?"  Part="1" 
-AR Path="/5A130D3E/5A34176D" Ref="R?"  Part="1" 
-AR Path="/5A1358B0/5A34176D" Ref="R?"  Part="1" 
-AR Path="/5A13680F/5A34176D" Ref="R?"  Part="1" 
-AR Path="/5A33548E/5A34176D" Ref="R?"  Part="1" 
-AR Path="/5A33648A/5A34176D" Ref="R?"  Part="1" 
-AR Path="/5A340DA3/5A34176D" Ref="R808"  Part="1" 
-F 0 "R808" H 5250 5184 45  0000 C CNN
-F 1 "390" H 5250 5100 45  0000 C CNN
-F 2 "yageo:0603" H 5230 5150 20  0001 C CNN
-F 3 "" H 5169 5039 60  0001 C CNN
-F 4 "" H 5569 5439 60  0001 C CNN "1st Source Part Number"
-F 5 "Digikey" H 5469 5339 60  0001 C CNN "1st Source"
-F 6 "RC0603FR-07390RL" H 5369 5239 60  0001 C CNN "Manufacturer Part Number"
-F 7 "YAGEO" H 5269 5139 60  0001 C CNN "Manufacturer"
-	1    5200 5000
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	5950 5200 5850 5200
 Wire Wire Line
@@ -283,9 +163,6 @@ Wire Wire Line
 Wire Wire Line
 	6650 4900 6750 4900
 Connection ~ 6750 4900
-Wire Wire Line
-	5500 5000 5500 3950
-Connection ~ 5500 3950
 Connection ~ 7050 3700
 Wire Wire Line
 	4500 3700 4500 4900
@@ -321,29 +198,13 @@ $EndComp
 Wire Wire Line
 	6750 3700 7050 3700
 Wire Wire Line
-	5650 3800 5950 3800
-Wire Wire Line
-	4650 3700 5950 3700
-Wire Wire Line
-	4900 4050 4900 4100
-Wire Wire Line
-	5850 4000 5850 4100
-Wire Wire Line
-	5500 5000 5950 5000
+	5850 4000 5850 4200
 Wire Wire Line
 	4650 4900 5950 4900
 Wire Wire Line
-	4900 5250 4900 5300
-Wire Wire Line
-	5850 5200 5850 5350
-Wire Wire Line
 	6750 4900 7050 4900
 Wire Wire Line
-	5500 3950 5650 3950
-Wire Wire Line
 	7050 3700 7250 3700
-Wire Wire Line
-	4500 3700 4650 3700
 Text HLabel 5550 2250 0    50   Input ~ 0
 IN_PWM
 $Comp
@@ -503,26 +364,117 @@ F 7 "YAGEO" H 7069 1789 60  0001 C CNN "Manufacturer"
 	0    1    1    0   
 $EndComp
 $Comp
-L yageo:10 R?
-U 1 1 5B5E9327
-P 7350 1650
-F 0 "R?" V 7358 1708 45  0000 L CNN
-F 1 "10" V 7442 1708 45  0000 L CNN
-F 2 "yageo:0603" H 7380 1800 20  0001 C CNN
-F 3 "" H 7319 1689 60  0001 C CNN
-F 4 "" H 7719 2089 60  0001 C CNN "1st Source Part Number"
-F 5 "Digikey" H 7619 1989 60  0001 C CNN "1st Source"
-F 6 "RC0603FR-0710RL" H 7519 1889 60  0001 C CNN "Manufacturer Part Number"
-F 7 "YAGEO" H 7419 1789 60  0001 C CNN "Manufacturer"
-	1    7350 1650
+L fsb-rescue:1K R?
+U 1 1 5C0195BB
+P 5150 3800
+AR Path="/5A01611C/5C0195BB" Ref="R?"  Part="1" 
+AR Path="/5A019746/5C0195BB" Ref="R?"  Part="1" 
+AR Path="/5A01A445/5C0195BB" Ref="R?"  Part="1" 
+AR Path="/5A01AB59/5C0195BB" Ref="R?"  Part="1" 
+AR Path="/5A120DD2/5C0195BB" Ref="R?"  Part="1" 
+AR Path="/5A12FF64/5C0195BB" Ref="R?"  Part="1" 
+AR Path="/5A130D3E/5C0195BB" Ref="R?"  Part="1" 
+AR Path="/5A1349CF/5C0195BB" Ref="R?"  Part="1" 
+AR Path="/5A1358B0/5C0195BB" Ref="R?"  Part="1" 
+AR Path="/5A13680F/5C0195BB" Ref="R?"  Part="1" 
+AR Path="/5A14370A/5C0195BB" Ref="R?"  Part="1" 
+AR Path="/5A33548E/5C0195BB" Ref="R?"  Part="1" 
+AR Path="/5A33648A/5C0195BB" Ref="R?"  Part="1" 
+AR Path="/5A340DA3/5C0195BB" Ref="R9"  Part="1" 
+F 0 "R9" V 5158 3858 45  0000 L CNN
+F 1 "1K" V 5242 3858 45  0000 L CNN
+F 2 "yageo:0603" H 5180 3950 20  0001 C CNN
+F 3 "" H 5119 3839 60  0001 C CNN
+F 4 "" H 5519 4239 60  0001 C CNN "1st Source Part Number"
+F 5 "Digikey" H 5419 4139 60  0001 C CNN "1st Source"
+F 6 "RC0603FR-071KL" H 5319 4039 60  0001 C CNN "Manufacturer Part Number"
+F 7 "YAGEO" H 5219 3939 60  0001 C CNN "Manufacturer"
+	1    5150 3800
+	-1   0    0    1   
+$EndComp
+$Comp
+L fsb-rescue:10K R10
+U 1 1 5C0197AC
+P 7050 5100
+F 0 "R10" V 7058 5158 45  0000 L CNN
+F 1 "10K" V 7142 5158 45  0000 L CNN
+F 2 "yageo:0603" H 7080 5250 20  0001 C CNN
+F 3 "" H 7019 5139 60  0001 C CNN
+F 4 "Digikey" H 7319 5439 60  0001 C CNN "1st Source"
+F 5 "RC0603FR-0710KL" H 7219 5339 60  0001 C CNN "Manufacturer Part Number"
+F 6 "YAGEO" H 7119 5239 60  0001 C CNN "Manufacturer"
+	1    7050 5100
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	7350 1550 7000 1550
-Connection ~ 7000 1550
+	7050 5000 7050 4900
+Connection ~ 7050 4900
+$Comp
+L fsb-rescue:GND #PWR0115
+U 1 1 5C01AD9D
+P 7050 5400
+F 0 "#PWR0115" H 7050 5150 50  0001 C CNN
+F 1 "GND" H 7055 5227 50  0000 C CNN
+F 2 "" H 7050 5400 50  0000 C CNN
+F 3 "" H 7050 5400 50  0000 C CNN
+	1    7050 5400
+	1    0    0    -1  
+$EndComp
 Wire Wire Line
-	7350 1850 7350 1950
+	7050 5400 7050 5300
+$Comp
+L usevolt:ZENER_MM3Z3V6T1G D6
+U 1 1 5C025775
+P 5500 3900
+F 0 "D6" V 5425 3822 45  0000 R CNN
+F 1 "ZENER_MM3Z3V6T1G" H 5775 4275 45  0001 L BNN
+F 2 "usevolt:SOD-323" H 5475 4275 20  0001 C CNN
+F 3 "http://www.mouser.com/ds/2/308/MM3Z2V4T1-D-269162.pdf" H 5850 4475 60  0001 C CNN
+F 4 "Mouser" H 5820 4220 60  0001 C CNN "1st Source"
+F 5 "MM3Z3V6T1G" H 5720 4120 60  0001 C CNN "Manufacturer Part Number"
+F 6 "863-MM3Z3V6T1G" H 5920 4320 60  0001 C CNN "1st Source Part Number"
+F 7 "ON Semiconductor" H 5775 4375 60  0001 C CNN "Manufacturer"
+	1    5500 3900
+	0    -1   -1   0   
+$EndComp
 Wire Wire Line
-	7350 1950 7000 1950
-Connection ~ 7000 1950
+	4500 3700 5950 3700
+Wire Wire Line
+	5950 3800 5500 3800
+Wire Wire Line
+	5500 3800 5500 3850
+Wire Wire Line
+	5500 4100 5500 4200
+Wire Wire Line
+	5500 4200 5850 4200
+Connection ~ 5850 4200
+Wire Wire Line
+	5250 3550 5350 3550
+Wire Wire Line
+	5350 3550 5350 3800
+Wire Wire Line
+	5350 3800 5500 3800
+Connection ~ 5500 3800
+Wire Wire Line
+	5250 3800 5350 3800
+Connection ~ 5350 3800
+Wire Wire Line
+	4900 3950 4900 3800
+Wire Wire Line
+	4900 3800 4950 3800
+$Comp
+L fsb-rescue:GND #PWR?
+U 1 1 5C03BB27
+P 4900 5350
+F 0 "#PWR?" H 4900 5100 50  0001 C CNN
+F 1 "GND" H 4905 5177 50  0000 C CNN
+F 2 "" H 4900 5350 50  0000 C CNN
+F 3 "" H 4900 5350 50  0000 C CNN
+	1    4900 5350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 5250 4900 5350
+Wire Wire Line
+	5850 5200 5850 5500
 $EndSCHEMATC

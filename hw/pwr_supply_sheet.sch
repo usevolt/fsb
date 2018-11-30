@@ -47,21 +47,6 @@ F 7 "KEMET" H 3404 4059 60  0001 C CNN "Manufacturer"
 	0    1    1    0   
 $EndComp
 $Comp
-L fsb-rescue:10nF C203
-U 1 1 57B822C5
-P 5800 3950
-F 0 "C203" H 5850 4149 45  0000 C CNN
-F 1 "10nF" H 5850 4065 45  0000 C CNN
-F 2 "kemet:0603" H 5830 4100 20  0001 C CNN
-F 3 "http://www.farnell.com/datasheets/2064086.pdf?_ga=1.250530118.1948984246.1460023966" H 5704 3959 60  0001 C CNN
-F 4 "1457729" H 6104 4359 60  0001 C CNN "1st Source Part Number"
-F 5 "C0603C103J3GACTU" H 5904 4159 60  0001 C CNN "Manufacturer Part Number"
-F 6 "Farnell" H 6004 4259 60  0001 C CNN "1st Source"
-F 7 "KEMET" H 5804 4059 60  0001 C CNN "Manufacturer"
-	1    5800 3950
-	1    0    0    -1  
-$EndComp
-$Comp
 L fsb-rescue:DIODE_RS07J-GS18 D204
 U 1 1 57B82329
 P 6200 3950
@@ -584,4 +569,19 @@ Wire Wire Line
 Wire Wire Line
 	900  4950 900  4850
 Connection ~ 900  4850
+$Comp
+L fsb-rescue:100nF C1
+U 1 1 5C021329
+P 5800 3950
+F 0 "C1" H 5850 4149 45  0000 C CNN
+F 1 "100nF" H 5850 4065 45  0000 C CNN
+F 2 "kemet:0603" H 5830 4100 20  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/2062872.pdf?_ga=1.250530118.1948984246.1460023966" H 5704 3959 60  0001 C CNN
+F 4 "1288255" H 6104 4359 60  0001 C CNN "1st Source Part Number"
+F 5 "C0603C104K5RACTU" H 5904 4159 60  0001 C CNN "Manufacturer Part Number"
+F 6 "Farnell" H 6004 4259 60  0001 C CNN "1st Source"
+F 7 "KEMET" H 5804 4059 60  0001 C CNN "Manufacturer"
+	1    5800 3950
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

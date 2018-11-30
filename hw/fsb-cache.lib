@@ -99,32 +99,6 @@ X R2 2 -100 0 0 R 40 40 1 1 P
 ENDDRAW
 ENDDEF
 #
-# fsb-rescue_10nF
-#
-DEF fsb-rescue_10nF C 0 40 N N 1 L N
-F0 "C" -96 9 45 H V L BNN
-F1 "fsb-rescue_10nF" -93 -48 45 H V L BNN
-F2 "kemet:0603" 30 150 20 H I C CNN
-F3 "http://www.farnell.com/datasheets/2064086.pdf?_ga=1.250530118.1948984246.1460023966" -96 9 60 H I C CNN
-F4 "1457729" 304 409 60 H I C CNN "1st Source Part Number"
-F5 "C0603C103J3GACTU" 104 209 60 H I C CNN "Manufacturer Part Number"
-F6 "Farnell" 204 309 60 H I C CNN "1st Source"
-F7 "KEMET" 4 109 60 H I C CNN "Manufacturer"
-$FPLIST
- *CAPC1608X85N*
-$ENDFPLIST
-DRAW
-P 2 1 0 0 0 0 27 0 N
-P 2 1 0 0 27 -45 27 0 N
-P 2 1 0 0 27 0 27 45 N
-P 2 1 0 0 72 -45 72 0 N
-P 2 1 0 0 72 0 72 45 N
-P 2 1 0 0 72 0 100 0 N
-X C1 1 -100 0 100 R 40 40 1 1 P
-X C2 2 200 0 100 L 40 40 1 1 P
-ENDDRAW
-ENDDEF
-#
 # fsb-rescue_18pF
 #
 DEF fsb-rescue_18pF C 0 40 N N 1 L N
@@ -160,33 +134,6 @@ F2 "yageo:0603" 30 150 20 H I C CNN
 F3 "" -31 39 60 H I C CNN
 F4 "Digikey" 269 339 60 H I C CNN "1st Source"
 F5 "RC0603FR-071KL" 169 239 60 H I C CNN "Manufacturer Part Number"
-F6 "YAGEO" 69 139 60 H I C CNN "Manufacturer"
-$FPLIST
- *RESC1608X60N*
-$ENDFPLIST
-DRAW
-P 2 1 0 0 -30 -30 130 -30 N
-P 2 1 0 0 -30 0 -100 0 N
-P 2 1 0 0 -30 0 -30 -30 N
-P 2 1 0 0 -30 30 -30 0 N
-P 2 1 0 0 130 -30 130 0 N
-P 2 1 0 0 130 0 130 30 N
-P 2 1 0 0 130 0 200 0 N
-P 2 1 0 0 130 30 -30 30 N
-X R1 1 200 0 0 L 40 40 1 1 P
-X R2 2 -100 0 0 R 40 40 1 1 P
-ENDDRAW
-ENDDEF
-#
-# fsb-rescue_390
-#
-DEF fsb-rescue_390 R 0 40 N N 1 L N
-F0 "R" -31 39 45 H V L BNN
-F1 "fsb-rescue_390" -33 -84 45 H V L BNN
-F2 "yageo:0603" 30 150 20 H I C CNN
-F3 "" -31 39 60 H I C CNN
-F4 "Digikey" 269 339 60 H I C CNN "1st Source"
-F5 "RC0603FR-07390RL" 169 239 60 H I C CNN "Manufacturer Part Number"
 F6 "YAGEO" 69 139 60 H I C CNN "Manufacturer"
 $FPLIST
  *RESC1608X60N*
@@ -890,6 +837,33 @@ X P$2 P$2 100 0 100 L 40 40 1 1 B
 ENDDRAW
 ENDDEF
 #
+# power_GND
+#
+DEF power_GND #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -250 50 H I C CNN
+F1 "power_GND" 0 -150 50 H V C CNN
+F2 "" 0 0 50 H V C CNN
+F3 "" 0 0 50 H V C CNN
+DRAW
+P 6 0 1 0 0 0 0 -50 50 -50 0 -100 -50 -50 0 -50 N
+X GND 1 0 0 0 D 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# power_VDD
+#
+DEF power_VDD #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -150 50 H I C CNN
+F1 "power_VDD" 0 150 50 H V C CNN
+F2 "" 0 0 50 H V C CNN
+F3 "" 0 0 50 H V C CNN
+DRAW
+C 0 75 25 0 1 0 N
+P 2 0 1 0 0 0 0 50 N
+X VDD 1 0 0 0 U 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
 # usevolt_MOSFET-N_2N7002W
 #
 DEF usevolt_MOSFET-N_2N7002W U 0 40 N Y 1 F N
@@ -930,6 +904,29 @@ X D 3 200 -50 100 L 40 40 1 1 B
 ENDDRAW
 ENDDEF
 #
+# usevolt_VN5E010AH
+#
+DEF usevolt_VN5E010AH U 0 40 Y Y 1 F N
+F0 "U" -250 300 60 H V C CNN
+F1 "usevolt_VN5E010AH" -50 -300 60 H V C CNN
+F2 "usevolt:HPAK" -350 950 60 H I C CNN
+F3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/1e/52/ef/e0/cc/90/4e/2e/CD00240716.pdf/files/CD00240716.pdf/jcr:content/translations/en.CD00240716.pdf" -250 1050 60 H I C CNN
+F4 "497-10505-2-ND" 150 1450 60 H I C CNN "1st Source Part Number"
+F5 "Digikey" 50 1350 60 H I C CNN "1st Source"
+F6 "STMicroelectronics" -150 1150 60 H I C CNN "Manufacturer"
+F7 "VN5E010AHTR-E" -50 1250 60 H I C CNN "Manufacturer Part Number"
+DRAW
+S -300 250 200 -250 0 1 0 N
+X OUT 1 300 100 100 L 50 50 1 1 I
+X GND 2 -400 -200 100 R 50 50 1 1 I
+X IN 3 -400 100 100 R 50 50 1 1 I
+X VCC 4 -400 200 100 R 50 50 1 1 I
+X CS 5 -400 0 100 R 50 50 1 1 I
+X CS_DIS 6 -400 -100 100 R 50 50 1 1 I
+X OUT 7 300 0 100 L 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
 # usevolt_VNB35NV04TR-E
 #
 DEF usevolt_VNB35NV04TR-E Q 0 40 Y Y 1 F N
@@ -951,6 +948,30 @@ X S S 200 -50 100 L 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
+# usevolt_ZENER_MM3Z3V6T1G
+#
+DEF ~usevolt_ZENER_MM3Z3V6T1G D 0 40 N N 1 L N
+F0 "D" -25 25 45 H V L BNN
+F1 "usevolt_ZENER_MM3Z3V6T1G" 275 375 45 H I L BNN
+F2 "usevolt:SOD-323" -25 375 20 H I C CNN
+F3 "http://www.mouser.com/ds/2/308/MM3Z2V4T1-D-269162.pdf" 350 575 60 H I C CNN
+F4 "Mouser" 320 320 60 H I C CNN "1st Source"
+F5 "MM3Z3V6T1G" 220 220 60 H I C CNN "Manufacturer Part Number"
+F6 "863-MM3Z3V6T1G" 420 420 60 H I C CNN "1st Source Part Number"
+F7 "ON Semiconductor" 275 475 60 H I C CNN "Manufacturer"
+$FPLIST
+ *DO219AB*
+$ENDFPLIST
+DRAW
+P 2 1 0 0 -100 -50 -50 0 N
+P 2 1 0 0 -100 50 -100 -50 N
+P 2 1 0 0 -50 0 -100 50 N
+P 4 0 1 0 -25 50 -50 50 -50 -50 -75 -50 N
+X 1 1 50 0 100 L 40 40 1 1 B
+X 2 2 -200 0 100 R 40 40 1 1 B
+ENDDRAW
+ENDDEF
+#
 # yageo_10
 #
 DEF yageo_10 R 0 40 N N 1 L N
@@ -960,6 +981,60 @@ F2 "yageo:0603" 30 150 20 H I C CNN
 F3 "" -31 39 60 H I C CNN
 F4 "Digikey" 269 339 60 H I C CNN "1st Source"
 F5 "RC0603FR-0710RL" 169 239 60 H I C CNN "Manufacturer Part Number"
+F6 "YAGEO" 69 139 60 H I C CNN "Manufacturer"
+$FPLIST
+ *RESC1608X60N*
+$ENDFPLIST
+DRAW
+P 2 1 0 0 -30 -30 130 -30 N
+P 2 1 0 0 -30 0 -100 0 N
+P 2 1 0 0 -30 0 -30 -30 N
+P 2 1 0 0 -30 30 -30 0 N
+P 2 1 0 0 130 -30 130 0 N
+P 2 1 0 0 130 0 130 30 N
+P 2 1 0 0 130 0 200 0 N
+P 2 1 0 0 130 30 -30 30 N
+X R1 1 200 0 0 L 40 40 1 1 P
+X R2 2 -100 0 0 R 40 40 1 1 P
+ENDDRAW
+ENDDEF
+#
+# yageo_10K
+#
+DEF yageo_10K R 0 40 N N 1 L N
+F0 "R" -31 39 45 H V L BNN
+F1 "yageo_10K" -33 -84 45 H V L BNN
+F2 "yageo:0603" 30 150 20 H I C CNN
+F3 "" -31 39 60 H I C CNN
+F4 "Digikey" 269 339 60 H I C CNN "1st Source"
+F5 "RC0603FR-0710KL" 169 239 60 H I C CNN "Manufacturer Part Number"
+F6 "YAGEO" 69 139 60 H I C CNN "Manufacturer"
+$FPLIST
+ *RESC1608X60N*
+$ENDFPLIST
+DRAW
+P 2 1 0 0 -30 -30 130 -30 N
+P 2 1 0 0 -30 0 -100 0 N
+P 2 1 0 0 -30 0 -30 -30 N
+P 2 1 0 0 -30 30 -30 0 N
+P 2 1 0 0 130 -30 130 0 N
+P 2 1 0 0 130 0 130 30 N
+P 2 1 0 0 130 0 200 0 N
+P 2 1 0 0 130 30 -30 30 N
+X R1 1 200 0 0 L 40 40 1 1 P
+X R2 2 -100 0 0 R 40 40 1 1 P
+ENDDRAW
+ENDDEF
+#
+# yageo_1K
+#
+DEF yageo_1K R 0 40 N N 1 L N
+F0 "R" -31 39 45 H V L BNN
+F1 "yageo_1K" -33 -84 45 H V L BNN
+F2 "yageo:0603" 30 150 20 H I C CNN
+F3 "" -31 39 60 H I C CNN
+F4 "Digikey" 269 339 60 H I C CNN "1st Source"
+F5 "RC0603FR-071KL" 169 239 60 H I C CNN "Manufacturer Part Number"
 F6 "YAGEO" 69 139 60 H I C CNN "Manufacturer"
 $FPLIST
  *RESC1608X60N*
