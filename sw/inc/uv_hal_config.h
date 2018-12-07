@@ -227,7 +227,7 @@
 
 
 #define CONFIG_OUTPUT								1
-#define CONFIG_SOLENOID_OUTPUT						1
+#define CONFIG_SOLENOID_OUTPUT						0
 #define CONFIG_PID									1
 #define CONFIG_SOLENOID_MA_P						500
 #define CONFIG_SOLENOID_MA_I						20
