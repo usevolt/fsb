@@ -31,7 +31,7 @@
 /// @brief: Heater maximum duty cycle
 #define HEATER_PWM_DC_MAX			1000
 
-#define HEATER_SPEED_STEPS_COUNT	4
+#define HEATER_SPEED_STEPS_COUNT	1
 
 #define LEVEL_FAULT_MIN_VAL			0
 #define LEVEL_FAULT_MAX_VAL			150
