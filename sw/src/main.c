@@ -108,12 +108,13 @@ void init(dev_st* me) {
 	uv_moving_aver_init(&this->emcy_avg, IGNKEY_MOVING_AVER_COUNT);
 	this->vbat = 0;
 	this->eberfan = uv_gpio_get(EBERFAN_I);
+	this->woken_by_eber = this->eberfan;
 	uv_moving_aver_init(&this->eberfan_avg, OUTPUT_MOVING_AVG_COUNT);
 	this->heaterspeed = 0;
 	this->heater_req = 0;
 	this->last_heater_req = 0;
-	this->doorsw1 = uv_gpio_get(DOORSW1_I);
-	this->doorsw2 = uv_gpio_get(DOORSW2_I);
+	this->doorsw1 = !uv_gpio_get(DOORSW1_I);
+	this->doorsw2 = !uv_gpio_get(DOORSW2_I);
 	this->seatsw = !uv_gpio_get(SEATSW_I);
 	uv_moving_aver_init(&this->seatsw_avg, IGNKEY_MOVING_AVER_COUNT);
 
@@ -153,7 +154,6 @@ void step(void* me) {
 	while (true) {
 		unsigned int step_ms = 20;
 
-		// todo: emcy
 		this->emcy = (this->safety_disable) ? 0 :
 				uv_moving_aver_step(&this->emcy_avg, get_gpio(EMCY_I));
 
@@ -161,8 +161,9 @@ void step(void* me) {
 		this->fuel_level_value = (uint8_t) uv_sensor_get_value(&this->fuel_level);
 
 		this->eberfan = uv_moving_aver_step(&this->eberfan_avg, uv_gpio_get(EBERFAN_I));
-		this->doorsw1 = (this->safety_disable) ? 1 : uv_gpio_get(DOORSW1_I);
-		this->doorsw2 = (this->safety_disable) ? 1 : uv_gpio_get(DOORSW2_I);
+//		this->doorsw1 = (this->safety_disable) ? 1 : !uv_gpio_get(DOORSW1_I);
+		this->doorsw1 = 1;
+		this->doorsw2 = (this->safety_disable) ? 1 : !uv_gpio_get(DOORSW2_I);
 		this->seatsw = (this->safety_disable) ? 1 :
 				uv_moving_aver_step(&this->seatsw_avg, !get_gpio(SEATSW_I));
 
@@ -288,8 +289,8 @@ void step(void* me) {
 
 
 
-		// Radio, Aux & UI disabled when Eber is on
-		if (this->eberfan) {
+		// Radio, Aux & UI disabled if Eber did wake us up
+		if (this->eberfan && this->woken_by_eber) {
 			uv_output_set_state(&this->radio, OUTPUT_STATE_OFF);
 			uv_output_set_state(&this->aux, OUTPUT_STATE_OFF);
 			// keep ui on if ignkey is not in off position

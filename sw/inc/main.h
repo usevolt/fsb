@@ -61,6 +61,8 @@ typedef struct _dev_st {
 	uv_moving_aver_st emcy_avg;
 	uint16_t vbat;
 	uint8_t eberfan;
+	// tells if eber was ON when booting
+	bool woken_by_eber;
 	uv_moving_aver_st eberfan_avg;
 	uint8_t heaterspeed;
 	int8_t heater_req;
