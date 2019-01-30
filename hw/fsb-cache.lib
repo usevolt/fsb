@@ -629,31 +629,6 @@ X RS/GND 8 -300 -100 100 R 40 40 1 1 B
 ENDDRAW
 ENDDEF
 #
-# fsb-rescue_OPTOCOUPLER_HCPL-181-000E
-#
-DEF fsb-rescue_OPTOCOUPLER_HCPL-181-000E CP 0 40 Y N 1 F N
-F0 "CP" 0 200 60 H V C CNN
-F1 "fsb-rescue_OPTOCOUPLER_HCPL-181-000E" 0 200 60 H V C CNN
-F2 "usevolt:HCPL-181-000E" 0 200 60 H I C CNN
-F3 "http://www.farnell.com/datasheets/317140.pdf?_ga=1.164840831.1561825231.1484148445" 0 200 60 H I C CNN
-F4 "1244525" 400 600 60 H I C CNN "1st Source Part Number"
-F5 "BROADCOM LIMITED" 100 300 60 H I C CNN "Manufacturer"
-F6 "Farnell" 300 500 60 H I C CNN "1st Source"
-F7 "HCPL-181-000E" 200 400 60 H I C CNN "Manufacturer Part Number"
-DRAW
-S -100 150 200 -250 0 1 0 N
-P 2 0 1 0 -100 -50 0 -50 N
-P 2 0 1 0 100 50 100 -150 N
-P 3 0 1 0 -50 -50 -50 -200 -100 -200 N
-P 7 0 1 0 -100 100 -50 100 -50 0 -100 0 -50 -50 0 0 -50 0 N
-P 8 0 1 0 200 100 150 100 150 50 100 0 100 -100 150 -150 150 -200 200 -200 N
-X AN 1 -200 100 100 R 50 50 1 1 B
-X CA 2 -200 -200 100 R 50 50 1 1 B
-X E 3 300 -200 100 L 50 50 1 1 B
-X C 4 300 100 100 L 50 50 1 1 B
-ENDDRAW
-ENDDEF
-#
 # fsb-rescue_PWR_FLAG
 #
 DEF fsb-rescue_PWR_FLAG #FLG 0 0 N N 1 F P
@@ -757,29 +732,6 @@ X VDD 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# fsb-rescue_VN5E010AH
-#
-DEF fsb-rescue_VN5E010AH U 0 40 Y Y 1 F N
-F0 "U" -250 300 60 H V C CNN
-F1 "fsb-rescue_VN5E010AH" -50 -300 60 H V C CNN
-F2 "usevolt:HPAK" -350 950 60 H I C CNN
-F3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/1e/52/ef/e0/cc/90/4e/2e/CD00240716.pdf/files/CD00240716.pdf/jcr:content/translations/en.CD00240716.pdf" -250 1050 60 H I C CNN
-F4 "497-10505-2-ND" 150 1450 60 H I C CNN "1st Source Part Number"
-F5 "Digikey" 50 1350 60 H I C CNN "1st Source"
-F6 "STMicroelectronics" -150 1150 60 H I C CNN "Manufacturer"
-F7 "VN5E010AHTR-E" -50 1250 60 H I C CNN "Manufacturer Part Number"
-DRAW
-S -300 250 200 -250 0 1 0 N
-X OUT 1 300 100 100 L 50 50 1 1 I
-X GND 2 -400 -200 100 R 50 50 1 1 I
-X IN 3 -400 100 100 R 50 50 1 1 I
-X VCC 4 -400 200 100 R 50 50 1 1 I
-X CS 5 -400 0 100 R 50 50 1 1 I
-X CS_DIS 6 -400 -100 100 R 50 50 1 1 I
-X OUT 7 300 0 100 L 50 50 1 1 I
-ENDDRAW
-ENDDEF
-#
 # fsb-rescue_VND5050AJTR-E
 #
 DEF fsb-rescue_VND5050AJTR-E U 0 40 Y Y 1 F N
@@ -864,46 +816,6 @@ X VDD 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# usevolt_MOSFET-N_2N7002W
-#
-DEF usevolt_MOSFET-N_2N7002W U 0 40 N Y 1 F N
-F0 "U" -75 225 60 H V C CNN
-F1 "usevolt_MOSFET-N_2N7002W" -125 150 60 H V C CNN
-F2 "usevolt:SOT323" 300 900 60 H I C CNN
-F3 "http://www.onsemi.com/pub_link/Collateral/2N7002W-D.PDF" 150 1000 60 H I C CNN
-F4 "2533171" 575 825 60 H I C CNN "2nd Source Part Number"
-F5 "2N7002WT1G" 175 425 60 H I C CNN "Manufacturer Part Number"
-F6 "2N7002WT1GOSCT-ND" 375 625 60 H I C CNN "1st Source Part Number"
-F7 "Digikey" 275 525 60 H I C CNN "1st Source"
-F8 "Farnell" 475 725 60 H I C CNN "2nd Source"
-F9 "ON Semiconductor" 75 325 60 H I C CNN "Manufacturer"
-DRAW
-S 100 100 -100 -100 0 1 0 N
-X G L -150 0 50 R 40 40 1 1 B
-X D M 150 50 50 L 40 40 1 1 B
-X S R 150 -50 50 L 40 40 1 1 B
-ENDDRAW
-ENDDEF
-#
-# usevolt_MOSFET_P_ZXMP10A13F
-#
-DEF usevolt_MOSFET_P_ZXMP10A13F U 0 40 Y Y 1 F N
-F0 "U" 0 150 50 H V C CNN
-F1 "usevolt_MOSFET_P_ZXMP10A13F" 0 -150 50 H V C CNN
-F2 "usevolt:SOT-23_3-PIN" 0 200 50 H I C CNN
-F3 "http://www.farnell.com/datasheets/1915646.pdf?_ga=2.76885333.1768503822.1530426090-1862443086.1504075057" 0 200 50 H I C CNN
-F4 "DIODES INC." 100 250 50 H I C CNN "Manufacturer"
-F5 "ZXMP10A13FTA" 200 350 50 H I C CNN "Manufacturer Part Number"
-F6 "Farnell" 300 450 50 H I C CNN "1st Source"
-F7 "1843777" 400 550 50 H I C CNN "1st Source Part Number"
-DRAW
-S 100 100 -100 -100 0 1 0 N
-X G 1 -200 0 100 R 40 40 1 1 B
-X S 2 200 50 100 L 40 40 1 1 B
-X D 3 200 -50 100 L 40 40 1 1 B
-ENDDRAW
-ENDDEF
-#
 # usevolt_VN5E010AH
 #
 DEF usevolt_VN5E010AH U 0 40 Y Y 1 F N
@@ -924,27 +836,6 @@ X VCC 4 -400 200 100 R 50 50 1 1 I
 X CS 5 -400 0 100 R 50 50 1 1 I
 X CS_DIS 6 -400 -100 100 R 50 50 1 1 I
 X OUT 7 300 0 100 L 50 50 1 1 I
-ENDDRAW
-ENDDEF
-#
-# usevolt_VNB35NV04TR-E
-#
-DEF usevolt_VNB35NV04TR-E Q 0 40 Y Y 1 F N
-F0 "Q" 0 150 50 H V C CNN
-F1 "usevolt_VNB35NV04TR-E" 0 250 50 H V C CNN
-F2 "usevolt:D2" -250 0 50 H I C CNN
-F3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/95/6b/79/42/8e/45/4a/e6/DM00062289.pdf/files/DM00062289.pdf/jcr:content/translations/en.DM00062289.pdf" -250 0 50 H I C CNN
-F4 "STMicroelectronics" 100 250 50 H I C CNN "Manufacturer"
-F5 "VNB35NV04TR-E" 200 350 50 H I C CNN "Manufacturer Part Number"
-F6 "Digikey" 300 450 50 H I C CNN "1st Source"
-F7 "497-11686-1-ND" 400 550 50 H I C CNN "1st Source Part Number"
-F8 "Mouser" 500 650 50 H I C CNN "2nd Source"
-F9 "511-VNB35NV04TR-E" 600 750 50 H I C CNN "2nd Source Part Number"
-DRAW
-S 100 100 -150 -100 0 1 0 N
-X D D 200 50 100 L 50 50 1 1 I
-X G G -250 0 100 R 50 50 1 1 I
-X S S 200 -50 100 L 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
@@ -969,33 +860,6 @@ P 2 1 0 0 -50 0 -100 50 N
 P 4 0 1 0 -25 50 -50 50 -50 -50 -75 -50 N
 X 1 1 50 0 100 L 40 40 1 1 B
 X 2 2 -200 0 100 R 40 40 1 1 B
-ENDDRAW
-ENDDEF
-#
-# yageo_10
-#
-DEF yageo_10 R 0 40 N N 1 L N
-F0 "R" -31 39 45 H V L BNN
-F1 "yageo_10" -33 -84 45 H V L BNN
-F2 "yageo:0603" 30 150 20 H I C CNN
-F3 "" -31 39 60 H I C CNN
-F4 "Digikey" 269 339 60 H I C CNN "1st Source"
-F5 "RC0603FR-0710RL" 169 239 60 H I C CNN "Manufacturer Part Number"
-F6 "YAGEO" 69 139 60 H I C CNN "Manufacturer"
-$FPLIST
- *RESC1608X60N*
-$ENDFPLIST
-DRAW
-P 2 1 0 0 -30 -30 130 -30 N
-P 2 1 0 0 -30 0 -100 0 N
-P 2 1 0 0 -30 0 -30 -30 N
-P 2 1 0 0 -30 30 -30 0 N
-P 2 1 0 0 130 -30 130 0 N
-P 2 1 0 0 130 0 130 30 N
-P 2 1 0 0 130 0 200 0 N
-P 2 1 0 0 130 30 -30 30 N
-X R1 1 200 0 0 L 40 40 1 1 P
-X R2 2 -100 0 0 R 40 40 1 1 P
 ENDDRAW
 ENDDEF
 #

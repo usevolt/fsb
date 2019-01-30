@@ -4,7 +4,7 @@ EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 4 8
+Sheet 3 8
 Title ""
 Date ""
 Rev ""
@@ -320,22 +320,22 @@ F 3 "" H 10100 5600 50  0000 C CNN
 	1    10100 5600
 	1    0    0    -1  
 $EndComp
-Text HLabel 3350 2450 0    60   Input ~ 0
+Text HLabel 7400 3850 2    60   Input ~ 0
 EBER_FAN
-Text HLabel 3350 2750 0    60   Output ~ 0
+Text HLabel 3350 3050 0    60   Output ~ 0
 HORN
-Text HLabel 3350 2850 0    60   Input ~ 0
-HORN_SENSE
-Text HLabel 3350 2650 0    60   Output ~ 0
-RADIO
 Text HLabel 3350 2950 0    60   Input ~ 0
+HORN_SENSE
+Text HLabel 3350 3150 0    60   Output ~ 0
+RADIO
+Text HLabel 3350 2850 0    60   Input ~ 0
 RADIO_SENSE
-Text HLabel 3350 5250 0    60   Input ~ 0
+Text HLabel 3350 2450 0    60   Input ~ 0
 AUX_SENSE
-Text HLabel 3350 5150 0    60   Output ~ 0
+Text HLabel 3350 2350 0    60   Output ~ 0
 AUX
-Text HLabel 7150 1850 2    60   Output ~ 0
-HEATER
+Text HLabel 3350 2250 0    60   Output ~ 0
+HEATER1
 Text HLabel 7150 2050 2    60   Input ~ 0
 KEY_19
 Text HLabel 7150 1950 2    60   Input ~ 0
@@ -344,22 +344,22 @@ Text HLabel 7150 2250 2    60   Input ~ 0
 KEY_AC
 Text HLabel 7150 2350 2    60   Input ~ 0
 EMCY
-Text HLabel 3350 5450 0    60   Input ~ 0
+Text HLabel 3350 2150 0    60   Input ~ 0
 HEATER_SENSE
 $Comp
 L fsb-rescue:10K R306
 U 1 1 598BBA44
-P 3850 2450
-F 0 "R306" H 3900 2634 45  0000 C CNN
-F 1 "10K" H 3900 2550 45  0000 C CNN
-F 2 "multicomp:0603" H 3880 2600 20  0001 C CNN
-F 3 "http://www.farnell.com/datasheets/1788326.pdf?_ga=1.214208087.1948984246.1460023966" H 3819 2489 60  0001 C CNN
-F 4 "9330399" H 4219 2889 60  0001 C CNN "1st Source Part Number"
-F 5 "Farnell" H 4119 2789 60  0001 C CNN "1st Source"
-F 6 "MC0063W0603110K" H 4019 2689 60  0001 C CNN "Manufacturer Part Number"
-F 7 "MULTICOMP" H 3919 2589 60  0001 C CNN "Manufacturer"
-	1    3850 2450
-	1    0    0    -1  
+P 7150 3850
+F 0 "R306" H 7200 4034 45  0000 C CNN
+F 1 "10K" H 7200 3950 45  0000 C CNN
+F 2 "multicomp:0603" H 7180 4000 20  0001 C CNN
+F 3 "http://www.farnell.com/datasheets/1788326.pdf?_ga=1.214208087.1948984246.1460023966" H 7119 3889 60  0001 C CNN
+F 4 "9330399" H 7519 4289 60  0001 C CNN "1st Source Part Number"
+F 5 "Farnell" H 7419 4189 60  0001 C CNN "1st Source"
+F 6 "MC0063W0603110K" H 7319 4089 60  0001 C CNN "Manufacturer Part Number"
+F 7 "MULTICOMP" H 7219 3989 60  0001 C CNN "Manufacturer"
+	1    7150 3850
+	-1   0    0    -1  
 $EndComp
 Text HLabel 3350 2550 0    60   Input ~ 0
 VBAT_SENSE
@@ -511,23 +511,23 @@ Wire Wire Line
 	10100 5600 10100 5700
 Connection ~ 10100 5700
 Wire Wire Line
-	4050 2450 4600 2450
+	6950 3850 6400 3850
 Wire Wire Line
-	3750 2450 3350 2450
+	7250 3850 7400 3850
 Wire Wire Line
-	4600 2750 3350 2750
-Wire Wire Line
-	4600 2850 3350 2850
-Wire Wire Line
-	4600 2650 3350 2650
+	4600 3050 3350 3050
 Wire Wire Line
 	4600 2950 3350 2950
 Wire Wire Line
-	4600 5250 3350 5250
+	4600 3150 3350 3150
 Wire Wire Line
-	4600 5150 3350 5150
+	4600 2850 3350 2850
 Wire Wire Line
-	6400 1850 7150 1850
+	4600 2450 3350 2450
+Wire Wire Line
+	4600 2350 3350 2350
+Wire Wire Line
+	4600 2250 3350 2250
 Wire Wire Line
 	6400 2250 7150 2250
 Wire Wire Line
@@ -537,7 +537,7 @@ Wire Wire Line
 Wire Wire Line
 	6400 2350 7150 2350
 Wire Wire Line
-	4600 5450 3350 5450
+	4600 2150 3350 2150
 Wire Wire Line
 	4600 2550 3350 2550
 Wire Wire Line
@@ -579,23 +579,23 @@ F 9 "MICROCHIP" H 9450 6100 60  0001 C CNN "Manufacturer"
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
-	4600 3050 3350 3050
+	4600 2750 3350 2750
 Wire Wire Line
-	4600 3150 3350 3150
-Text HLabel 3350 3050 0    60   Output ~ 0
+	4600 2650 3350 2650
+Text HLabel 3350 2750 0    60   Output ~ 0
 UI
-Text HLabel 3350 3150 0    60   Input ~ 0
+Text HLabel 3350 2650 0    60   Input ~ 0
 UI_SENSE
 Wire Wire Line
 	6400 2450 6800 2450
 Wire Wire Line
 	6400 2550 6800 2550
-Text HLabel 6800 4450 2    60   Input ~ 0
+Text HLabel 4200 5050 0    60   Input ~ 0
 DOORSW1
 Text HLabel 6800 2450 2    60   Input ~ 0
 DOORSW2
 Wire Wire Line
-	6400 4450 6800 4450
+	4600 5050 4200 5050
 Text HLabel 6800 2550 2    60   Input ~ 0
 SEATSW
 Wire Wire Line
@@ -657,19 +657,19 @@ Wire Wire Line
 Wire Wire Line
 	10100 5700 10200 5700
 Wire Wire Line
-	4600 5550 4150 5550
-Text HLabel 4150 5550 0    50   Output ~ 0
-HEATER_PWM
+	4600 2050 3350 2050
+Text HLabel 3350 2050 0    50   Output ~ 0
+HEATER2
 Wire Wire Line
 	4600 5650 4150 5650
 Text HLabel 4150 5650 0    50   Input ~ 0
 FUEL_L
 Wire Wire Line
-	6400 5550 6950 5550
-Wire Wire Line
 	6400 5450 6950 5450
-Text HLabel 6950 5550 2    50   Input ~ 0
-IN1
+Wire Wire Line
+	6400 5550 6950 5550
 Text HLabel 6950 5450 2    50   Input ~ 0
+IN1
+Text HLabel 6950 5550 2    50   Input ~ 0
 IN2
 $EndSCHEMATC

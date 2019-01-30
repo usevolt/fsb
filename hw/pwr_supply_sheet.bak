@@ -347,10 +347,6 @@ Connection ~ 2050 3850
 Connection ~ 1800 1650
 Text HLabel 3350 1850 2    60   Output ~ 0
 VBAT_SENSE
-Wire Wire Line
-	1800 1850 2150 1850
-Wire Wire Line
-	3150 1850 3350 1850
 $Comp
 L fsb-rescue:LM2671SOIC8 VR201
 U 1 1 5A060F27
@@ -368,14 +364,6 @@ F 9 "TEXAS INSTRUMENTS" H 4750 4770 60  0001 C CNN "Manufacturer"
 	1    4850 4150
 	1    0    0    -1  
 $EndComp
-$Sheet
-S 2150 1750 1000 200 
-U 59C2BC93
-F0 "Sheet59C2" 60
-F1 "optocoupler.sch" 60
-F2 "VOUT" O R 3150 1850 60 
-F3 "VIN" I L 2150 1850 60 
-$EndSheet
 $Comp
 L fsb-rescue:SCHOTTKY_DIODE_V40PW10C D207
 U 1 1 5A081648
@@ -584,4 +572,22 @@ F 7 "KEMET" H 5804 4059 60  0001 C CNN "Manufacturer"
 	1    5800 3950
 	1    0    0    -1  
 $EndComp
+$Comp
+L fsb-rescue:10K R14
+U 1 1 5C513F03
+P 2600 1850
+F 0 "R14" H 2650 2034 45  0000 C CNN
+F 1 "10K" H 2650 1950 45  0000 C CNN
+F 2 "yageo:0603" H 2630 2000 20  0001 C CNN
+F 3 "" H 2569 1889 60  0001 C CNN
+F 4 "Digikey" H 2869 2189 60  0001 C CNN "1st Source"
+F 5 "RC0603FR-0710KL" H 2769 2089 60  0001 C CNN "Manufacturer Part Number"
+F 6 "YAGEO" H 2669 1989 60  0001 C CNN "Manufacturer"
+	1    2600 1850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1800 1850 2500 1850
+Wire Wire Line
+	2800 1850 3350 1850
 $EndSCHEMATC
