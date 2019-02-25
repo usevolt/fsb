@@ -163,7 +163,8 @@ void step(void* me) {
 		this->eberfan = uv_moving_aver_step(&this->eberfan_avg, uv_gpio_get(EBERFAN_I));
 //		this->doorsw1 = (this->safety_disable) ? 1 : !uv_gpio_get(DOORSW1_I);
 		this->doorsw1 = 1;
-		this->doorsw2 = (this->safety_disable) ? 1 : !uv_gpio_get(DOORSW2_I);
+//		this->doorsw2 = (this->safety_disable) ? 1 : !uv_gpio_get(DOORSW2_I);
+		this->doorsw2 = 1;
 		this->seatsw = (this->safety_disable) ? 1 :
 				uv_moving_aver_step(&this->seatsw_avg, !get_gpio(SEATSW_I));
 
