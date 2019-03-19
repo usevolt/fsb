@@ -76,18 +76,32 @@ canopen_object_st obj_dict[] = {
 				.data_ptr = &this->aux.current
 		},
 		{
-				.main_index = FSB_HEATER_STATUS_INDEX,
-				.sub_index = FSB_HEATER_STATUS_SUBINDEX,
-				.type = FSB_HEATER_STATUS_TYPE,
-				.permissions = FSB_HEATER_STATUS_PERMISSIONS,
-				.data_ptr = &this->heater.state
+				.main_index = FSB_HEATER1_STATUS_INDEX,
+				.sub_index = FSB_HEATER1_STATUS_SUBINDEX,
+				.type = FSB_HEATER1_STATUS_TYPE,
+				.permissions = FSB_HEATER1_STATUS_PERMISSIONS,
+				.data_ptr = &this->heater1.state
 		},
 		{
-				.main_index = FSB_HEATER_CURRENT_INDEX,
-				.sub_index = FSB_HEATER_CURRENT_SUBINDEX,
-				.type = FSB_HEATER_CURRENT_TYPE,
-				.permissions = FSB_HEATER_CURRENT_PERMISSIONS,
-				.data_ptr = &this->heater.current
+				.main_index = FSB_HEATER1_CURRENT_INDEX,
+				.sub_index = FSB_HEATER1_CURRENT_SUBINDEX,
+				.type = FSB_HEATER1_CURRENT_TYPE,
+				.permissions = FSB_HEATER1_CURRENT_PERMISSIONS,
+				.data_ptr = &this->heater1.current
+		},
+		{
+				.main_index = FSB_HEATER2_STATUS_INDEX,
+				.sub_index = FSB_HEATER2_STATUS_SUBINDEX,
+				.type = FSB_HEATER2_STATUS_TYPE,
+				.permissions = FSB_HEATER2_STATUS_PERMISSIONS,
+				.data_ptr = &this->heater2.state
+		},
+		{
+				.main_index = FSB_HEATER2_CURRENT_INDEX,
+				.sub_index = FSB_HEATER2_CURRENT_SUBINDEX,
+				.type = FSB_HEATER2_CURRENT_TYPE,
+				.permissions = FSB_HEATER2_CURRENT_PERMISSIONS,
+				.data_ptr = &this->heater2.current
 		},
 		{
 				.main_index = FSB_HEATER_SPEED_INDEX,
@@ -236,7 +250,8 @@ void stat_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv
 	stat_output(&this->horn, "Horn");
 	stat_output(&this->aux, "Aux");
 	stat_output(&this->radio, "Radio");
-	stat_output(&this->heater, "Heater");
+	stat_output(&this->heater1, "Heater1");
+	stat_output(&this->heater2, "Heater2");
 	stat_output(&this->ui, "UI");
 	printf("Ignition key state: ");
 	if (this->ignkey == FSB_IGNKEY_STATE_OFF) {

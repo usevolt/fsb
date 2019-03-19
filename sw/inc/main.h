@@ -31,7 +31,7 @@
 /// @brief: Heater maximum duty cycle
 #define HEATER_PWM_DC_MAX			1000
 
-#define HEATER_SPEED_STEPS_COUNT	1
+#define HEATER_SPEED_STEPS_COUNT	2
 
 #define LEVEL_FAULT_MIN_VAL			0
 #define LEVEL_FAULT_MAX_VAL			150
@@ -49,7 +49,8 @@ typedef struct _dev_st {
 	uv_output_st radio;
 	uv_output_st aux;
 	uv_output_st ui;
-	uv_output_st heater;
+	uv_output_st heater1;
+	uv_output_st heater2;
 
 	uint16_t total_current;
 

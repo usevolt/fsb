@@ -77,7 +77,10 @@ void init(dev_st* me) {
 			FSB_EMCY_AUX_OVERCURRENT, 0);
 	uv_output_init(&this->ui, UI_SENSE, UI_O, VND5050_CURRENT_AMPL_UA, 2000, 3000, OUTPUT_MOVING_AVG_COUNT,
 			FSB_EMCY_UI_OVERCURRENT, FSB_EMCY_UI_FAULT);
-	uv_output_init(&this->heater, HEATER_SENSE, HEATER_O, VN5E01_CURRENT_AMPL_UA,
+	uv_output_init(&this->heater1, HEATER_SENSE, HEATER1_O, VN5E01_CURRENT_AMPL_UA,
+			0xFFFF, 0xFFFF, OUTPUT_MOVING_AVG_COUNT,
+			FSB_EMCY_HEATERBAT_OVERCURRENT, FSB_EMCY_HEATERBAT_FAULT);
+	uv_output_init(&this->heater2, HEATER_SENSE, HEATER2_O, VN5E01_CURRENT_AMPL_UA,
 			0xFFFF, 0xFFFF, OUTPUT_MOVING_AVG_COUNT,
 			FSB_EMCY_HEATERBAT_OVERCURRENT, FSB_EMCY_HEATERBAT_FAULT);
 
@@ -91,9 +94,6 @@ void init(dev_st* me) {
 	UV_GPIO_INIT_INPUT(DOORSW2_I, PULL_UP_ENABLED);
 	UV_GPIO_INIT_INPUT(SEATSW_I, PULL_UP_ENABLED);
 	UV_GPIO_INIT_INPUT(VBAT_I, PULL_UP_ENABLED);
-
-	// initialize heater PWM output
-	uv_pwm_set(HEATER_PWM, PWM_MAX_VALUE);
 
 	// initialize fuel level sensor module
 	uv_sensor_init(&this->fuel_level, FUEL_LEVEL_AIN, FUEL_LEVEL_AVG_COUNT, &get_level);
@@ -175,7 +175,8 @@ void step(void* me) {
 		uv_output_step(&this->radio, step_ms);
 		uv_output_step(&this->aux, step_ms);
 		uv_output_step(&this->ui, step_ms);
-		uv_output_step(&this->heater, step_ms);
+		uv_output_step(&this->heater1, step_ms);
+		uv_output_step(&this->heater2, step_ms);
 
 		// terminal step function
 		uv_terminal_step();
@@ -184,7 +185,8 @@ void step(void* me) {
 				uv_output_get_current(&this->radio) +
 				uv_output_get_current(&this->aux) +
 				uv_output_get_current(&this->ui) +
-				uv_output_get_current(&this->heater);
+				uv_output_get_current(&this->heater1) +
+				uv_output_get_current(&this->heater2);
 
 
 		if (this->heater_req && !this->last_heater_req) {
@@ -209,22 +211,12 @@ void step(void* me) {
 				(this->eberfan)) {
 			this->heaterspeed = FSB_HEATER_MAX_SPEED;
 		}
-		uv_output_set_state(&this->heater,
-				(this->heaterspeed) ? OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
-		int32_t speed = 0;
-		if (this->heaterspeed) {
-			uint32_t rel = uv_reli(this->heaterspeed, 0, FSB_HEATER_MAX_SPEED);
-			speed = uv_lerpi(rel, HEATER_PWM_DC_MIN, HEATER_PWM_DC_MAX);
-			if (speed > HEATER_PWM_DC_MAX) {
-				speed = HEATER_PWM_DC_MAX;
-			}
-			else if (speed < HEATER_PWM_DC_MIN) {
-				speed = HEATER_PWM_DC_MIN;
-			}
-			else {
-			}
-		}
-		uv_pwm_set(HEATER_PWM, PWM_MAX_VALUE - speed);
+		uv_output_set_state(&this->heater1,
+				(this->heaterspeed && (this->heaterspeed < FSB_HEATER_MAX_SPEED)) ?
+						OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
+		uv_output_set_state(&this->heater2,
+				(this->heaterspeed == FSB_HEATER_MAX_SPEED) ?
+						OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
 
 
 		// vbat
@@ -317,14 +309,15 @@ void step(void* me) {
 			uv_output_disable(&this->aux);
 			uv_output_disable(&this->radio);
 			uv_output_disable(&this->horn);
-			uv_output_disable(&this->heater);
-			uv_pwm_set(HEATER_PWM, 0);
+			uv_output_disable(&this->heater1);
+			uv_output_enable(&this->heater2);
 		}
 		else {
 			uv_output_enable(&this->aux);
 			uv_output_enable(&this->radio);
 			uv_output_enable(&this->horn);
-			uv_output_enable(&this->heater);
+			uv_output_enable(&this->heater1);
+			uv_output_enable(&this->heater2);
 		}
 
 		uv_rtos_task_delay(step_ms);
