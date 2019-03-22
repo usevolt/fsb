@@ -128,6 +128,9 @@ void init(dev_st* me) {
 		this->assembly.eber_installed = 0;
 		uv_eeprom_write(&this->assembly, sizeof(this->assembly), ASSEMBLY_EEPROM_ADDR);
 	}
+	else if (this->assembly.safety_disable > SAFETY_NONE) {
+		this->assembly.safety_disable = SAFETY_ALL;
+	}
 
 	//init terminal and pass application terminal commands array as a parameter
 	uv_terminal_init(terminal_commands, commands_size());
@@ -135,8 +138,6 @@ void init(dev_st* me) {
 
 	// load non-volatile data
 	if (uv_memory_load()) {
-
-		this->safety_disable = false;
 
 		uv_memory_save();
 	}
@@ -162,7 +163,7 @@ void step(void* me) {
 	while (true) {
 		unsigned int step_ms = 20;
 
-		this->emcy = (this->safety_disable > SAFETY_EMCY) ? 0 :
+		this->emcy = (this->assembly.safety_disable > SAFETY_EMCY) ? 0 :
 				uv_moving_aver_step(&this->emcy_avg, get_gpio(EMCY_I));
 
 		uv_sensor_step(&this->fuel_level, step_ms);
@@ -178,7 +179,7 @@ void step(void* me) {
 		this->doorsw1 = 1;
 //		this->doorsw2 = (this->safety_disable) ? 1 : !uv_gpio_get(DOORSW2_I);
 		this->doorsw2 = 1;
-		this->seatsw = (this->safety_disable > SAFETY_DOOR) ? 1 :
+		this->seatsw = (this->assembly.safety_disable > SAFETY_DOOR) ? 1 :
 				uv_moving_aver_step(&this->seatsw_avg, !get_gpio(SEATSW_I));
 
 		// update watchdog timer value to prevent a hard reset

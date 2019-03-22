@@ -42,13 +42,14 @@
 #define ASSEMBLY_EEPROM_ADDR		0
 
 
-typedef enum {
+enum {
 	SAFETY_ALL = 0,
-	SAFETY_EMCY,
 	SAFETY_SEAT,
 	SAFETY_DOOR,
+	SAFETY_EMCY,
 	SAFETY_NONE
-} safety_disable_e;
+};
+typedef uint8_t safety_disable_e;
 
 /// @brief: main data structure.
 /// This struct can be save to non-volatile flash memory with
@@ -87,11 +88,11 @@ typedef struct _dev_st {
 
 	struct {
 		uint8_t eber_installed;
+		safety_disable_e safety_disable;
 	} assembly;
 
 	uv_data_start_t data_start;
 
-	safety_disable_e safety_disable;
 
 	uv_data_end_t data_end;
 
