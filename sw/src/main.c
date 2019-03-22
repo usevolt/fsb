@@ -16,6 +16,7 @@
 #include <uv_utilities.h>
 #include <uv_rtos.h>
 #include <uv_pwm.h>
+#include <uv_eeprom.h>
 
 dev_st dev = {};
 #define this ((dev_st*) &dev)
@@ -117,13 +118,20 @@ void init(dev_st* me) {
 	this->doorsw2 = !uv_gpio_get(DOORSW2_I);
 	this->seatsw = !uv_gpio_get(SEATSW_I);
 	uv_moving_aver_init(&this->seatsw_avg, IGNKEY_MOVING_AVER_COUNT);
-
 	uv_moving_aver_init(&this->key_on, IGNKEY_MOVING_AVER_COUNT);
 	uv_moving_aver_init(&this->key_preheat, IGNKEY_MOVING_AVER_COUNT);
 	uv_moving_aver_init(&this->key_start, IGNKEY_MOVING_AVER_COUNT);
 
+	uv_eeprom_read(&this->assembly, sizeof(this->assembly), ASSEMBLY_EEPROM_ADDR);
+	// by default eber is not installed
+	if (this->assembly.eber_installed == 0xFF) {
+		this->assembly.eber_installed = 0;
+		uv_eeprom_write(&this->assembly, sizeof(this->assembly), ASSEMBLY_EEPROM_ADDR);
+	}
+
 	//init terminal and pass application terminal commands array as a parameter
 	uv_terminal_init(terminal_commands, commands_size());
+
 
 	// load non-volatile data
 	if (uv_memory_load()) {
@@ -154,18 +162,23 @@ void step(void* me) {
 	while (true) {
 		unsigned int step_ms = 20;
 
-		this->emcy = (this->safety_disable) ? 0 :
+		this->emcy = (this->safety_disable > SAFETY_EMCY) ? 0 :
 				uv_moving_aver_step(&this->emcy_avg, get_gpio(EMCY_I));
 
 		uv_sensor_step(&this->fuel_level, step_ms);
 		this->fuel_level_value = (uint8_t) uv_sensor_get_value(&this->fuel_level);
 
-		this->eberfan = uv_moving_aver_step(&this->eberfan_avg, uv_gpio_get(EBERFAN_I));
+		if (this->assembly.eber_installed) {
+			this->eberfan = uv_moving_aver_step(&this->eberfan_avg, uv_gpio_get(EBERFAN_I));
+		}
+		else {
+			this->eberfan = 0;
+		}
 //		this->doorsw1 = (this->safety_disable) ? 1 : !uv_gpio_get(DOORSW1_I);
 		this->doorsw1 = 1;
 //		this->doorsw2 = (this->safety_disable) ? 1 : !uv_gpio_get(DOORSW2_I);
 		this->doorsw2 = 1;
-		this->seatsw = (this->safety_disable) ? 1 :
+		this->seatsw = (this->safety_disable > SAFETY_DOOR) ? 1 :
 				uv_moving_aver_step(&this->seatsw_avg, !get_gpio(SEATSW_I));
 
 		// update watchdog timer value to prevent a hard reset
