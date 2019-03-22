@@ -18,6 +18,7 @@
 #include <uv_utilities.h>
 #include <uv_output.h>
 #include <uv_rtos.h>
+#include <uv_eeprom.h>
 
 extern dev_st dev;
 #define this (&dev)
@@ -222,8 +223,15 @@ const uv_command_st terminal_commands[] = {
 				.id = CMD_SAFETY,
 				.str = "safety",
 				.instructions = "Disables or enables safety related inputs.\n"
-						"Usage: safety <0/1>",
+						"Usage: safety <\"all\"/\"emcy\"/\"seat\"/\"door\"/\"none\">",
 				.callback = &safety_callb
+		},
+		{
+				.id = CMD_ASS,
+				.str = "ass",
+				.instructions = "Sets the assembly variables. \n"
+						"Usage: ass <\"eber\"> <1/0>",
+				.callback = &ass_callb
 		}
 };
 
@@ -299,10 +307,38 @@ void horn_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv
 }
 
 void safety_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv) {
-	if (args && (argv[0].type == ARG_INTEGER)) {
-		this->safety_disable = (argv[0].number) ? false : true;
+	if (args && (argv[0].type == ARG_STRING)) {
+		char *str = argv[0].str;
+		if (strcmp(str, "all") == 0) {
+			this->safety_disable = SAFETY_ALL;
+		}
+		else if (strcmp(str, "emcy") == 0) {
+			this->safety_disable = SAFETY_EMCY;
+		}
+		else if (strcmp(str, "seat") == 0) {
+			this->safety_disable = SAFETY_SEAT;
+		}
+		else if (strcmp(str, "door") == 0) {
+			this->safety_disable = SAFETY_DOOR;
+		}
+		else if (strcmp(str, "none") == 0) {
+			this->safety_disable = SAFETY_NONE;
+		}
 	}
 	printf("Safety functions disabled: %u\n", this->safety_disable);
+}
+
+void ass_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv) {
+	if (args >= 2 &&
+			argv[0].type == ARG_STRING) {
+		if (strcmp(argv[0].str, "eber") == 0) {
+			this->assembly.eber_installed = argv[1].number;
+			uv_eeprom_write(&this->assembly, sizeof(this->assembly), ASSEMBLY_EEPROM_ADDR);
+		}
+	}
+	printf("Assembly:\n"
+			"Eber installed: %u\n",
+			this->assembly.eber_installed);
 }
 
 

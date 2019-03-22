@@ -22,6 +22,7 @@ void stat_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv
 void heater_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv);
 void horn_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv);
 void safety_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv);
+void ass_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv);
 
 
 
@@ -31,6 +32,7 @@ typedef enum {
 	CMD_HEATER,
 	CMD_HORN,
 	CMD_SAFETY,
+	CMD_ASS,
 	CMD_COUNT
 } gsm_commands_e;
 

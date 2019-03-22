@@ -39,6 +39,16 @@
 #define FUEL_LEVEL_HYSTERESIS		20
 #define FUEL_LEVEL_WARNING_VALUE	30
 
+#define ASSEMBLY_EEPROM_ADDR		0
+
+
+typedef enum {
+	SAFETY_ALL = 0,
+	SAFETY_EMCY,
+	SAFETY_SEAT,
+	SAFETY_DOOR,
+	SAFETY_NONE
+} safety_disable_e;
 
 /// @brief: main data structure.
 /// This struct can be save to non-volatile flash memory with
@@ -75,9 +85,13 @@ typedef struct _dev_st {
 	uv_sensor_st fuel_level;
 	uint8_t fuel_level_value;
 
+	struct {
+		uint8_t eber_installed;
+	} assembly;
+
 	uv_data_start_t data_start;
 
-	bool safety_disable;
+	safety_disable_e safety_disable;
 
 	uv_data_end_t data_end;
 

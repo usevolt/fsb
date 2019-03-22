@@ -24,6 +24,7 @@
 #define CONFIG_TARGET_LPC1549						1
 
 
+#define CONFIG_EEPROM								1
 
 
 #define CONFIG_NON_VOLATILE_MEMORY					1
