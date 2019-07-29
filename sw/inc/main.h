@@ -43,13 +43,13 @@
 
 
 enum {
-	SAFETY_ALL = 0,
-	SAFETY_SEAT,
-	SAFETY_DOOR,
-	SAFETY_EMCY,
-	SAFETY_NONE
+	SAFETY_NONE = 1,
+	SAFETY_SEAT = (1 << 1),
+	SAFETY_DOOR = (1 << 2),
+	SAFETY_EMCY = (1 << 3),
+	SAFETY_ALL = SAFETY_SEAT | SAFETY_DOOR | SAFETY_EMCY
 };
-typedef uint8_t safety_disable_e;
+typedef uint8_t safety_enable_e;
 
 /// @brief: main data structure.
 /// This struct can be save to non-volatile flash memory with
@@ -88,7 +88,7 @@ typedef struct _dev_st {
 
 	struct {
 		uint8_t eber_installed;
-		safety_disable_e safety_disable;
+		safety_enable_e safety_enable;
 	} assembly;
 
 	uv_data_start_t data_start;

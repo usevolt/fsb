@@ -282,7 +282,22 @@ void stat_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv
 	printf("doorsw1: %u\ndoorsw2: %u\nseatsw: %u\n",
 			this->doorsw1, this->doorsw2, this->seatsw);
 	printf("fuel level: %u\n", this->fuel_level_value);
-	printf("Safety functions disabled: %u\n", this->assembly.safety_disable);
+	printf("Enabled safety functions: ");
+	if (this->assembly.safety_enable & SAFETY_NONE) {
+		printf("NONE");
+	}
+	else {
+		if (this->assembly.safety_enable & SAFETY_EMCY) {
+			printf("EMCY ");
+		}
+		if (this->assembly.safety_enable & SAFETY_SEAT) {
+			printf("Seat ");
+		}
+		if (this->assembly.safety_enable & SAFETY_DOOR) {
+			printf("Door");
+		}
+	}
+	printf("\n");
 
 }
 
@@ -310,23 +325,42 @@ void safety_callb(void* me, unsigned int cmd, unsigned int args, argument_st *ar
 	if (args && (argv[0].type == ARG_STRING)) {
 		char *str = argv[0].str;
 		if (strcmp(str, "all") == 0) {
-			this->assembly.safety_disable = SAFETY_ALL;
+			this->assembly.safety_enable &= ~SAFETY_NONE;
+			this->assembly.safety_enable = SAFETY_ALL;
 		}
 		else if (strcmp(str, "emcy") == 0) {
-			this->assembly.safety_disable = SAFETY_EMCY;
+			this->assembly.safety_enable &= ~SAFETY_NONE;
+			this->assembly.safety_enable ^= SAFETY_EMCY;
 		}
 		else if (strcmp(str, "seat") == 0) {
-			this->assembly.safety_disable = SAFETY_SEAT;
+			this->assembly.safety_enable &= ~SAFETY_NONE;
+			this->assembly.safety_enable ^= SAFETY_SEAT;
 		}
 		else if (strcmp(str, "door") == 0) {
-			this->assembly.safety_disable = SAFETY_DOOR;
+			this->assembly.safety_enable &= ~SAFETY_NONE;
+			this->assembly.safety_enable ^= SAFETY_DOOR;
 		}
 		else if (strcmp(str, "none") == 0) {
-			this->assembly.safety_disable = SAFETY_NONE;
+			this->assembly.safety_enable = SAFETY_NONE;
 		}
 		uv_eeprom_write(&this->assembly, sizeof(this->assembly), ASSEMBLY_EEPROM_ADDR);
 	}
-	printf("Safety functions disabled: %u\n", this->assembly.safety_disable);
+	printf("Enabled safety functions: ");
+	if (this->assembly.safety_enable & SAFETY_NONE) {
+		printf("NONE");
+	}
+	else {
+		if (this->assembly.safety_enable & SAFETY_EMCY) {
+			printf("EMCY ");
+		}
+		if (this->assembly.safety_enable & SAFETY_SEAT) {
+			printf("Seat ");
+		}
+		if (this->assembly.safety_enable & SAFETY_DOOR) {
+			printf("Door");
+		}
+	}
+	printf("\n");
 }
 
 void ass_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv) {
