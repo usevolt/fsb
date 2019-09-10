@@ -70,7 +70,8 @@ typedef struct _dev_st {
 	uv_moving_aver_st key_preheat;
 	uv_moving_aver_st key_start;
 	uint8_t emcy;
-	uv_moving_aver_st emcy_avg;
+	uv_ring_buffer_st emcy_ring_buffer;
+	uint8_t emcy_buffer[25];
 	uint16_t vbat;
 	uint8_t eberfan;
 	// tells if eber was ON when booting
