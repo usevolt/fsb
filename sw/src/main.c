@@ -16,6 +16,7 @@
 #include <uv_utilities.h>
 #include <uv_rtos.h>
 #include <uv_pwm.h>
+#include <string.h>
 
 dev_st dev = {};
 #define this ((dev_st*) &dev)
@@ -105,7 +106,10 @@ void init(dev_st* me) {
 
 	this->ignkey = FSB_IGNKEY_STATE_OFF;
 	this->emcy = uv_gpio_get(EMCY_I);
-	uv_moving_aver_init(&this->emcy_avg, IGNKEY_MOVING_AVER_COUNT);
+	memset(this->emcy_buffer, 0, sizeof(this->emcy_buffer));
+	uv_ring_buffer_init(&this->emcy_ring_buffer, this->emcy_buffer,
+			sizeof(this->emcy_buffer) / sizeof(this->emcy_buffer[0]),
+			sizeof(this->emcy_buffer[0]));
 	this->vbat = 0;
 	this->eberfan = uv_gpio_get(EBERFAN_I);
 	this->woken_by_eber = this->eberfan;
@@ -154,8 +158,21 @@ void step(void* me) {
 	while (true) {
 		unsigned int step_ms = 20;
 
-		this->emcy = (this->safety_disable) ? 0 :
-				uv_moving_aver_step(&this->emcy_avg, get_gpio(EMCY_I));
+		if (uv_ring_buffer_get_element_count(&this->emcy_ring_buffer) ==
+				sizeof(this->emcy_buffer)) {
+			uint8_t val;
+			uv_ring_buffer_pop(&this->emcy_ring_buffer, &val);
+		}
+		uint8_t emcy = uv_gpio_get(EMCY_I);
+		uv_ring_buffer_push(&this->emcy_ring_buffer, &emcy);
+		emcy = 1;
+		for (uint8_t i = 0; i < sizeof(this->emcy_buffer); i++) {
+			if (this->emcy_buffer[i] == 0) {
+				emcy = 0;
+				break;
+			}
+		}
+		this->emcy = (this->safety_disable) ? 0 : emcy;
 
 		uv_sensor_step(&this->fuel_level, step_ms);
 		this->fuel_level_value = (uint8_t) uv_sensor_get_value(&this->fuel_level);
