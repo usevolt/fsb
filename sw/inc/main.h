@@ -41,6 +41,8 @@
 
 #define ASSEMBLY_EEPROM_ADDR		0
 
+#define UI_DELAY_MS					2000
+
 
 enum {
 	SAFETY_NONE = 1,
@@ -86,6 +88,7 @@ typedef struct _dev_st {
 	uv_moving_aver_st seatsw_avg;
 	uv_sensor_st fuel_level;
 	uint8_t fuel_level_value;
+	uv_delay_st ui_delay;
 
 	struct {
 		uint8_t eber_installed;

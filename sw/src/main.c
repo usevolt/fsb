@@ -126,6 +126,8 @@ void init(dev_st* me) {
 	uv_moving_aver_init(&this->key_preheat, IGNKEY_MOVING_AVER_COUNT);
 	uv_moving_aver_init(&this->key_start, IGNKEY_MOVING_AVER_COUNT);
 
+	uv_delay_init(&this->ui_delay, UI_DELAY_MS);
+
 	uv_eeprom_read(&this->assembly, sizeof(this->assembly), ASSEMBLY_EEPROM_ADDR);
 	// by default eber is not installed
 	if (this->assembly.eber_installed == 0xFF) {
@@ -330,7 +332,17 @@ void step(void* me) {
 			uv_output_set_state(&this->aux,
 					(this->ignkey == FSB_IGNKEY_STATE_ON) ? OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
 			// ui
-			uv_output_set_state(&this->ui, OUTPUT_STATE_ON);
+			uv_output_state_e s = uv_output_get_state(&this->ui);
+			if (s == OUTPUT_STATE_OVERLOAD ||
+					s == OUTPUT_STATE_FAULT) {
+				if (uv_delay(&this->ui_delay, step_ms)) {
+					uv_output_set_state(&this->ui, OUTPUT_STATE_OFF);
+				}
+			}
+			else {
+				uv_output_set_state(&this->ui, OUTPUT_STATE_ON);
+				uv_delay_init(&this->ui_delay, UI_DELAY_MS);
+			}
 		}
 
 
