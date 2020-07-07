@@ -91,7 +91,7 @@ void init(dev_st* me) {
 	UV_GPIO_INIT_INPUT(KEY_PREHEAT_I, PULL_DOWN_ENABLED);
 	UV_GPIO_INIT_INPUT(KEY_ON_I, PULL_DOWN_ENABLED);
 	UV_GPIO_INIT_INPUT(KEY_START_I, PULL_DOWN_ENABLED);
-	UV_GPIO_INIT_INPUT(EMCY_I, PULL_UP_ENABLED);
+	UV_GPIO_INIT_INPUT(EMCY_I, PULL_DOWN_ENABLED);
 	UV_GPIO_INIT_INPUT(DOORSW1_I, PULL_UP_ENABLED);
 	UV_GPIO_INIT_INPUT(DOORSW2_I, PULL_UP_ENABLED);
 	UV_GPIO_INIT_INPUT(SEATSW_I, PULL_UP_ENABLED);
@@ -106,7 +106,7 @@ void init(dev_st* me) {
 	this->fuel_level_value = 0;
 
 	this->ignkey = FSB_IGNKEY_STATE_OFF;
-	this->emcy = uv_gpio_get(EMCY_I);
+	this->emcy = !uv_gpio_get(EMCY_I);
 	memset(this->emcy_buffer, 0, sizeof(this->emcy_buffer));
 	uv_ring_buffer_init(&this->emcy_ring_buffer, this->emcy_buffer,
 			sizeof(this->emcy_buffer) / sizeof(this->emcy_buffer[0]),
@@ -176,7 +176,7 @@ void step(void* me) {
 			uint8_t val;
 			uv_ring_buffer_pop(&this->emcy_ring_buffer, &val);
 		}
-		uint8_t emcy = uv_gpio_get(EMCY_I);
+		uint8_t emcy = !uv_gpio_get(EMCY_I);
 		uv_ring_buffer_push(&this->emcy_ring_buffer, &emcy);
 		emcy = 1;
 		for (uint8_t i = 0; i < sizeof(this->emcy_buffer); i++) {
