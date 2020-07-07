@@ -298,6 +298,11 @@ void stat_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv
 		}
 	}
 	printf("\n");
+	printf("Door sw1: %u\n", this->doorsw1);
+	for (uint8_t i = 0; i < sizeof(this->doorsw1_buffer); i++) {
+		printf("%i ", this->doorsw1_buffer[i]);
+	}
+	printf("\n");
 
 }
 

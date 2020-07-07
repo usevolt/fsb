@@ -119,9 +119,20 @@ void init(dev_st* me) {
 	this->heater_req = 0;
 	this->last_heater_req = 0;
 	this->doorsw1 = !uv_gpio_get(DOORSW1_I);
+	memset(this->doorsw1_buffer, 0, sizeof(this->doorsw1_buffer));
+	uv_ring_buffer_init(&this->doorsw1_ringbuffer, this->doorsw1_buffer,
+			sizeof(this->doorsw1_buffer) / sizeof(this->doorsw1_buffer[0]),
+			sizeof(this->doorsw1_buffer[0]));
 	this->doorsw2 = !uv_gpio_get(DOORSW2_I);
+	memset(this->doorsw2_buffer, 0, sizeof(this->doorsw2_buffer));
+	uv_ring_buffer_init(&this->doorsw2_ringbuffer, this->doorsw2_buffer,
+			sizeof(this->doorsw2_buffer) / sizeof(this->doorsw2_buffer[0]),
+			sizeof(this->doorsw2_buffer[0]));
 	this->seatsw = !uv_gpio_get(SEATSW_I);
-	uv_moving_aver_init(&this->seatsw_avg, IGNKEY_MOVING_AVER_COUNT);
+	memset(this->seatsw_buffer, 0, sizeof(this->seatsw_buffer));
+	uv_ring_buffer_init(&this->seatsw_ringbuffer, this->seatsw_buffer,
+			sizeof(this->seatsw_buffer) / sizeof(this->seatsw_buffer[0]),
+			sizeof(this->seatsw_buffer[0]));
 	uv_moving_aver_init(&this->key_on, IGNKEY_MOVING_AVER_COUNT);
 	uv_moving_aver_init(&this->key_preheat, IGNKEY_MOVING_AVER_COUNT);
 	uv_moving_aver_init(&this->key_start, IGNKEY_MOVING_AVER_COUNT);
@@ -196,12 +207,59 @@ void step(void* me) {
 		else {
 			this->eberfan = 0;
 		}
-		this->doorsw1 = (this->assembly.safety_enable & SAFETY_DOOR) ?
+		if (uv_ring_buffer_get_element_count(&this->doorsw1_ringbuffer) ==
+				sizeof(this->doorsw1_buffer)) {
+			uint8_t val;
+			uv_ring_buffer_pop(&this->doorsw1_ringbuffer, &val);
+		}
+		uint8_t doorsw1 = (this->assembly.safety_enable & SAFETY_DOOR) ?
 				!uv_gpio_get(DOORSW1_I) : 1;
-		this->doorsw2 = (this->assembly.safety_enable & SAFETY_DOOR) ?
+		uv_ring_buffer_push(&this->doorsw1_ringbuffer, &doorsw1);
+		doorsw1 = 0;
+		for (uint8_t i = 0;
+				i < sizeof(this->doorsw1_buffer) / sizeof(this->doorsw1_buffer[0]); i++) {
+			if (this->doorsw1_buffer[i] == 1) {
+				doorsw1 = 1;
+				break;
+			}
+		}
+		this->doorsw1 = doorsw1;
+
+		if (uv_ring_buffer_get_element_count(&this->doorsw2_ringbuffer) ==
+				sizeof(this->doorsw2_buffer)) {
+			uint8_t val;
+			uv_ring_buffer_pop(&this->doorsw2_ringbuffer, &val);
+		}
+		uint8_t doorsw2 = (this->assembly.safety_enable & SAFETY_DOOR) ?
 				!uv_gpio_get(DOORSW2_I) : 1;
-		this->seatsw = (this->assembly.safety_enable & SAFETY_SEAT) ?
-				uv_moving_aver_step(&this->seatsw_avg, !get_gpio(SEATSW_I)) : 1;
+		uv_ring_buffer_push(&this->doorsw2_ringbuffer, &doorsw2);
+		doorsw2 = 0;
+		for (uint8_t i = 0;
+				i < sizeof(this->doorsw2_buffer) / sizeof(this->doorsw2_buffer[0]); i++) {
+			if (this->doorsw2_buffer[i] == 1) {
+				doorsw2 = 1;
+				break;
+			}
+		}
+		this->doorsw2 = doorsw2;
+
+		if (uv_ring_buffer_get_element_count(&this->seatsw_ringbuffer) ==
+				sizeof(this->seatsw_ringbuffer)) {
+			uint8_t val;
+			uv_ring_buffer_pop(&this->seatsw_ringbuffer, &val);
+		}
+		uint8_t seatsw = (this->assembly.safety_enable & SAFETY_SEAT) ?
+				!get_gpio(SEATSW_I) : 1;
+		uv_ring_buffer_push(&this->seatsw_ringbuffer, &seatsw);
+		seatsw = 0;
+		for (uint8_t i = 0;
+				i < sizeof(this->seatsw_buffer) / sizeof(this->seatsw_buffer[0]); i++) {
+			if (this->seatsw_buffer[i] == 1) {
+				seatsw = 1;
+				break;
+			}
+		}
+		this->seatsw = seatsw;
 
 		// update watchdog timer value to prevent a hard reset
 		// uw_wdt_update();
