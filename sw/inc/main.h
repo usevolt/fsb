@@ -83,9 +83,14 @@ typedef struct _dev_st {
 	int8_t heater_req;
 	int8_t last_heater_req;
 	uint8_t doorsw1;
+	uv_ring_buffer_st doorsw1_ringbuffer;
+	uint8_t doorsw1_buffer[25];
 	uint8_t doorsw2;
+	uv_ring_buffer_st doorsw2_ringbuffer;
+	uint8_t doorsw2_buffer[25];
 	uint8_t seatsw;
-	uv_moving_aver_st seatsw_avg;
+	uv_ring_buffer_st seatsw_ringbuffer;
+	uint8_t seatsw_buffer[25];
 	uv_sensor_st fuel_level;
 	uint8_t fuel_level_value;
 	uv_delay_st ui_delay;
