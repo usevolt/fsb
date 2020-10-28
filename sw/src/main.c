@@ -320,10 +320,16 @@ void step(void* me) {
 				(this->heaterspeed == FSB_HEATER_SPEED_WARM2 ||
 						this->heaterspeed == FSB_HEATER_SPEED_COLD2) ?
 						OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
-		uv_output_set_state(&this->coolair,
-				(this->heaterspeed == FSB_HEATER_SPEED_COLD1 ||
-						this->heaterspeed == FSB_HEATER_SPEED_COLD2) ?
-								OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
+		if (this->heaterspeed != FSB_HEATER_OFF) {
+			uv_output_set_state(&this->coolair,
+					(this->heaterspeed == FSB_HEATER_SPEED_COLD1 ||
+							this->heaterspeed == FSB_HEATER_SPEED_COLD2) ?
+									OUTPUT_STATE_OFF : OUTPUT_STATE_ON);
+		}
+		else {
+			uv_output_set_state(&this->coolair,
+					OUTPUT_STATE_OFF);
+		}
 
 		// vbat
 		this->vbat = !uv_gpio_get(VBAT_I);
