@@ -85,6 +85,9 @@ void init(dev_st* me) {
 	uv_output_init(&this->heater2, HEATER_SENSE, HEATER2_O, VN5E01_CURRENT_AMPL_UA,
 			0xFFFF, 0xFFFF, OUTPUT_MOVING_AVG_COUNT,
 			FSB_EMCY_HEATERBAT_OVERCURRENT, FSB_EMCY_HEATERBAT_FAULT);
+	uv_output_init(&this->coolair, COOLAIR_SENSE, COOLAIR_O, VND5050_CURRENT_AMPL_UA,
+			COOLAIR_MAX_CURRENT_MA, COOLAIR_MAX_CURRENT_MA * 2, 10,
+			FSB_EMCY_COOLAIR_OVERCURRENT, FSB_EMCY_COOLAIR_FAULT);
 
 	// initialize inputs
 	UV_GPIO_INIT_INPUT(EBERFAN_I, PULL_DOWN_ENABLED);
@@ -270,6 +273,7 @@ void step(void* me) {
 		uv_output_step(&this->ui, step_ms);
 		uv_output_step(&this->heater1, step_ms);
 		uv_output_step(&this->heater2, step_ms);
+		uv_output_step(&this->coolair, step_ms);
 
 		// terminal step function
 		uv_terminal_step();
@@ -279,38 +283,47 @@ void step(void* me) {
 				uv_output_get_current(&this->aux) +
 				uv_output_get_current(&this->ui) +
 				uv_output_get_current(&this->heater1) +
-				uv_output_get_current(&this->heater2);
+				uv_output_get_current(&this->heater2) +
+				uv_output_get_current(&this->coolair);
 
 
 		if (this->heater_req && !this->last_heater_req) {
 			if (this->heater_req > 0) {
 				// increase heater requested
-				this->heaterspeed += FSB_HEATER_MAX_SPEED / HEATER_SPEED_STEPS_COUNT;
+				this->heaterspeed++;
 			}
 			else {
 				// decrease heater requested
-				if (this->heaterspeed >= FSB_HEATER_MAX_SPEED / HEATER_SPEED_STEPS_COUNT) {
-					this->heaterspeed -= FSB_HEATER_MAX_SPEED / HEATER_SPEED_STEPS_COUNT;
-				}
-				else {
-					this->heaterspeed = 0;
-				}
+				this->heaterspeed--;
+			}
+			if (this->heaterspeed < FSB_HEATER_OFF) {
+				this->heaterspeed = FSB_HEATER_OFF;
+			}
+			else if (this->heaterspeed >= FSB_HEATER_SPEED_COUNT) {
+				this->heaterspeed = FSB_HEATER_SPEED_WARM2;
+			}
+			else {
+
 			}
 		}
 		this->last_heater_req = this->heater_req;
 
 		// heater. It is also controlled by eber
-		if ((this->heaterspeed > FSB_HEATER_MAX_SPEED) ||
-				(this->eberfan)) {
-			this->heaterspeed = FSB_HEATER_MAX_SPEED;
+		if (this->eberfan) {
+			this->heaterspeed = FSB_HEATER_SPEED_WARM2;
 		}
 		uv_output_set_state(&this->heater1,
-				(this->heaterspeed && (this->heaterspeed < FSB_HEATER_MAX_SPEED)) ?
+				(this->heaterspeed == FSB_HEATER_SPEED_WARM1 ||
+						this->heaterspeed == FSB_HEATER_SPEED_COLD1) ?
 						OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
 		uv_output_set_state(&this->heater2,
-				(this->heaterspeed == FSB_HEATER_MAX_SPEED) ?
+				(this->heaterspeed == FSB_HEATER_SPEED_WARM2 ||
+						this->heaterspeed == FSB_HEATER_SPEED_COLD2) ?
 						OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
-
+		uv_output_set_state(&this->coolair,
+				(this->heaterspeed == FSB_HEATER_SPEED_COLD1 ||
+						this->heaterspeed == FSB_HEATER_SPEED_COLD2) ?
+								OUTPUT_STATE_ON : OUTPUT_STATE_OFF);
 
 		// vbat
 		this->vbat = !uv_gpio_get(VBAT_I);
@@ -413,7 +426,8 @@ void step(void* me) {
 			uv_output_disable(&this->radio);
 			uv_output_disable(&this->horn);
 			uv_output_disable(&this->heater1);
-			uv_output_enable(&this->heater2);
+			uv_output_disable(&this->heater2);
+			uv_output_disable(&this->coolair);
 		}
 		else {
 			uv_output_enable(&this->aux);
@@ -421,6 +435,7 @@ void step(void* me) {
 			uv_output_enable(&this->horn);
 			uv_output_enable(&this->heater1);
 			uv_output_enable(&this->heater2);
+			uv_output_enable(&this->coolair);
 		}
 
 		uv_rtos_task_delay(step_ms);

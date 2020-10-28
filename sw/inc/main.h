@@ -31,13 +31,14 @@
 /// @brief: Heater maximum duty cycle
 #define HEATER_PWM_DC_MAX			1000
 
-#define HEATER_SPEED_STEPS_COUNT	2
 
 #define LEVEL_FAULT_MIN_VAL			0
 #define LEVEL_FAULT_MAX_VAL			150
 #define FUEL_LEVEL_AVG_COUNT		50
 #define FUEL_LEVEL_HYSTERESIS		20
 #define FUEL_LEVEL_WARNING_VALUE	30
+
+#define COOLAIR_MAX_CURRENT_MA		5000
 
 #define ASSEMBLY_EEPROM_ADDR		0
 
@@ -64,6 +65,7 @@ typedef struct _dev_st {
 	uv_output_st ui;
 	uv_output_st heater1;
 	uv_output_st heater2;
+	uv_output_st coolair;
 
 	uint16_t total_current;
 
@@ -79,7 +81,7 @@ typedef struct _dev_st {
 	// tells if eber was ON when booting
 	bool woken_by_eber;
 	uv_moving_aver_st eberfan_avg;
-	uint8_t heaterspeed;
+	int8_t heaterspeed;
 	int8_t heater_req;
 	int8_t last_heater_req;
 	uint8_t doorsw1;

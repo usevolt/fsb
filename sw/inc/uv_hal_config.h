@@ -85,7 +85,7 @@
 #define CONFIG_ADC_CHANNEL1_0						0
 #define CONFIG_ADC_CHANNEL1_1						0
 #define CONFIG_ADC_CHANNEL1_2						0
-#define CONFIG_ADC_CHANNEL1_3						0
+#define CONFIG_ADC_CHANNEL1_3						1
 #define CONFIG_ADC_CHANNEL1_4						1
 #define CONFIG_ADC_CHANNEL1_5						0
 #define CONFIG_ADC_CHANNEL1_6						0

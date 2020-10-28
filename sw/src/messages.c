@@ -187,6 +187,13 @@ canopen_object_st obj_dict[] = {
 				.type = FSB_FUEL_LEVEL_TYPE,
 				.permissions = FSB_FUEL_LEVEL_PERMISSIONS,
 				.data_ptr = &this->fuel_level_value
+		},
+		{
+				.main_index = FSB_COOLAIR_STATE_INDEX,
+				.sub_index = FSB_COOLAIR_STATE_SUBINDEX,
+				.type = FSB_COOLAIR_STATE_TYPE,
+				.permissions = FSB_COOLAIR_STATE_PERMISSIONS,
+				.data_ptr = &this->coolair.state
 		}
 };
 
@@ -309,9 +316,9 @@ void stat_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv
 
 void heater_callb(void* me, unsigned int cmd, unsigned int args, argument_st *argv) {
 	if (args && (argv[0].type == ARG_INTEGER)) {
-		if (argv[0].number > FSB_HEATER_MAX_SPEED) {
-			printf("Max allowed speed: %u\n", FSB_HEATER_MAX_SPEED);
-			argv[0].number = FSB_HEATER_MAX_SPEED;
+		if (argv[0].number >= FSB_HEATER_SPEED_COUNT) {
+			printf("Max allowed speed: %u\n", FSB_HEATER_SPEED_WARM2);
+			argv[0].number = FSB_HEATER_SPEED_WARM2;
 		}
 		this->heaterspeed = argv[0].number;
 	}

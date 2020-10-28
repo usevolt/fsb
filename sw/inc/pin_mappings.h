@@ -22,6 +22,7 @@
 #define HEATER_SENSE				ADC0_10
 #define UI_SENSE					ADC0_5
 #define FUEL_LEVEL_AIN				ADC1_4
+#define COOLAIR_SENSE				ADC1_3
 
 // Digital inputs
 #define EBERFAN_I					P1_6
@@ -42,6 +43,7 @@
 #define UI_O						P0_4
 #define HEATER1_O					P0_31
 #define HEATER2_O					P0_30
+#define COOLAIR_O					P0_12
 
 
 
